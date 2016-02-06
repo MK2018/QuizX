@@ -1,4 +1,4 @@
-var webSocket;
+            var webSocket;
             var messages = document.getElementById("messages");
            
            
