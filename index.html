@@ -2,24 +2,45 @@
  
 <html>
     <head>
-        <title>Echo Chamber</title>
+        <title>QuizLette</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
     </head>
-    <body>
+    <body class="bodyContainer">
        
-        <div>
-            <input type="text" id="messageinput"/>
-        </div>
-        <div>
-            <button type="button" onclick="openSocket();" >Open</button>
-            <button type="button" onclick="send();" >Send</button>
-            <button type="button" onclick="closeSocket();" >Close</button>
-        </div>
+        <h1 class="mainPageTitle">QuizLette</h1>
+
+           
+            
+           
+        
+        
+            
+        
         <!-- Server responses get written here -->
-        <div id="messages"></div>
+        
+        
+
+         <div>
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3" id="topRow">            
+             
+              
+              <center>
+              <button class="joinButton btn btn-success"type="submit" onclick="send();" >Join</button>
+                </center>
+            
+
+          </div>
+
+        </div>
+    </div>
         <script src="main.js"></script> 
 
+        <
     </body>
 
     </html>
