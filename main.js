@@ -1,27 +1,3 @@
-<!DOCTYPE html>
- 
-<html>
-    <head>
-        <title>Echo Chamber</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width">
-    </head>
-    <body>
-       
-        <div>
-            <input type="text" id="messageinput"/>
-        </div>
-        <div>
-            <button type="button" onclick="openSocket();" >Open</button>
-            <button type="button" onclick="send();" >Send</button>
-            <button type="button" onclick="closeSocket();" >Close</button>
-        </div>
-        <!-- Server responses get written here -->
-        <div id="messages"></div>
-       
-        <!-- Script to utilise the WebSocket -->
-        <script type="text/javascript">
-                       
             var webSocket;
             var messages = document.getElementById("messages");
            
@@ -75,9 +51,3 @@
             function writeResponse(text){
                 messages.innerHTML += "<br/>" + text;
             }
-           
-        </script>
-       
-    </body>
-
-    </html>
