@@ -41,6 +41,7 @@
              */
             function send(){
                 var text = document.getElementById("messageinput").value;
+                console.log("text:"+text);
                 webSocket.send(text);
             }
            
