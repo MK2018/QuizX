@@ -1,5 +1,6 @@
             var webSocket;
             var messages = document.getElementById("messages");
+            var buttons = document.getElementById("buttons");
            
            
             function openSocket(){
@@ -29,6 +30,7 @@
  
                 webSocket.onmessage = function(event){
                     writeResponse(event.data);
+
                 };
  
                 webSocket.onclose = function(event){
@@ -39,8 +41,8 @@
             /**
              * Sends the value of the text input to the server
              */
-            function send(){
-                var text = document.getElementById("messageinput").value;
+            function send(arg1){
+                var text = arg1;
                 console.log("text:"+text);
                 webSocket.send(text);
             }
@@ -51,4 +53,18 @@
  
             function writeResponse(text){
                 messages.innerHTML += "<br/>" + text;
+            }
+            function checkText(text){
+                if (text.compareTo("game:confirm"))
+                {
+
+                }
+                else if (text.compareTo("game:askrole"))
+                {
+                    while (buttons.firstChild) {
+                        buttons.removeChild(myNode.firstChild);
+                        }                    
+                    var button = document.createElement("button");
+                    buttons.appendChild(button);
+                }
             }
