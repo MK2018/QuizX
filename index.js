@@ -1,3 +1,7 @@
+class
+
+
+
 function broadcast(data) {
 	wss.clients.forEach(function each(client) {
 		client.send(data);
@@ -27,6 +31,13 @@ wss.on("connection", function(ws) {
   console.log("websocket connection open")
 
   ws.on("message", function(data, id) {
+    if(data==="game:connected"){
+      ws.send("game:confirm");
+      ws.send("game:askrole");
+    }
+    else if(data==="game:whatever"){
+      ws.send("game:");
+    }
     broadcast(data);
   });
 
