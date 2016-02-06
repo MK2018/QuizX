@@ -1,6 +1,3 @@
-class
-
-
 
 function broadcast(data) {
 	wss.clients.forEach(function each(client) {
