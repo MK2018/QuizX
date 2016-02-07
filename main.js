@@ -109,11 +109,11 @@
                     pg.className += " par";  
                     buttons.appendChild(pg);  
                 }
-                 else if  (text === "game:showclue")
+                 else if  (text.substring(0,12) === "game:showclue")
                  {
                    document.getElementById("invis-container").className = "";
                     var pg = document.createElement("p");
-                    pg.textContent = "SAMPLE TERT LAWL";/////////////////////////////////////////////////////////////////////////////////////////////FIXFIXFIXFIXFIX
+                    pg.textContent = text.substring(13);/////////////////////////////////////////////////////////////////////////////////////////////FIXFIXFIXFIXFIX
                     pg.className += "par"; 
                     buttons.appendChild(pg);
                  }
