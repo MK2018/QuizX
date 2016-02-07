@@ -30,7 +30,7 @@
  
                 webSocket.onmessage = function(event){
                     //writeResponse(event.data);
-
+                    checkText(event.data);
                 };
  
                 webSocket.onclose = function(event){
@@ -55,16 +55,18 @@
               //  messages.innerHTML += "<br/>" + text;
             //}
             function checkText(text){
-                if (text.compareTo("game:confirm"))
+                if (text === "game:confirm")
                 {
 
                 }
-                else if (text.compareTo("game:askrole"))
+                else if (text === "game:askrole")
                 {
                     while (buttons.firstChild) {
-                        buttons.removeChild(myNode.firstChild);
+                        buttons.removeChild(buttons.firstChild);
                         }                    
                     var button = document.createElement("button");
+                    button.textContent = "THIS IS A BUTTON";
+                    button.className += " joinButton btn btn-success";
                     buttons.appendChild(button);
                 }
             }
