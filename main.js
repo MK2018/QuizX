@@ -128,7 +128,7 @@
                     
                    var button = document.createElement("button");
                    button.textContent = "BUZZER";
-                   button.setAttribute( "onClick", "buzzer(document.getElementById(answerBox)"); ///////////////////////////////////////////////////////////////FIXFIXFIXFIXFIXFIX
+                   button.setAttribute( "onClick", "buzzer(document.getElementById(answerBox);"); ///////////////////////////////////////////////////////////////FIXFIXFIXFIXFIXFIX
 
                    document.getElementById("answerSubmit").className = "invisableanswer";
                    document.getElementById("answerBox").className = "invisabletext";

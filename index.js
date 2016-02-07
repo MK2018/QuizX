@@ -101,7 +101,7 @@ wss.on("connection", function(ws) {
       ws.send("game:showclue-"+gameBoard[coordx][coordy].getQuestion());
     }
     else if(data==="game:buzz"){
-      
+      broadcast("game:disable");
     }
     //broadcast(data);
   });
