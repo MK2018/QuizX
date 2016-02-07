@@ -142,13 +142,12 @@ wss.on("connection", function(ws) {
       activey = coordy;
       console.log(coordx+","+coordy);
       broadcast("game:showbuzzer-"+gameBoard[coordx][coordy].getQuestion());
-      host = gameHost[0];
-      alert(host);
-      host.send("game:showquest-"+gameBoard[coordx][coordy].getQuestion());
+      //host = gameHost[0];
+      //host.send("game:showquest-"+gameBoard[coordx][coordy].getQuestion());
     }
     else if(data.substring(0, 9) ==="game:buzz"){
       var index = -1;
-      broadcast("game:disable");
+      //broadcast("game:disable");
       answer = data.substring(10);
       console.log(answer);
       id = parseInt(answer.substring(0, answer.indexOf("-")));
@@ -165,7 +164,7 @@ wss.on("connection", function(ws) {
         broadcast("game:=qcom");
       }
       else{
-        broadcast("game:enable");
+        //broadcast("game:enable");
         ws.send("game:incorrect");
       }
     }

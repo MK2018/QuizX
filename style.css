@@ -66,3 +66,9 @@ background-color: #819FF7;
 .invisibleScoreTable{
 	display:none;
 }
+.questionStyle{
+	padding-top: 40pt;
+	text-align: center;
+	font-size: 75pt;
+	color: white;
+}

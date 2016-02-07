@@ -14,6 +14,8 @@
     </head>
     <body class="body-wrapper">
 
+        <div class="questionStyle" id="question">
+        </div>
         <center><h1 class="mainPageTitle" id="title">QuizX</h1></center>
 
         <!-- Server responses get written here -->
@@ -169,28 +171,30 @@
                 <button class="tableCells btn btn-default"type="submit" onclick="check(4,5); this.disabled=true;" >500</button>     
             </div>
         </div>
-       <div class="invisible" id="question" style="font-size:40pt;">
-       </div>
+       
 
 
        <div class="row invisibleScoreTable" id="scoreTable">
-        <div class="cold-md-3">
+        <div class="col-md-3">
 
-        <div/>
-        <div class="cold-md-3">
+        </div>
+        <div class="col-md-3">
 
-        <div/>
-        <div class="cold-md-3">
+        </div>
+        <div class="col-md-3">
 
-        <div/>
-        <div class="cold-md-3">
+        </div>
+        <div class="col-md-3">
 
-        <div/>
+        </div>
 
 
        </div>
 
     </div>
+    </div>
+    </div>
+    
         <script src="main.js"></script> 
         <script>
             openSocket();
