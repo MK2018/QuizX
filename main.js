@@ -57,7 +57,7 @@
               //  messages.innerHTML += "<br/>" + text;
             //}
             function checkText(text){
-                console.log(text);
+                //console.log(text);
                 if (text === "game:confirm")
                 {
 
