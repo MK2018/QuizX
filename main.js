@@ -2,6 +2,8 @@
             var messages = document.getElementById("messages");
             var buttons = document.getElementById("buttons");
             var paragraph = document.getElementById("paragraph");
+            var invisable = document.getElementById("invisable");
+
 
            
            
@@ -90,4 +92,11 @@
                     buttons.appendChild(pg);
                              
                 }
+                 else if  (text === "game:showclue"){
+                
+                   document.getElementById("invis-container").className = "";
+
+
+                 }
+                
             }
