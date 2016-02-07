@@ -16,7 +16,7 @@
         <h1 class="mainPageTitle" id="title">QuizLéttè</h1>
         <!-- Server responses get written here -->
          <div class="container">
-        <div class="row">
+        <div class="row" >
           <div class="col-md-6 col-md-offset-3" id="topRow">            
             <center>
             <div id="buttons"> 
@@ -25,24 +25,24 @@
             </center>
 
             <input type="text" id="answerBox" placeholder="Answer" class="form-control invisibleTextBox"/>
-            <button id="answerSubmit"class="btn btn-success invisibleSubmitAnswer" type="submit">Submit Answer</button>
-            
+            <button id="answerSubmit"class="btn btn-success invisibleSubmitAnswer" type="submit" onclick="buzz();">Submit Answer</button>
+            <div id="thumbsContainer" style="font-size: 300px; color:#449D44;">
+            <!--
 
-            <div style="font-size: 300px; color:#449D44;"  id="correctThumb">
+            <div style="font-size: 300px; color:#449D44;" class="invisible"  id="correctThumb">
             <i class="fa fa-thumbs-up correctSize"></i>
             </div>
             
 
-            <div style="font-size: 300px; color:#FE2E2E;" id="incorrectThumb">
+            <div style="font-size: 300px; color:#FE2E2E; display:none;" class="invisible" id="incorrectThumb">
             <i class="fa fa-thumbs-down incorrectSize" ></i>
             </div>
-
-
-
+-->
+            </div>
 
           </div>
         </div>
-        <div id="invis-container" class="invisibleTable invisbleTable">
+        <div id="invis-container" class="invisible">
            <div class="row">
                 <div class="col-md-2 category">
                     Category1

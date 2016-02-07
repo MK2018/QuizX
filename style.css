@@ -25,15 +25,9 @@
 .invisbleTable{
 	display: none;
 }
-
-#correctThumb{
-display:none;
+.invisble{
+	display: none;
 }
-
-#incorrectThumb{
-	display:none;
-}
-
 
 .invisibleTextBox{
 	display:none;
