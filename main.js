@@ -29,12 +29,12 @@
                 };
  
                 webSocket.onmessage = function(event){
-                    writeResponse(event.data);
-
+                    //writeResponse(event.data);
+                    checkText(event.data);
                 };
  
                 webSocket.onclose = function(event){
-                    writeResponse("Connection closed");
+                    //writeResponse("Connection closed");
                 };
             }
            
@@ -51,10 +51,11 @@
                 webSocket.close();
             }
  
-            function writeResponse(text){
-                messages.innerHTML += "<br/>" + text;
-            }
+            //function writeResponse(text){
+              //  messages.innerHTML += "<br/>" + text;
+            //}
             function checkText(text){
+<<<<<<< HEAD
                 if (text === "game:confirm"))
                 {
 
@@ -67,6 +68,22 @@
                     var button = document.createElement("button");
                     var button2 = document.createElement("button");
 
+=======
+                if (text === "game:confirm")
+                {
+
+                }
+                else if (text === "game:askrole")
+                {
+                    while (buttons.firstChild) {
+                        buttons.removeChild(buttons.firstChild);
+                        }                    
+                    var button = document.createElement("button");
+                    button.textContent = "THIS IS A BUTTON";
+                    button2.textContent = "THIS IS A BUTTON TOO";
+
+                    button.className += " joinButton btn btn-success";
+>>>>>>> 
                     buttons.appendChild(button);
                     buttons.appendChild(button2);
 
