@@ -28,6 +28,7 @@ wss.on("connection", function(ws) {
   console.log("websocket connection open")
 
   ws.on("message", function(data, id) {
+    console.log(data);
     if(data==="game:connected"){
       ws.send("game:confirm");
       ws.send("game:askrole");
@@ -35,7 +36,7 @@ wss.on("connection", function(ws) {
     else if(data==="game:whatever"){
       ws.send("game:");
     }
-    broadcast(data);
+    //broadcast(data);
   });
 
   ws.on("close", function() {
