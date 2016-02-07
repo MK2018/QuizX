@@ -26,7 +26,10 @@
 	display: none;
 }
 
-.invisbleTextBox{
+.invisibleTextBox{
+	display:none;
+}
+.invisibleSubmitAnswer{
 	display:none;
 }
 .tableCells{
