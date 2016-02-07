@@ -162,7 +162,6 @@
                  }
                  else if (text === "game:correct")
                  {
-                    {
                    var thumbCont = document.getElementById("thumbsContainer");
                     while (thumbCont.firstChild) {
                         thumbCont.removeChild(thumbCont.firstChild);
