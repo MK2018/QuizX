@@ -1,6 +1,8 @@
             var webSocket;
             var messages = document.getElementById("messages");
             var buttons = document.getElementById("buttons");
+            var paragraph = document.getElementById("paragraph");
+
            
            
             function openSocket(){
@@ -76,5 +78,19 @@
                     buttons.appendChild(button);
                     buttons.appendChild(button2);
 
+                }
+                else if  (text === "game:loadboard")
+                {
+                 while (buttons.firstChild) {
+                        buttons.removeChild(buttons.firstChild);
+                    }  
+                     var pg = document.createElement("paragraph");
+                     pg.text = "WAITING FOR OTHER PLAYERS LAWL";
+                     pg.className += " bodyContainer btn btn-success";
+
+
+
+
+                       
                 }
             }
