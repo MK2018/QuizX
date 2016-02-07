@@ -21,9 +21,14 @@
               <button class="joinButton btn btn-success"type="submit" onclick="send('game:connected');" >Join</button>
             </div>
             </center>
+
+            <input type="text" id="answerBox" placeholder="Answer" class="form-control invibleTextBox"/>
+            <button class="btn btn-success invisibleSubmitAnswer"type="submit" onclick="buzz(document.getElementById("answerBox"))">Submit Answer</button>
+            
+
           </div>
         </div>
-        <div id="invis-container" class="invisibleTable">
+        <div id="invis-container" class="invisibleTable invisbleTable">
            <div class="row">
                 <div class="col-md-2 category">
                     Category1
@@ -148,6 +153,7 @@
                 <button class="tableCells btn btn-default"type="submit" onclick="check(5,6);" >500</button>     
             </div>
         </div>
+       
     </div>
         <script src="main.js"></script> 
         <script>
