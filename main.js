@@ -109,17 +109,25 @@
                     pg.className += " par";  
                     buttons.appendChild(pg);  
                 }
+
+                else if(text === "game:hashost")
+                {
+                    var button = document.createElement("button");  
+                    button.textContent = "Start Game"; 
+                    buttons.appendChild(button);
+                }
                  else if  (text.substring(0,12) === "game:showclue")
                  {
                    document.getElementById("invis-container").className = "";
                     var pg = document.createElement("p");
-                    pg.textContent = text.substring(13);/////////////////////////////////////////////////////////////////////////////////////////////FIXFIXFIXFIXFIX
+                    pg.textContent = text.substring(13);
                     pg.className += "par"; 
                     buttons.appendChild(pg);
                  }
              }
+             function startGame(){
 
-                
+             }               
             
             function buzz(arg1)
                  {
