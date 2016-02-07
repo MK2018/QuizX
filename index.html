@@ -10,7 +10,7 @@
         <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     </head>
     <body class="bodyContainer">
-       
+
 
 
         <h1 class="mainPageTitle">QuizLette</h1>
@@ -23,7 +23,7 @@
              
               
               <center>
-              <button class="joinButton btn btn-success"type="submit" onclick="send();" >Join</button>
+              <button class="joinButton btn btn-success"type="submit" onclick="send('game:connected');" >Join</button>
                 </center>
             
 
@@ -32,7 +32,9 @@
         </div>
     </div>
         <script src="main.js"></script> 
-
+        <script>
+            openSocket();
+        </script>  
     </body>
 
     </html>

@@ -29,12 +29,12 @@
                 };
  
                 webSocket.onmessage = function(event){
-                    writeResponse(event.data);
+                    //writeResponse(event.data);
 
                 };
  
                 webSocket.onclose = function(event){
-                    writeResponse("Connection closed");
+                    //writeResponse("Connection closed");
                 };
             }
            
@@ -51,9 +51,9 @@
                 webSocket.close();
             }
  
-            function writeResponse(text){
-                messages.innerHTML += "<br/>" + text;
-            }
+            //function writeResponse(text){
+              //  messages.innerHTML += "<br/>" + text;
+            //}
             function checkText(text){
                 if (text.compareTo("game:confirm"))
                 {
