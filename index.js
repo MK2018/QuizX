@@ -47,7 +47,7 @@ function Clue(question, value, answer){
 
 function fillBoard(){
   var gameBoard = [new Clue("Who is the best member of the group?", 100, "Michael"),new Clue("Who is the best member of the group?", 200, "Michael"),new Clue("Who is the best member of the group?", 300, "Michael"),new Clue("Who is the best member of the group?", 400, "Michael"),new Clue("Who is the best member of the group?", 500, "Michael")];
-  for(var i=0; i<5; i++) {
+  for(var i=1; i<=5; i++) {
     gameBoard[i] = [new Clue("Who is the best member of the group?", i*100, "Michael"),new Clue("Who is the best member of the group?", i*100, "Michael"),new Clue("Who is the best member of the group?", i*100, "Michael"),new Clue("Who is the best member of the group?", i*100, "Michael"),new Clue("Who is the best member of the group?", i*100, "Michael"),new Clue("Who is the best member of the group?", i*100, "Michael")];//new Array(6);
   }
   return gameBoard;
@@ -83,6 +83,12 @@ var conCounter = 0;
 
 gameBoard = fillBoard();
 
+for(var x=0; x < gameBoard.length; x++){
+  for(var y = 0; y < gameBoard[0].length;y++){
+    console.log(gameBoard[x][y].getValue());
+  }
+}
+
 activex = -1;
 activey = -1;
 
@@ -102,14 +108,12 @@ wss.on("connection", function(ws) {
       var id = conCounter++;
       gameHost.push(new Connection(ws, true, id));
       ws.send("game:id:"+id);
-      //ws.send("game:loadboard");
       broadcast("game:clientsconnected-"+wss.clients.length);
     }
     else if(data==="game:client"){
       var id = conCounter++;
       gameClients.push(new Connection(ws, false, id));
       ws.send("game:id:"+id);
-      //ws.send("game:loadboard");
       broadcast("game:clientsconnected-"+wss.clients.length);
     }
     else if(data==="game:checkhost"){
@@ -122,33 +126,29 @@ wss.on("connection", function(ws) {
       coordy = coords.substring(3, 4);
       activex = coordx;
       activey = coordy;
-      ws.send("game:showbuzzer-"+gameBoard[coordx][coordy].getQuestion());
+      broadcast("game:showbuzzer-"+gameBoard[coordx][coordy].getQuestion());
+      gameHost.getClient().send("game:showquest-"+gameBoard[coordx][coordy].getQuestion());
     }
     else if(data.substring(0, 9) ==="game:buzz"){
-      //console.log(ws);
-      //console.log(gameClients);
       var index = -1;
       broadcast("game:disable");
       answer = data.substring(10);
       id = parseInt(answer.substring(0, answer.indexOf("-")));
-      //console.log(id);
       answer = answer.substring(answer.indexOf("-")+1);
       if(answer.toLowerCase() === gameBoard[activex][activey].getAnswer().toLowerCase()){
         ws.send("game:correct");
         for(var x = 0; x < gameClients.length; x++)
           if(gameClients[x].getId() === id){
-            //console.log("FOUND");
             index = x;
             gameClients[x].addScore(gameBoard[activex][activey].getValue());
           }
-       //console.log(index);
         ws.send("game:score-"+gameClients[index].getScore());
       }
       else{
+        broadcast("game:enable");
         ws.send("game:incorrect");
       }
     }
-    //broadcast(data);
   });
 
   ws.on("close", function() {
