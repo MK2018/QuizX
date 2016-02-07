@@ -126,7 +126,7 @@
                     button.setAttribute( "onClick", "javascript: send('game:start');" );
                     buttons.appendChild(button);
                 }
-                 else if  (text.substring(0,15) === "game:showbuzzer") //////////////////////////////////////////
+                 else if  (text.substring(0,16) === "game:showbuzzer") //////////////////////////////////////////
                  {
                    if(!isHost){
                            console.log(text.substring(16));
@@ -153,7 +153,7 @@
 
 
                  }
-                 else if  (text.substring(0,14) === "game:showquest") //////////////////////////////////////////
+                 else if  (text.substring(0,15) === "game:showquest") //////////////////////////////////////////
                  {
                    
                    //document.getElementById("answerSubmit").className = "";
@@ -184,6 +184,8 @@
                     thumbCont.appendChild(thumbsUp);
                     document.getElementById("answerSubmit").className = "invisible"; //sets answer box o invisible
                     document.getElementById("answerBox").className = "invisible";
+                    document.getElementById("scoreTable").className = "invisible row"; 
+
                     setTimeout(function(){}, 2000);
                  
                  }
@@ -199,6 +201,8 @@
                    document.getElementById("answerSubmit").className = "invisible"; //sets answer box o invisible
                    document.getElementById("answerBox").className = "invisible";
                    document.getElementById("invis-container").className = "";
+                   document.getElementById("scoreTable").className = "row"; 
+
                }
 
 
@@ -212,16 +216,32 @@
                     thumbCont.appendChild(thumbsDown);
                    document.getElementById("answerSubmit").className = "invisible"; //sets answer box o invisible
                    document.getElementById("answerBox").className = "invisible";
+                   document.getElementById("scoreTable").className = "invisible row"; 
+
                    setTimeout(function(){}, 2000);
                  }  
-                else if (text.substring(0, 10) === "game:score-")
+                else if (text.substring(0, 11) === "game:score-")
                 {
-                    console.log(parseInt(text.substring(11)));
-                    myScore += parseInt(text.substring(11));
+                    console.log(parseInt(text.substring(12)));
+                    myScore += parseInt(text.substring(12));
                 }  
-                else if (text.substring(0, 15) === "game:scorereport")
+                else if (text.substring(0, 16) === "game:scorereport")
                         {
-                           var scores[] = text.subtring(16).splitText("" + ,);
+                           
+                           var scores[] = text.subtring(18).splitText("" + ,);
+
+                           for (int i =0; i < (Integer.parseInt(text.substring(17,18) ))
+                           {
+                           
+                            var newDiv = document.createElement("div");  //sets answer box o invisible
+                            newDiv.id='c'+i;
+                            newDiv.className='col-md-3';
+                            var pg = scores[i];
+                            myDiv.setContent(pg);
+                            toAdd.appendChild(newDiv);
+                           }
+                            document.getElementById("scoreTable").className = "row"; 
+
 
                         }
          
