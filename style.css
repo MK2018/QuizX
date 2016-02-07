@@ -25,6 +25,10 @@
 .invisbleTable{
 	display: none;
 }
+
+.invisbleTextBox{
+	display:none;
+}
 .tableCells{
 width:200px;
 height:75px;
