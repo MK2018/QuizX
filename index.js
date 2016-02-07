@@ -111,6 +111,13 @@ wss.on("connection", function(ws) {
     else if(data === "game:start"){
       broadcast("game:starting");
     }
+    else if(data === "game:getallscores"){
+      scores = [];
+      for(var x = 0; x < gameClients.length; x++){
+        scores.push(gameClients[x].getScore);
+      }
+      return scores;
+    }
     else if(data==="game:host"){
       var id = conCounter++;
       gameHost.push(new Connection(ws, true, id));
@@ -135,7 +142,9 @@ wss.on("connection", function(ws) {
       activey = coordy;
       console.log(coordx+","+coordy);
       broadcast("game:showbuzzer-"+gameBoard[coordx][coordy].getQuestion());
-      //gameHost[0].getClient().send("game:showquest-"+gameBoard[coordx][coordy].getQuestion());
+      host = gameHost[0];
+      alert(host);
+      host.send("game:showquest-"+gameBoard[coordx][coordy].getQuestion());
     }
     else if(data.substring(0, 9) ==="game:buzz"){
       var index = -1;

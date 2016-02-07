@@ -93,7 +93,7 @@
                     button2.className += " joinButton btn btn-success";
                     buttons.appendChild(button);
                     buttons.appendChild(button2);
-
+                    
                 }
                 else if  (text.substring(0, 8) === "game:id:")
                 {
