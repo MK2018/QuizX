@@ -1,7 +1,7 @@
             var webSocket;
             var messages = document.getElementById("messages");
             var buttons = document.getElementById("buttons");
-            var invisable = document.getElementById("invisible-container");
+            var invisable = document.getElementById("invis-container");
             var invisabletext = document.getElementById("answerBox");
             var invisableanswer = document.getElementById("answerSubmit");
 
@@ -68,7 +68,7 @@
                 //console.log(text);
                 if (text === "game:confirm")
                 {
-
+                    //literally do nothing
                 }
                 else if (text === "game:askrole")
                 {
@@ -77,10 +77,10 @@
                     }                    
                     var button = document.createElement("button");
                     var button2 = document.createElement("button");
-                    button.textContent = "THIS IS A BUTTON";
+                    button.textContent = "Join as a host";
                     button.setAttribute( "onClick", "javascript: send('game:host');" );
                     button2.setAttribute( "onClick", "javascript: send('game:client');" );
-                    button2.textContent = "THIS IS A BUTTON TOO";
+                    button2.textContent = "Join as a client";
                     button.className += " joinButton btn btn-success";
                     button2.className += " joinButton btn btn-success";
                     buttons.appendChild(button);
@@ -120,6 +120,7 @@
                 {
                     var button = document.createElement("button");  
                     button.textContent = "Start Game"; 
+                    button.setAttribute( "onClick", "javascript: startGame();" );
                     buttons.appendChild(button);
                 }
                  else if  (text.substring(0,12) === "game:showbuzzer") //////////////////////////////////////////
@@ -152,7 +153,8 @@
              }
 
              function startGame(){
-
+                console.log("game starting...");
+                invisible.className = "";
              }               
             
             function buzz(arg1)
