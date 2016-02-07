@@ -129,7 +129,7 @@
                     
                    var button = document.createElement("button");
                    button.textContent = "BUZZER";
-                   button.setAttribute( "onClick", "buzzer(document.getElementById(answerBox)"); ///////////////////////////////////////////////////////////////FIXFIXFIXFIXFIXFIX
+                   button.setAttribute( "onClick", "buzz(document.getElementById(answerBox))"); ///////////////////////////////////////////////////////////////FIXFIXFIXFIXFIXFIX
 
                    document.getElementById("answerSubmit").className = "invisableanswer";
                    document.getElementById("answerBox").className = "invisabletext";
@@ -138,7 +138,8 @@
                  }
                  else if (text === "game:correct")
                  {
-                    
+                   document.getElementById("answerSubmit").className = "";
+                   document.getElementById("answerBox").className = "";
                  }
                   else if (text === "game:incorrect")
                  {
