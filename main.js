@@ -129,25 +129,22 @@
                     
                    var button = document.createElement("button");
                    button.textContent = "BUZZER";
-<<<<<<< HEAD
                    button.setAttribute( "onClick", "buzz(document.getElementById(answerBox))"); ///////////////////////////////////////////////////////////////FIXFIXFIXFIXFIXFIX
-=======
-                   button.setAttribute( "onClick", "buzzer(document.getElementById(answerBox);"); ///////////////////////////////////////////////////////////////FIXFIXFIXFIXFIXFIX
->>>>>>> 01e605186e3d2fc3bab556a0b6346a4d3c21a045
 
-                   document.getElementById("answerSubmit").className = "invisableanswer";
+                   document.getElementById("answerSubmit").className = "invisableanswer"; //sets answer box to visable
                    document.getElementById("answerBox").className = "invisabletext";
 
 
                  }
                  else if (text === "game:correct")
                  {
-                   document.getElementById("answerSubmit").className = "";
+                   document.getElementById("answerSubmit").className = ""; //sets answer box o invisable
                    document.getElementById("answerBox").className = "";
                  }
                   else if (text === "game:incorrect")
                  {
-                    
+                   document.getElementById("answerSubmit").className = ""; //sets answer box o invisable
+                   document.getElementById("answerBox").className = "";
                  }
 
              }
