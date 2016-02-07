@@ -27,7 +27,7 @@
                     if(event.data === undefined)
                         return;
  
-                    writeResponse(event.data);
+                    //writeResponse(event.data);
                 };
  
                 webSocket.onmessage = function(event){
