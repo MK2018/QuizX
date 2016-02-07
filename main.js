@@ -124,9 +124,19 @@
                     var pg = document.createElement("p");
                     pg.textContent = text.substring(13);
                     pg.className += "par"; 
-                    buttons.appendChild(pg);
+                    buttons.appendChild(pg);z
                  }
+                 else if (text === "game:correct")
+                 {
+                    
+                 }
+                  else if (text === "game:incorrect")
+                 {
+                    
+                 }
+
              }
+
              function startGame(){
 
              }               
