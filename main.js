@@ -81,13 +81,30 @@
                 }
                 else if  (text === "game:loadboard")
                 {
+                    //LOAD GAME BOARD IN
+
+
+                    /*while (buttons.firstChild) {
+                        buttons.removeChild(buttons.firstChild);
+                    }  
+                    var pg = document.createElement("p");
+                    pg.textContent = "WAITING FOR OTHER PLAYERS TO JOIN....";
+                    pg.className += " par";  
+                    buttons.appendChild(pg);    */                         
+                }
+                else if (text.substring(0, 22) === 'game:clientsconnected-'){
                     while (buttons.firstChild) {
                         buttons.removeChild(buttons.firstChild);
                     }  
                     var pg = document.createElement("p");
-                    pg.textContent = "WAITING FOR OTHER PLAYERS LAWL";
+                    if(parseInt(text.substring(22))===1)
+                        pg.textContent = "Currently, there is " + text.substring(22) + " client connected.";
+                    else
+                        pg.textContent = "Currently, there are " + text.substring(22) + " clients connected.";
+                    if(parseInt(text.substring(22))>2){
+                        send("game:checkhost");
+                    }
                     pg.className += " par";  
-                    buttons.appendChild(pg);
-                             
+                    buttons.appendChild(pg);  
                 }
             }
