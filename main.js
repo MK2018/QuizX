@@ -228,7 +228,7 @@
             }
              function check(arg1, arg2)
                  {
-                    console.log("x:"+(arg1-1));
-                    console.log("y:"+(arg2-1));
-                    webSocket.send("game:check("+(arg1-1) +","+(arg2-1)+")");
+                    console.log("x:"+(arg1));
+                    console.log("y:"+(arg2));
+                    webSocket.send("game:check("+(arg1) +","+(arg2)+")");
                  }
