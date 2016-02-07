@@ -127,7 +127,6 @@
                  {
                    console.log(text.substring(16));
                    invisible.className = "invisible";
-                    
                    //var button = document.createElement("button");
                    //button.textContent = "BUZZER";
                    //button.setAttribute( "onClick", "buzzer(document.getElementById(answerBox);"); ///////////////////////////////////////////////////////////////FIXFIXFIXFIXFIXFIX
@@ -139,11 +138,13 @@
                  }
                  else if (text === "game:correct")
                  {
-                    
+                   document.getElementById("answerSubmit").className = ""; //sets answer box o invisable
+                   document.getElementById("answerBox").className = "";
                  }
                   else if (text === "game:incorrect")
                  {
-                    
+                   document.getElementById("answerSubmit").className = ""; //sets answer box o invisable
+                   document.getElementById("answerBox").className = "";
                  }
 
              }
