@@ -1,4 +1,5 @@
 function Connection(conn, hostOrNah) {
+  this.score = 0;
   this.conn = conn;
   if(hostOrNah){
     this.host = true;
@@ -98,6 +99,9 @@ wss.on("connection", function(ws) {
       coordx = coords.substring(1, 2);
       coordy = coords.substring(3, 4);
       ws.send("game:showclue-"+gameBoard[coordx][coordy].getQuestion());
+    }
+    else if(data==="game:buzz"){
+      
     }
     //broadcast(data);
   });

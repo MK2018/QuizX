@@ -109,7 +109,6 @@
                     }
                     pg.className += " par";  
                     buttons.appendChild(pg);  
-                    check(0, 4);
                 }
 
                 else if(text === "game:hashost")
