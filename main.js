@@ -187,8 +187,8 @@
                         thumbCont.removeChild(thumbCont.firstChild);
                     }
                    
-                   document.getElementById("answerSubmit").className = "invisable"; //sets answer box o invisible
-                   document.getElementById("answerBox").className = "invisable";
+                   document.getElementById("answerSubmit").className = "invisible"; //sets answer box o invisible
+                   document.getElementById("answerBox").className = "invisible";
                    document.getElementById("invis-container") = "";
                }
 
@@ -205,7 +205,7 @@
                    document.getElementById("answerBox").className = "invisible";
                    setTimeout(function(){}, 2000);
                  }  
-                else if (text.substring(0, 10) === "game:score"){
+                else if (text.substring(0, 10) === "game:score-"){
                     console.log(parseInt(text.substring(11)));
                     myScore += parseInt(text.substring(11));
                 }  
