@@ -1,6 +1,7 @@
-function Connection(conn, hostOrNah) {
+function Connection(conn, hostOrNah, id) {
   this.score = 0;
   this.conn = conn;
+  this.id = id;
   if(hostOrNah){
     this.host = true;
     this.client = false;
@@ -10,10 +11,10 @@ function Connection(conn, hostOrNah) {
     this.client = true;
   }
   this.getHost = function(){
-    return host;
+    return this.host;
   }
   this.getClient = function(){
-    return client;
+    return this.client;
   }
   this.info = function(){
     return "Client = " + client + ", Host = " + host;
@@ -23,6 +24,9 @@ function Connection(conn, hostOrNah) {
   }
   this.addScore = function(toAdd){
     this.score += toAdd;
+  }
+  this.getId = function(){
+    return this.id;
   }
 }
 
@@ -43,7 +47,7 @@ function Clue(question, value, answer){
 
 function fillBoard(){
   var gameBoard = [new Clue("Who is the best member of the group?", 100, "Michael"),new Clue("Who is the best member of the group?", 200, "Michael"),new Clue("Who is the best member of the group?", 300, "Michael"),new Clue("Who is the best member of the group?", 400, "Michael"),new Clue("Who is the best member of the group?", 500, "Michael")];
-  for(var i=0; i<5; i++) {
+  for(var i=1; i<=5; i++) {
     gameBoard[i] = [new Clue("Who is the best member of the group?", i*100, "Michael"),new Clue("Who is the best member of the group?", i*100, "Michael"),new Clue("Who is the best member of the group?", i*100, "Michael"),new Clue("Who is the best member of the group?", i*100, "Michael"),new Clue("Who is the best member of the group?", i*100, "Michael"),new Clue("Who is the best member of the group?", i*100, "Michael")];//new Array(6);
   }
   return gameBoard;
@@ -75,7 +79,15 @@ var gameHost = [];
 
 var gameClients = [];
 
+var conCounter = 0;
+
 gameBoard = fillBoard();
+
+for(var x=0; x < gameBoard.length; x++){
+  for(var y = 0; y < gameBoard[0].length;y++){
+    console.log(gameBoard[x][y].getValue());
+  }
+}
 
 activex = -1;
 activey = -1;
@@ -89,14 +101,19 @@ wss.on("connection", function(ws) {
       ws.send("game:confirm");
       ws.send("game:askrole");
     }
+    else if(data === "game:start"){
+      broadcast("game:starting");
+    }
     else if(data==="game:host"){
-      gameHost.push(new Connection(ws, true));
-      ws.send("game:loadboard");
+      var id = conCounter++;
+      gameHost.push(new Connection(ws, true, id));
+      ws.send("game:id:"+id);
       broadcast("game:clientsconnected-"+wss.clients.length);
     }
     else if(data==="game:client"){
-      gameClients.push(new Connection(ws, false));
-      ws.send("game:loadboard");
+      var id = conCounter++;
+      gameClients.push(new Connection(ws, false, id));
+      ws.send("game:id:"+id);
       broadcast("game:clientsconnected-"+wss.clients.length);
     }
     else if(data==="game:checkhost"){
@@ -109,23 +126,30 @@ wss.on("connection", function(ws) {
       coordy = coords.substring(3, 4);
       activex = coordx;
       activey = coordy;
-      ws.send("game:showbuzzer-"+gameBoard[coordx][coordy].getQuestion());
+      console.log(coordx+","+coordy);
+      broadcast("game:showbuzzer-"+gameBoard[coordx][coordy].getQuestion());
+      gameHost.getClient().send("game:showquest-"+gameBoard[coordx][coordy].getQuestion());
     }
     else if(data.substring(0, 9) ==="game:buzz"){
+      var index = -1;
       broadcast("game:disable");
-      answer = data.substring(9);
+      answer = data.substring(10);
+      id = parseInt(answer.substring(0, answer.indexOf("-")));
+      answer = answer.substring(answer.indexOf("-")+1);
       if(answer.toLowerCase() === gameBoard[activex][activey].getAnswer().toLowerCase()){
         ws.send("game:correct");
-        for(var x = 0; x < gameClients; x++)
-          if(gameClients[x].getClient() === ws)
+        for(var x = 0; x < gameClients.length; x++)
+          if(gameClients[x].getId() === id){
+            index = x;
             gameClients[x].addScore(gameBoard[activex][activey].getValue());
-        ws.send("game:score-"+gameClients[x].getScore());
+          }
+        ws.send("game:score-"+gameClients[index].getScore());
       }
       else{
+        broadcast("game:enable");
         ws.send("game:incorrect");
       }
     }
-    //broadcast(data);
   });
 
   ws.on("close", function() {

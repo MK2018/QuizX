@@ -9,8 +9,8 @@
 
 
 
-
-
+            var myID = -1;
+            var myScore = 0;
 
            
            
@@ -73,6 +73,10 @@
                 {
                     //literally do nothing
                 }
+                else if (text === "game:starting")
+                {
+                    startGame();
+                }
                 else if (text === "game:askrole")
                 {
                     while (buttons.firstChild) 
@@ -91,18 +95,10 @@
                     buttons.appendChild(button2);
 
                 }
-                else if  (text === "game:loadboard")
+                else if  (text.substring(0, 8) === "game:id:")
                 {
-                    //LOAD GAME BOARD IN
-
-
-                    /*while (buttons.firstChild) {
-                        buttons.removeChild(buttons.firstChild);
-                    }  
-                    var pg = document.createElement("p");
-                    pg.textContent = "WAITING FOR OTHER PLAYERS TO JOIN....";
-                    pg.className += " par";  
-                    buttons.appendChild(pg);    */                         
+                    var id = parseInt(text.substring(8));
+                    myID = id;                      
                 }
                 else if (text.substring(0, 22) === 'game:clientsconnected-')
                 {
@@ -125,7 +121,7 @@
                 {
                     var button = document.createElement("button");  
                     button.textContent = "Start Game"; 
-                    button.setAttribute( "onClick", "javascript: startGame();" );
+                    button.setAttribute( "onClick", "javascript: send('game:start');" );
                     buttons.appendChild(button);
                 }
                  else if  (text.substring(0,15) === "game:showbuzzer") //////////////////////////////////////////
@@ -141,26 +137,82 @@
                    document.getElementById("answerBox").className = "";
 
                  }
+                 else if  (text.substring(0,14) === "game:showquest") //////////////////////////////////////////
+                 {
+                   console.log(text.substring(15));
+                   invisible.className = "invisible";
+                   //var button = document.createElement("button");
+                   //button.textContent = "BUZZER";
+                   //button.setAttribute( "onClick", "buzzer(document.getElementById(answerBox);"); ///////////////////////////////////////////////////////////////FIXFIXFIXFIXFIXFIX
+                    //buttons.appendChild(button);
+                    question = document.getElementById("question");
+                    question.className = "";
+                    question.innerHTML = text.substring(15);
+                   //document.getElementById("answerSubmit").className = "";
+                   //document.getElementById("answerBox").className = "";
+
+                 }
+                 else if (text === "game:disable")
+                 {
+                    document.getElementById("answerSubmit").disabled = true;
+                 }
+                 else if (text === "game:enable")
+                 {
+                    document.getElementById("answerSubmit").disabled = false;
+                 }
                  else if (text === "game:correct")
                  {
-                   document.getElementById("correctThumb").className = "thumbsup"; 
-                   document.getElementById("incorrectThumb").className = ""; 
-
-                   document.getElementById("answerSubmit").className = ""; //sets answer box o invisible
-                   document.getElementById("answerBox").className = "";
+                   var thumbCont = document.getElementById("thumbsContainer");
+                    while (thumbCont.firstChild) {
+                        thumbCont.removeChild(thumbCont.firstChild);
+                    }
+                   var thumbCont = document.getElementById("thumbsContainer");
+                    while (thumbCont.firstChild) 
+                    {
+                        thumbCont.removeChild(thumbCont.firstChild);
+                    }
+                    var thumbsUp = document.createElement("i");
+                    thumbsUp.className = "fa fa-thumbs-up correctSize";
+                    thumbCont.appendChild(thumbsUp);
+                    document.getElementById("answerSubmit").className = "invisible"; //sets answer box o invisible
+                    document.getElementById("answerBox").className = "invisible";
+                    setTimeout(function(){}, 2000);
+                 
                  }
+                 
+                 else if (text === "game:=qcom")
+                 {
+                    while (thumbCont.firstChild) 
+                    {
+                        thumbCont.removeChild(thumbCont.firstChild);
+                    }
+                   
+                   document.getElementById("answerSubmit").className = "invisable"; //sets answer box o invisible
+                   document.getElementById("answerBox").className = "invisable";
+                   document.getElementById("invis-container") = "";
+               }
+
+
+                    
                   else if (text === "game:incorrect")
                  {
-
-                   document.getElementById("correctThumb").className = ""; 
-                   document.getElementById("incorrectThumb").className = "thumbsdown";
-                   document.getElementById("answerSubmit").className = ""; //sets answer box o invisible
-                   document.getElementById("answerBox").className = "";
-
+                   var thumbCont = document.getElementById("thumbsContainer");
+                    
+                    var thumbsDown = document.createElement("i");
+                    thumbsDown.className = "fa fa-thumbs-down correctSize";
+                    thumbCont.appendChild(thumbsDown);
+                   document.getElementById("answerSubmit").className = "invisible"; //sets answer box o invisible
+                   document.getElementById("answerBox").className = "invisible";
+                   setTimeout(function(){}, 2000);
                  }  
+                else if (text.substring(0, 10) === "game:score"){
+                    console.log(parseInt(text.substring(11)));
+                    myScore += parseInt(text.substring(11));
+                }  
          
             }
              function startGame(){
+
                 console.log("game starting...");
                 invisible.className = "";
                 while (buttons.firstChild) {
@@ -169,15 +221,14 @@
                 document.getElementById('title').className = "invisible";  
              }               
             
-            function buzz(arg1)
-                 {
-                console.log("answer:"+ arg2);
-                webSocket.send("game:buzz");
-                webSocket.send(arg1+"");
-                 }
+            function buzz(){
+                var arg1 = document.getElementById("answerBox").value;
+                console.log("answer:"+ arg1);
+                webSocket.send("game:buzz:"+myID+"-" + arg1);
+            }
              function check(arg1, arg2)
                  {
-                    console.log("x:"+arg1);
-                    console.log("y:"+arg2);
-                    webSocket.send("game:check("+arg1 +","+arg2+")");
+                    console.log("x:"+(arg1-1));
+                    console.log("y:"+(arg2-1));
+                    webSocket.send("game:check("+(arg1-1) +","+(arg2-1)+")");
                  }

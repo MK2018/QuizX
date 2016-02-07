@@ -13,10 +13,14 @@
 
     </head>
     <body class="body-wrapper">
+<<<<<<< HEAD
         <center><h1 class="mainPageTitle" id="title">QuizLette</h1></center>
+=======
+        <h1 class="mainPageTitle" id="title">Insert Name Here</h1>
+>>>>>>> 35418baf6dfe70bb614713e3319e15ebb99ace8d
         <!-- Server responses get written here -->
          <div class="container">
-        <div class="row">
+        <div class="row" >
           <div class="col-md-6 col-md-offset-3" id="topRow">            
             <center>
             <div id="buttons"> 
@@ -25,24 +29,24 @@
             </center>
 
             <input type="text" id="answerBox" placeholder="Answer" class="form-control invisibleTextBox"/>
-            <button id="answerSubmit"class="btn btn-success invisibleSubmitAnswer" type="submit">Submit Answer</button>
-            
+            <button id="answerSubmit"class="btn btn-success invisibleSubmitAnswer" type="submit" onclick="buzz();">Submit Answer</button>
+            <div id="thumbsContainer" style="font-size: 300px; color:#449D44;">
+            <!--
 
-            <div style="font-size: 300px; color:#449D44;"  id="correctThumb">
+            <div style="font-size: 300px; color:#449D44;" class="invisible"  id="correctThumb">
             <i class="fa fa-thumbs-up correctSize"></i>
             </div>
             
 
-            <div style="font-size: 300px; color:#FE2E2E;" id="incorrectThumb">
+            <div style="font-size: 300px; color:#FE2E2E; display:none;" class="invisible" id="incorrectThumb">
             <i class="fa fa-thumbs-down incorrectSize" ></i>
             </div>
-
-
-
+-->
+            </div>
 
           </div>
         </div>
-        <div id="invis-container" class="invisibleTable invisbleTable">
+        <div id="invis-container" class="invisible">
            <div class="row">
                 <div class="col-md-2 category">
                     Category1
@@ -65,64 +69,64 @@
             </div>
         <div class="row">
             <div class="col-md-2">
-                 <button class="tableCells btn btn-default"type="submit" onclick="check(1,1);" >100</button>
+                 <button class="tableCells btn btn-default"type="submit" onclick="check(0,0);" >100</button>
             </div>
             <div class="col-md-2">
-                <button class="tableCells btn btn-default"type="submit" onclick="check(1,2);" >100</button>
+                <button class="tableCells btn btn-default"type="submit" onclick="check(0,1);" >100</button>
             </div>
             <div class="col-md-2">
-                <button class="tableCells btn btn-default"type="submit" onclick="check(1,3);" >100</button>
+                <button class="tableCells btn btn-default"type="submit" onclick="check(0,2);" >100</button>
             </div>
             <div class="col-md-2">
-                <button class="tableCells btn btn-default"type="submit" onclick="check(1,4);" >100</button>
+                <button class="tableCells btn btn-default"type="submit" onclick="check(0,3);" >100</button>
             </div>
             <div class="col-md-2">
-                <button class="tableCells btn btn-default"type="submit" onclick="check(1,5);" >100</button>
+                <button class="tableCells btn btn-default"type="submit" onclick="check(0,4);" >100</button>
             </div>
             <div class="col-md-2">
-                <button class="tableCells btn btn-default"type="submit" onclick="check(1,6);" >100</button>
+                <button class="tableCells btn btn-default"type="submit" onclick="check(0,5);" >100</button>
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-2">
-                <button class="tableCells btn btn-default"type="submit" onclick="check(2,1);" >200</button>
+                <button class="tableCells btn btn-default"type="submit" onclick="check(1,0);" >200</button>
             </div>
             <div class="col-md-2">
-                <button class="tableCells btn btn-default"type="submit" onclick="check(2,2);" >200</button>
+                <button class="tableCells btn btn-default"type="submit" onclick="check(1,1);" >200</button>
             </div>
             <div class="col-md-2">
-                <button class="tableCells btn btn-default"type="submit" onclick="check(2,3);" >200</button>
+                <button class="tableCells btn btn-default"type="submit" onclick="check(1,2);" >200</button>
             </div>
             <div class="col-md-2">
-                <button class="tableCells btn btn-default"type="submit" onclick="check(2,4);" >200</button>
+                <button class="tableCells btn btn-default"type="submit" onclick="check(1,3);" >200</button>
             </div>
             <div class="col-md-2">
-                <button class="tableCells btn btn-default"type="submit" onclick="check(2,5);" >200</button>
+                <button class="tableCells btn btn-default"type="submit" onclick="check(1,4);" >200</button>
             </div>
             <div class="col-md-2">
-                <button class="tableCells btn btn-default"type="submit" onclick="check(2,6);" >200</button>
+                <button class="tableCells btn btn-default"type="submit" onclick="check(1,5);" >200</button>
             </div>
         </div>
 
             <div class="row">
                 <div class="col-md-2">
-                     <button class="tableCells btn btn-default"type="submit" onclick="check(1,1);" >300</button>
+                     <button class="tableCells btn btn-default"type="submit" onclick="check(2,0);" >300</button>
                 </div>
                 <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(1,2);" >300</button>
+                    <button class="tableCells btn btn-default"type="submit" onclick="check(2,1);" >300</button>
                 </div>
                 <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(1,3);" >300</button>
+                    <button class="tableCells btn btn-default"type="submit" onclick="check(2,2);" >300</button>
                 </div>
                 <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(1,4);" >300</button>
+                    <button class="tableCells btn btn-default"type="submit" onclick="check(2,3);" >300</button>
                 </div>
                 <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(1,5);" >300</button>
+                    <button class="tableCells btn btn-default"type="submit" onclick="check(2,4);" >300</button>
                 </div>
                 <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(1,6);" >300</button>
+                    <button class="tableCells btn btn-default"type="submit" onclick="check(2,5);" >300</button>
                 </div>
             </div>
 
@@ -167,7 +171,8 @@
                 <button class="tableCells btn btn-default"type="submit" onclick="check(5,6);" >500</button>     
             </div>
         </div>
-       
+       <div class="invisible" id="question" style="font-size:40pt;">
+       </div>
     </div>
         <script src="main.js"></script> 
         <script>
