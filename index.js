@@ -19,15 +19,27 @@ function Connection(conn, hostOrNah) {
   }
 }
 
-function Clue(question, value){
+function Clue(question, value, answer){
   this.question = question;
   this.value = value;
+  this.answer = answer;
   this.getQuestion =  function(){
     return this.question;
   }
   this.getValue = function(){
     return this.value;
   }
+  this.getAnswer = function(){
+    return this.answer;
+  }
+}
+
+function fillBoard(){
+  var gameBoard = [new Clue("Who is the best member of the group?", 100, "Michael"),new Clue("Who is the best member of the group?", 200, "Michael"),new Clue("Who is the best member of the group?", 300, "Michael"),new Clue("Who is the best member of the group?", 400, "Michael"),new Clue("Who is the best member of the group?", 500, "Michael")];
+  for(var i=0; i<5; i++) {
+    gameBoard[i] = [new Clue("Who is the best member of the group?", i*100, "Michael"),new Clue("Who is the best member of the group?", i*100, "Michael"),new Clue("Who is the best member of the group?", i*100, "Michael"),new Clue("Who is the best member of the group?", i*100, "Michael"),new Clue("Who is the best member of the group?", i*100, "Michael"),new Clue("Who is the best member of the group?", i*100, "Michael")];//new Array(6);
+  }
+  return gameBoard;
 }
 
 function broadcast(data) {
@@ -56,10 +68,7 @@ var gameHost = [];
 
 var gameClients = [];
 
-var gameBoard = [];
-for(var i=0; i<5; i++) {
-  gameBoard[i] = new Array(9);
-}
+gameBoard = fillBoard();
 
 wss.on("connection", function(ws) {
   ws.send("Connected");
@@ -85,7 +94,10 @@ wss.on("connection", function(ws) {
         ws.send("game:hashost");
     }
     else if(data.substring(0,10) ==="game:check"){
-
+      coords = data.substring(10);
+      coordx = coords.substring(1, 2);
+      coordy = coords.substring(3, 4);
+      ws.send("game:showclue-"+gameBoard[coordx][coordy].getQuestion());
     }
     //broadcast(data);
   });

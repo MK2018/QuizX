@@ -34,6 +34,7 @@
                 webSocket.onmessage = function(event){
                     //writeResponse(event.data);
                     checkText(event.data);
+                    //check(0, 4);
                 };
  
                 webSocket.onclose = function(event){
@@ -108,6 +109,7 @@
                     }
                     pg.className += " par";  
                     buttons.appendChild(pg);  
+                    check(0, 4);
                 }
 
                 else if(text === "game:hashost")
@@ -139,5 +141,5 @@
                  {
                     console.log("x:"+arg1);
                     console.log("y:"+arg2);
-                    webSocket.send("game:("+arg1 +"),("+arg2+")");
+                    webSocket.send("game:check("+arg1 +","+arg2+")");
                  }
