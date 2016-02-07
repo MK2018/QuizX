@@ -22,17 +22,31 @@
 	margin: 10px;
 	margin-top: 75px;
 }
-.invisble{
+.invisbleTable{
 	display: none;
 }
 .tableCells{
 width:200px;
 height:75px;
 font-family: 'Montserrat', sans-serif;
-border: 2px, solid, #FFFFFF;
+border: 5px, solid, #FFFFFF;
+text-align: center;
+background-color: #819FF7;
 }
 
 .par{
 	font-size: 20pt;
 	color: white;
+}
+
+.row{
+	text-align: center;
+}
+
+.category{
+	text-align: center;
+	font-family: 'Montserrat', sans-serif;
+	padding-left: 50px;
+	font-size: 1.75em;
+	color:white;
 }
