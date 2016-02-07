@@ -55,20 +55,6 @@
               //  messages.innerHTML += "<br/>" + text;
             //}
             function checkText(text){
-<<<<<<< HEAD
-                if (text === "game:confirm"))
-                {
-
-                }
-                else if (text === "game:askrole"))
-                {
-                    while (buttons.firstChild) {
-                        buttons.removeChild(buttons.firstChild);
-                    }                    
-                    var button = document.createElement("button");
-                    var button2 = document.createElement("button");
-
-=======
                 if (text === "game:confirm")
                 {
 
@@ -77,13 +63,13 @@
                 {
                     while (buttons.firstChild) {
                         buttons.removeChild(buttons.firstChild);
-                        }                    
+                    }                    
                     var button = document.createElement("button");
+                    var button2 = document.createElement("button");
                     button.textContent = "THIS IS A BUTTON";
                     button2.textContent = "THIS IS A BUTTON TOO";
-
                     button.className += " joinButton btn btn-success";
->>>>>>> 
+                    button2.className += " joinButton btn btn-success";
                     buttons.appendChild(button);
                     buttons.appendChild(button2);
 
