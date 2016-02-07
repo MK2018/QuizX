@@ -57,6 +57,7 @@
               //  messages.innerHTML += "<br/>" + text;
             //}
             function checkText(text){
+                //console.log(text);
                 if (text === "game:confirm")
                 {
 
@@ -80,16 +81,13 @@
                 }
                 else if  (text === "game:loadboard")
                 {
-                 while (buttons.firstChild) {
+                    while (buttons.firstChild) {
                         buttons.removeChild(buttons.firstChild);
                     }  
-                     var pg = document.createElement("paragraph");
-                     pg.text = "WAITING FOR OTHER PLAYERS LAWL";
-                     pg.className += " bodyContainer btn btn-success";
-
-
-
-
-                       
+                    var pg = document.createElement("p");
+                    pg.textContent = "WAITING FOR OTHER PLAYERS LAWL";
+                    pg.className += " par";  
+                    buttons.appendChild(pg);
+                             
                 }
             }

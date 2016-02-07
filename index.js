@@ -1,5 +1,23 @@
-
-
+function Connection(conn, hostOrNah) {
+  this.conn = conn;
+  if(hostOrNah){
+    this.host = true;
+    this.client = false;
+  }
+  else{
+    this.host = false;
+    this.client = true;
+  }
+  this.getHost = function(){
+    return host;
+  }
+  this.getClient = function(){
+    return client;
+  }
+  this.info = function(){
+    return "Client = " + client + ", Host = " + host;
+  }
+}
 
 
 function broadcast(data) {
@@ -39,12 +57,13 @@ wss.on("connection", function(ws) {
       ws.send("game:askrole");
     }
     else if(data==="game:host"){
-      
+      gameHost.push(new Connection(ws, true));
+      ws.send("game:loadboard");
     }
     else if(data==="game:client"){
-      gameClients.push(ws);
-      console.log(gameClients);
-      ws.send("game:");
+      gameClients.push(new Connection(ws, false));
+      //console.log(gameClients);
+      ws.send("game:loadboard");
     }
     //broadcast(data);
   });
