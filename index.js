@@ -48,7 +48,6 @@ var gameClients = [];
 
 wss.on("connection", function(ws) {
   ws.send("Connected");
-
   console.log("websocket connection open")
 
   ws.on("message", function(data) {
@@ -59,16 +58,24 @@ wss.on("connection", function(ws) {
     else if(data==="game:host"){
       gameHost.push(new Connection(ws, true));
       ws.send("game:loadboard");
+      broadcast("game:clientsconnected-"+wss.clients.length);
     }
     else if(data==="game:client"){
       gameClients.push(new Connection(ws, false));
       ws.send("game:loadboard");
+      broadcast("game:clientsconnected-"+wss.clients.length);
     }
+    else if(data==="game:checkhost"){
+      if(gameHost.length === 1)
+        ws.send("game:hashost");
+    }
+    else if(data==="")
     //broadcast(data);
   });
 
   ws.on("close", function() {
     console.log("websocket connection close");
+    broadcast("game:clientsconnected-"+wss.clients.length);
   })
 
 })
