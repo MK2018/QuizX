@@ -112,11 +112,11 @@ wss.on("connection", function(ws) {
       broadcast("game:starting");
     }
     else if(data === "game:getallscores"){
-      scores = [];
+      scores = "game:scorereport:"+gameClients.length+":";
       for(var x = 0; x < gameClients.length; x++){
-        scores.push(gameClients[x].getScore);
+        scores+=(gameClients[x].getScore)+",";
       }
-      return scores;
+      ws.send();
     }
     else if(data==="game:host"){
       var id = conCounter++;

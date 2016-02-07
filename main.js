@@ -12,6 +12,8 @@
             var myID = -1;
             var myScore = 0;
 
+            var isHost = false;
+
            
            
             function openSocket(){
@@ -86,14 +88,14 @@
                     var button = document.createElement("button");
                     var button2 = document.createElement("button");
                     button.textContent = "Join as a host";
-                    button.setAttribute( "onClick", "javascript: send('game:host');" );
+                    button.setAttribute( "onClick", "javascript: checkifHost(); send('game:host');" );
                     button2.setAttribute( "onClick", "javascript: send('game:client');" );
                     button2.textContent = "Join as a client";
                     button.className += " joinButton btn btn-success";
                     button2.className += " joinButton btn btn-success";
                     buttons.appendChild(button);
                     buttons.appendChild(button2);
-                    
+
                 }
                 else if  (text.substring(0, 8) === "game:id:")
                 {
@@ -126,28 +128,33 @@
                 }
                  else if  (text.substring(0,15) === "game:showbuzzer") //////////////////////////////////////////
                  {
-                   console.log(text.substring(16));
-                   invisible.className = "invisible";
-                   //var button = document.createElement("button");
-                   //button.textContent = "BUZZER";
-                   //button.setAttribute( "onClick", "buzzer(document.getElementById(answerBox);"); ///////////////////////////////////////////////////////////////FIXFIXFIXFIXFIXFIX
-                    //buttons.appendChild(button);
+                   if(!isHost){
+                           console.log(text.substring(16));
+                           invisible.className = "invisible";
+                           //var button = document.createElement("button");
+                           //button.textContent = "BUZZER";
+                           //button.setAttribute( "onClick", "buzzer(document.getElementById(answerBox);"); ///////////////////////////////////////////////////////////////FIXFIXFIXFIXFIXFIX
+                            //buttons.appendChild(button);
 
-                   document.getElementById("answerSubmit").className = "";
-                   document.getElementById("answerBox").className = "";
+                           document.getElementById("answerSubmit").className = "";
+                           document.getElementById("answerBox").className = "";
+                       }
+                    else{
+                        console.log(text.substring(15));
+                       invisible.className = "invisible";
+                       //var button = document.createElement("button");
+                       //button.textContent = "BUZZER";
+                       //button.setAttribute( "onClick", "buzzer(document.getElementById(answerBox);"); ///////////////////////////////////////////////////////////////FIXFIXFIXFIXFIXFIX
+                        //buttons.appendChild(button);
+                        question = document.getElementById("question");
+                        question.className = "";
+                        question.innerHTML = text.substring(15);
+                    }
 
                  }
                  else if  (text.substring(0,14) === "game:showquest") //////////////////////////////////////////
                  {
-                   console.log(text.substring(15));
-                   invisible.className = "invisible";
-                   //var button = document.createElement("button");
-                   //button.textContent = "BUZZER";
-                   //button.setAttribute( "onClick", "buzzer(document.getElementById(answerBox);"); ///////////////////////////////////////////////////////////////FIXFIXFIXFIXFIXFIX
-                    //buttons.appendChild(button);
-                    question = document.getElementById("question");
-                    question.className = "";
-                    question.innerHTML = text.substring(15);
+                   
                    //document.getElementById("answerSubmit").className = "";
                    //document.getElementById("answerBox").className = "";
 
@@ -233,3 +240,6 @@
                     console.log("y:"+(arg2));
                     webSocket.send("game:check("+(arg1) +","+(arg2)+")");
                  }
+            function checkIfHost(){
+                isHost = true;
+            }
