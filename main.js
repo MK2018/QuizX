@@ -1,8 +1,7 @@
             var webSocket;
             var messages = document.getElementById("messages");
             var buttons = document.getElementById("buttons");
-            var paragraph = document.getElementById("paragraph");
-            var invisable = document.getElementById("invisable");
+            var invisable = document.getElementById("invisable-container");
 
 
            
@@ -58,7 +57,8 @@
             //function writeResponse(text){
               //  messages.innerHTML += "<br/>" + text;
             //}
-            function checkText(text){
+            function checkText(text)
+            {
                 //console.log(text);
                 if (text === "game:confirm")
                 {
@@ -92,11 +92,21 @@
                     buttons.appendChild(pg);
                              
                 }
-                 else if  (text === "game:showclue"){
-                
+                 else if  (text === "game:showclue")
+                 {
                    document.getElementById("invis-container").className = "";
-
-
+                    var pg = document.createElement("p");
+                    pg.textContent = "SAMPLE TERT LAWL";/////////////////////////////////////////////////////////////////////////////////////////////FIXFIXFIXFIXFIX
+                    pg.className += "par"; 
+                    buttons.appendChild(pg);
                  }
+             }
+
                 
-            }
+            
+            function buzz(arg1)
+                 {
+                console.log("text:"+arg1);
+                webSocket.send("game:buzz")
+                webSocket.send(arg1+"");
+                 }
