@@ -206,7 +206,7 @@
                    document.getElementById("answerBox").className = "invisible";
                    setTimeout(function(){}, 2000);
                  }  
-                else if (text.substring(0, 10) === "game:score"){
+                else if (text.substring(0, 10) === "game:score-"){
                     console.log(parseInt(text.substring(11)));
                     myScore += parseInt(text.substring(11));
                 }  
