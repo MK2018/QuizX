@@ -187,8 +187,8 @@
                         thumbCont.removeChild(thumbCont.firstChild);
                     }
                    
-                   document.getElementById("answerSubmit").className = "invisable"; //sets answer box o invisible
-                   document.getElementById("answerBox").className = "invisable";
+                   document.getElementById("answerSubmit").className = "invisible"; //sets answer box o invisible
+                   document.getElementById("answerBox").className = "invisible";
                    document.getElementById("invis-container") = "";
                }
 

@@ -142,6 +142,7 @@ wss.on("connection", function(ws) {
             gameClients[x].addScore(gameBoard[activex][activey].getValue());
           }
         ws.send("game:score-"+gameClients[index].getScore());
+        broadcast("game:=qcom");
       }
       else{
         broadcast("game:enable");
