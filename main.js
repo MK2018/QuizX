@@ -136,6 +136,7 @@
                    document.getElementById("answerSubmit").className = "";
                    document.getElementById("answerBox").className = "";
 
+
                  }
                  else if  (text.substring(0,14) === "game:showquest") //////////////////////////////////////////
                  {
@@ -206,10 +207,16 @@
                    document.getElementById("answerBox").className = "invisible";
                    setTimeout(function(){}, 2000);
                  }  
-                else if (text.substring(0, 10) === "game:score-"){
+                else if (text.substring(0, 10) === "game:score-")
+                {
                     console.log(parseInt(text.substring(11)));
                     myScore += parseInt(text.substring(11));
                 }  
+                else if (text.substring(0, 15) === "game:scorereport")
+                        {
+                           var scores[] = text.subtring(16).splitText("" + ,);
+
+                        }
          
             }
              function startGame(){
