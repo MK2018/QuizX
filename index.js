@@ -66,8 +66,8 @@ wss.on("connection", function(ws) {
       broadcast("game:clientsconnected-"+wss.clients.length);
     }
     else if(data==="game:checkhost"){
-      if(gameHost.)
-      ws.send("game:")
+      if(gameHost.length === 1)
+        ws.send("game:hashost");
     }
     else if(data==="")
     //broadcast(data);
