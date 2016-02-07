@@ -88,7 +88,7 @@
                     var button = document.createElement("button");
                     var button2 = document.createElement("button");
                     button.textContent = "Join as a host";
-                    button.setAttribute( "onClick", "javascript: checkifHost(); send('game:host');" );
+                    button.setAttribute( "onClick", "javascript: checkIfHost(); send('game:host');" );
                     button2.setAttribute( "onClick", "javascript: send('game:client');" );
                     button2.textContent = "Join as a client";
                     button.className += " joinButton btn btn-success";
@@ -147,8 +147,8 @@
                        //button.setAttribute( "onClick", "buzzer(document.getElementById(answerBox);"); ///////////////////////////////////////////////////////////////FIXFIXFIXFIXFIXFIX
                         //buttons.appendChild(button);
                         question = document.getElementById("question");
-                        question.className = "";
-                        question.innerHTML = text.substring(15);
+                        question.className = "questionStyle";
+                        question.textContent = text.substring(16);
                     }
 
 
@@ -192,6 +192,8 @@
                  
                  else if (text === "game:=qcom")
                  {
+                    question = document.getElementById("question");
+                    question.textContent = "";
                     var thumbCont = document.getElementById("thumbsContainer");
                     while (thumbCont.firstChild) 
                     {
@@ -262,11 +264,11 @@
                 webSocket.send("game:buzz:"+myID+"-" + arg1);
             }
              function check(arg1, arg2)
-                 {
+            {
                     console.log("x:"+(arg1));
                     console.log("y:"+(arg2));
                     webSocket.send("game:check("+(arg1) +","+(arg2)+")");
-                 }
+            }
             function checkIfHost(){
                 isHost = true;
             }
