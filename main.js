@@ -3,7 +3,10 @@
             var buttons = document.getElementById("buttons");
             var invisible = document.getElementById("invis-container");
             var invisibletext = document.getElementById("answerBox");
-            var invisibleanswer = document.getElementById("answerSubmit");
+            var thumbsup = document.getElementById("correctThumb");
+            var thumbsdown = document.getElementById("incorrectThumb");
+
+
 
 
 
@@ -72,7 +75,8 @@
                 }
                 else if (text === "game:askrole")
                 {
-                    while (buttons.firstChild) {
+                    while (buttons.firstChild) 
+                    {
                         buttons.removeChild(buttons.firstChild);
                     }                    
                     var button = document.createElement("button");
@@ -100,7 +104,8 @@
                     pg.className += " par";  
                     buttons.appendChild(pg);    */                         
                 }
-                else if (text.substring(0, 22) === 'game:clientsconnected-'){
+                else if (text.substring(0, 22) === 'game:clientsconnected-')
+                {
                     while (buttons.firstChild) {
                         buttons.removeChild(buttons.firstChild);
                     }  
@@ -131,24 +136,30 @@
                    button.textContent = "BUZZER";
                    button.setAttribute( "onClick", "buzz(document.getElementById(answerBox))"); ///////////////////////////////////////////////////////////////FIXFIXFIXFIXFIXFIX
 
-                   document.getElementById("answerSubmit").className = "invisableanswer"; //sets answer box to visable
-                   document.getElementById("answerBox").className = "invisabletext";
+                   document.getElementById("answerSubmit").className = "invisibleanswer"; //sets answer box to visable
+                   document.getElementById("answerBox").className = "invisibletext";
 
 
                  }
                  else if (text === "game:correct")
                  {
-                   document.getElementById("answerSubmit").className = ""; //sets answer box o invisable
+                   document.getElementById("correctThumb").className = "thumbsup"; 
+                   document.getElementById("incorrectThumb").className = ""; 
+
+                   document.getElementById("answerSubmit").className = ""; //sets answer box o invisible
                    document.getElementById("answerBox").className = "";
                  }
                   else if (text === "game:incorrect")
                  {
-                   document.getElementById("answerSubmit").className = ""; //sets answer box o invisable
+
+                   document.getElementById("correctThumb").className = ""; 
+                   document.getElementById("incorrectThumb").className = "thumbsdown";
+                   document.getElementById("answerSubmit").className = ""; //sets answer box o invisible
                    document.getElementById("answerBox").className = "";
-                 }
 
-             }
-
+                 }  
+         
+            }
              function startGame(){
                 console.log("game starting...");
                 invisible.className = "";
