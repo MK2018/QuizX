@@ -182,6 +182,7 @@
                  
                  else if (text === "game:=qcom")
                  {
+                    var thumbCont = document.getElementById("thumbsContainer");
                     while (thumbCont.firstChild) 
                     {
                         thumbCont.removeChild(thumbCont.firstChild);
@@ -189,7 +190,7 @@
                    
                    document.getElementById("answerSubmit").className = "invisible"; //sets answer box o invisible
                    document.getElementById("answerBox").className = "invisible";
-                   document.getElementById("invis-container") = "";
+                   document.getElementById("invis-container").className = "";
                }
 
 
