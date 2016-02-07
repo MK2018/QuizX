@@ -143,25 +143,36 @@
                  }
                  else if (text === "game:correct")
                  {
-                   document.getElementById("correctThumb").className = "thumbsup"; 
-                   document.getElementById("incorrectThumb").className = ""; 
+                   document.getElementById("correctThumb").className = ""; 
+                   document.getElementById("incorrectThumb").className = "invisable"; 
 
-                   document.getElementById("answerSubmit").className = ""; //sets answer box o invisible
-                   document.getElementById("answerBox").className = "";
+                   document.getElementById("answerSubmit").className = "invisable"; //sets answer box o invisible
+                   document.getElementById("answerBox").className = "invisable";
                  }
                   else if (text === "game:incorrect")
                  {
 
-                   document.getElementById("correctThumb").className = ""; 
-                   document.getElementById("incorrectThumb").className = "thumbsdown";
-                   document.getElementById("answerSubmit").className = ""; //sets answer box o invisible
-                   document.getElementById("answerBox").className = "";
+                   document.getElementById("correctThumb").className = "invisable"; 
+                   document.getElementById("incorrectThumb").className = "";
+                   document.getElementById("answerSubmit").className = "invisable"; //sets answer box o invisible
+                   document.getElementById("answerBox").className = "invisable";
+
+                 }  
+                 else if (text === "game:=qcom")
+                 {
+
+                   document.getElementById("correctThumb").className = "invisable"; 
+                   document.getElementById("incorrectThumb").className = "invisable";
+                   document.getElementById("answerSubmit").className = "invisable"; //sets answer box o invisible
+                   document.getElementById("answerBox").className = "invisable";
+                   document.getElementById("invis-container") = "";
+
 
                  }  
          
             }
              function startGame(){
-                console.log("game starting...");
+                console.log("Game starting...");
                 invisible.className = "";
                 while (buttons.firstChild) {
                         buttons.removeChild(buttons.firstChild);
