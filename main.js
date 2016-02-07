@@ -162,23 +162,43 @@
                  }
                  else if (text === "game:correct")
                  {
-                    var thumbCont = document.getElementById("thumbsContainer");
+                    {
+                   var thumbCont = document.getElementById("thumbsContainer");
                     while (thumbCont.firstChild) {
+                        thumbCont.removeChild(thumbCont.firstChild);
+                    }
+                   var thumbCont = document.getElementById("thumbsContainer");
+                    while (thumbCont.firstChild) 
+                    {
                         thumbCont.removeChild(thumbCont.firstChild);
                     }
                     var thumbsUp = document.createElement("i");
                     thumbsUp.className = "fa fa-thumbs-up correctSize";
                     thumbCont.appendChild(thumbsUp);
-                   document.getElementById("answerSubmit").className = "invisible"; //sets answer box o invisible
-                   document.getElementById("answerBox").className = "invisible";
-                   setTimeout(function(){}, 2000);
+                    document.getElementById("answerSubmit").className = "invisible"; //sets answer box o invisible
+                    document.getElementById("answerBox").className = "invisible";
+                    setTimeout(function(){}, 2000);
+                 
                  }
+                 
+                 else if (text === "game:=qcom")
+                 {
+                    while (thumbCont.firstChild) 
+                    {
+                        thumbCont.removeChild(thumbCont.firstChild);
+                    }
+                   
+                   document.getElementById("answerSubmit").className = "invisable"; //sets answer box o invisible
+                   document.getElementById("answerBox").className = "invisable";
+                   document.getElementById("invis-container") = "";
+               }
+
+
+                    
                   else if (text === "game:incorrect")
                  {
                    var thumbCont = document.getElementById("thumbsContainer");
-                    while (thumbCont.firstChild) {
-                        thumbCont.removeChild(thumbCont.firstChild);
-                    }
+                    
                     var thumbsDown = document.createElement("i");
                     thumbsDown.className = "fa fa-thumbs-down correctSize";
                     thumbCont.appendChild(thumbsDown);
@@ -193,8 +213,7 @@
          
             }
              function startGame(){
-                //var topRow = document.getElementById("topRow");
-                //topRow.className = " invisible";
+
                 console.log("game starting...");
                 invisible.className = "";
                 while (buttons.firstChild) {
