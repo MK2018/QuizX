@@ -19,6 +19,16 @@ function Connection(conn, hostOrNah) {
   }
 }
 
+function Clue(question, value){
+  this.question = question;
+  this.value = value;
+  this.getQuestion =  function(){
+    return this.question;
+  }
+  this.getValue = function(){
+    return this.value;
+  }
+}
 
 function broadcast(data) {
 	wss.clients.forEach(function each(client) {
@@ -46,6 +56,11 @@ var gameHost = [];
 
 var gameClients = [];
 
+var gameBoard = [];
+for(var i=0; i<5; i++) {
+  gameBoard[i] = new Array(9);
+}
+
 wss.on("connection", function(ws) {
   ws.send("Connected");
   console.log("websocket connection open")
@@ -69,7 +84,9 @@ wss.on("connection", function(ws) {
       if(gameHost.length === 1)
         ws.send("game:hashost");
     }
-    else if(data==="")
+    else if(data.substring(0,10) ==="game:check"){
+
+    }
     //broadcast(data);
   });
 

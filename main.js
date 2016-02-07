@@ -109,7 +109,12 @@
                     pg.className += " par";  
                     buttons.appendChild(pg);  
                 }
-                 else if  (text === "game:showclue")
+                else if(text === "game:hashost"){
+                    var button = document.createElement("button");  
+                    button.textContent = "Start Game"; 
+                    buttons.appendChild(button);
+                }
+                else if (text === "game:showclue")
                  {
                    document.getElementById("invis-container").className = "";
                     var pg = document.createElement("p");
@@ -118,8 +123,9 @@
                     buttons.appendChild(pg);
                  }
              }
+             function startGame(){
 
-                
+             }               
             
             function buzz(arg1)
                  {
