@@ -1,7 +1,12 @@
             var webSocket;
             var messages = document.getElementById("messages");
             var buttons = document.getElementById("buttons");
-            var invisable = document.getElementById("invisable-container");
+            var invisable = document.getElementById("invisible-container");
+            var invisabletext = document.getElementById("answerBox");
+            var invisableanswer = document.getElementById("answerSubmit");
+
+
+
 
 
            
@@ -116,13 +121,18 @@
                     button.textContent = "Start Game"; 
                     buttons.appendChild(button);
                 }
-                 else if  (text.substring(0,12) === "game:showclue")
+                 else if  (text.substring(0,12) === "game:showbuzzer") //////////////////////////////////////////
                  {
                    document.getElementById("invis-container").className = "";
-                    var pg = document.createElement("p");
-                    pg.textContent = text.substring(13);
-                    pg.className += "par"; 
-                    buttons.appendChild(pg);z
+                    
+                   var button = document.createElement("button");
+                   button.textContent = "BUZZER";
+                   button.setAttribute( "onClick", "buzzer(document.getElementById(answerBox)"); ///////////////////////////////////////////////////////////////FIXFIXFIXFIXFIXFIX
+
+                   document.getElementById("answerSubmit").className = "invisableanswer";
+                   document.getElementById("answerBox").className = "invisabletext";
+
+
                  }
                  else if (text === "game:correct")
                  {
@@ -141,7 +151,7 @@
             
             function buzz(arg1)
                  {
-                console.log("text:"+ arg1);
+                console.log("answer:"+ arg2);
                 webSocket.send("game:buzz");
                 webSocket.send(arg1+"");
                  }
