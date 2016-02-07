@@ -30,6 +30,15 @@ function Connection(conn, hostOrNah, id) {
   }
 }
 
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
+
 function Clue(question, value, answer){
   this.question = question;
   this.value = value;
@@ -102,6 +111,13 @@ wss.on("connection", function(ws) {
     else if(data === "game:start"){
       broadcast("game:starting");
     }
+    else if(data === "game:getallscores"){
+      scores = [];
+      for(var x = 0; x < gameClients.length; x++){
+        scores.push(gameClients[x].getScore);
+      }
+      return scores;
+    }
     else if(data==="game:host"){
       var id = conCounter++;
       gameHost.push(new Connection(ws, true, id));
@@ -126,12 +142,15 @@ wss.on("connection", function(ws) {
       activey = coordy;
       console.log(coordx+","+coordy);
       broadcast("game:showbuzzer-"+gameBoard[coordx][coordy].getQuestion());
-      gameHost[0].getClient().send("game:showquest-"+gameBoard[coordx][coordy].getQuestion());
+      host = gameHost[0];
+      alert(host);
+      host.send("game:showquest-"+gameBoard[coordx][coordy].getQuestion());
     }
     else if(data.substring(0, 9) ==="game:buzz"){
       var index = -1;
       broadcast("game:disable");
       answer = data.substring(10);
+      console.log(answer);
       id = parseInt(answer.substring(0, answer.indexOf("-")));
       answer = answer.substring(answer.indexOf("-")+1);
       if(answer.toLowerCase() === gameBoard[activex][activey].getAnswer().toLowerCase()){
@@ -142,6 +161,7 @@ wss.on("connection", function(ws) {
             gameClients[x].addScore(gameBoard[activex][activey].getValue());
           }
         ws.send("game:score-"+gameClients[index].getScore());
+        sleep(2000);
         broadcast("game:=qcom");
       }
       else{
