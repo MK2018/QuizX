@@ -137,6 +137,29 @@
                    document.getElementById("answerBox").className = "";
 
                  }
+                 else if  (text.substring(0,14) === "game:showquest") //////////////////////////////////////////
+                 {
+                   console.log(text.substring(15));
+                   invisible.className = "invisible";
+                   //var button = document.createElement("button");
+                   //button.textContent = "BUZZER";
+                   //button.setAttribute( "onClick", "buzzer(document.getElementById(answerBox);"); ///////////////////////////////////////////////////////////////FIXFIXFIXFIXFIXFIX
+                    //buttons.appendChild(button);
+                    question = document.getElementById("question");
+                    question.className = "";
+                    question.innerHTML = text.substring(15);
+                   document.getElementById("answerSubmit").className = "";
+                   document.getElementById("answerBox").className = "";
+
+                 }
+                 else if (text === "game:disable")
+                 {
+                    document.getElementById("answerSubmit").disabled = true;
+                 }
+                 else if (text === "game:enable")
+                 {
+                    document.getElementById("answerSubmit").disabled = false;
+                 }
                  else if (text === "game:correct")
                  {
                     var thumbCont = document.getElementById("thumbsContainer");
