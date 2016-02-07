@@ -106,7 +106,7 @@
             
             function buzz(arg1)
                  {
-                console.log("text:"+arg1);
-                webSocket.send("game:buzz")
+                console.log("text:"+ arg1);
+                webSocket.send("game:buzz");
                 webSocket.send(arg1+"");
                  }
