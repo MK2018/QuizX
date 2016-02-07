@@ -95,6 +95,9 @@ wss.on("connection", function(ws) {
       ws.send("game:confirm");
       ws.send("game:askrole");
     }
+    else if(data === "game:start"){
+      broadcast("game:starting");
+    }
     else if(data==="game:host"){
       var id = conCounter++;
       gameHost.push(new Connection(ws, true, id));

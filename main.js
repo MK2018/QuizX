@@ -73,6 +73,10 @@
                 {
                     //literally do nothing
                 }
+                else if (text === "game:starting")
+                {
+                    startGame();
+                }
                 else if (text === "game:askrole")
                 {
                     while (buttons.firstChild) 
@@ -117,7 +121,7 @@
                 {
                     var button = document.createElement("button");  
                     button.textContent = "Start Game"; 
-                    button.setAttribute( "onClick", "javascript: startGame();" );
+                    button.setAttribute( "onClick", "javascript: send('game:start');" );
                     buttons.appendChild(button);
                 }
                  else if  (text.substring(0,15) === "game:showbuzzer") //////////////////////////////////////////
@@ -144,6 +148,7 @@
                     thumbCont.appendChild(thumbsUp);
                    document.getElementById("answerSubmit").className = "invisible"; //sets answer box o invisible
                    document.getElementById("answerBox").className = "invisible";
+                   setTimeout(function(){}, 2000);
                  }
                   else if (text === "game:incorrect")
                  {
@@ -156,7 +161,7 @@
                     thumbCont.appendChild(thumbsDown);
                    document.getElementById("answerSubmit").className = "invisible"; //sets answer box o invisible
                    document.getElementById("answerBox").className = "invisible";
-
+                   setTimeout(function(){}, 2000);
                  }  
                 else if (text.substring(0, 10) === "game:score"){
                     console.log(parseInt(text.substring(11)));
