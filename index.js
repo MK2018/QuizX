@@ -109,7 +109,7 @@ wss.on("connection", function(ws) {
       coordy = coords.substring(3, 4);
       activex = coordx;
       activey = coordy;
-      ws.send("game:showclue-"+gameBoard[coordx][coordy].getQuestion());
+      ws.send("game:showbuzzer-"+gameBoard[coordx][coordy].getQuestion());
     }
     else if(data.substring(0, 9) ==="game:buzz"){
       broadcast("game:disable");
@@ -129,6 +129,8 @@ wss.on("connection", function(ws) {
   });
 
   ws.on("close", function() {
+    if(gameHost[0]===ws)
+      gameHost.pop();
     console.log("websocket connection close");
     broadcast("game:clientsconnected-"+wss.clients.length);
   })

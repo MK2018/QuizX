@@ -123,17 +123,18 @@
                     button.setAttribute( "onClick", "javascript: startGame();" );
                     buttons.appendChild(button);
                 }
-                 else if  (text.substring(0,12) === "game:showbuzzer") //////////////////////////////////////////
+                 else if  (text.substring(0,15) === "game:showbuzzer") //////////////////////////////////////////
                  {
-                   document.getElementById("invis-container").className = "";
+                   console.log(text.substring(16));
+                   invisible.className = "invisible";
                     
-                   var button = document.createElement("button");
-                   button.textContent = "BUZZER";
-                   button.setAttribute( "onClick", "buzzer(document.getElementById(answerBox);"); ///////////////////////////////////////////////////////////////FIXFIXFIXFIXFIXFIX
+                   //var button = document.createElement("button");
+                   //button.textContent = "BUZZER";
+                   //button.setAttribute( "onClick", "buzzer(document.getElementById(answerBox);"); ///////////////////////////////////////////////////////////////FIXFIXFIXFIXFIXFIX
+                    //buttons.appendChild(button);
 
-                   document.getElementById("answerSubmit").className = "invisableanswer";
-                   document.getElementById("answerBox").className = "invisabletext";
-
+                   document.getElementById("answerSubmit").className = "";
+                   document.getElementById("answerBox").className = "";
 
                  }
                  else if (text === "game:correct")
@@ -150,6 +151,10 @@
              function startGame(){
                 console.log("game starting...");
                 invisible.className = "";
+                while (buttons.firstChild) {
+                        buttons.removeChild(buttons.firstChild);
+                }
+                document.getElementById('title').className = "invisible";  
              }               
             
             function buzz(arg1)
