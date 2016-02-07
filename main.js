@@ -1,9 +1,9 @@
             var webSocket;
             var messages = document.getElementById("messages");
             var buttons = document.getElementById("buttons");
-            var invisable = document.getElementById("invis-container");
-            var invisabletext = document.getElementById("answerBox");
-            var invisableanswer = document.getElementById("answerSubmit");
+            var invisible = document.getElementById("invis-container");
+            var invisibletext = document.getElementById("answerBox");
+            var invisibleanswer = document.getElementById("answerSubmit");
 
 
 
