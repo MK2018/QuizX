@@ -1,6 +1,7 @@
-function Connection(conn, hostOrNah) {
+function Connection(conn, hostOrNah, id) {
   this.score = 0;
   this.conn = conn;
+  this.id = id;
   if(hostOrNah){
     this.host = true;
     this.client = false;
@@ -10,10 +11,10 @@ function Connection(conn, hostOrNah) {
     this.client = true;
   }
   this.getHost = function(){
-    return host;
+    return this.host;
   }
   this.getClient = function(){
-    return client;
+    return this.client;
   }
   this.info = function(){
     return "Client = " + client + ", Host = " + host;
@@ -23,6 +24,9 @@ function Connection(conn, hostOrNah) {
   }
   this.addScore = function(toAdd){
     this.score += toAdd;
+  }
+  this.getId = function(){
+    return this.id;
   }
 }
 
@@ -75,6 +79,8 @@ var gameHost = [];
 
 var gameClients = [];
 
+var conCounter = 0;
+
 gameBoard = fillBoard();
 
 activex = -1;
@@ -90,13 +96,17 @@ wss.on("connection", function(ws) {
       ws.send("game:askrole");
     }
     else if(data==="game:host"){
-      gameHost.push(new Connection(ws, true));
-      ws.send("game:loadboard");
+      var id = conCounter++;
+      gameHost.push(new Connection(ws, true, id));
+      ws.send("game:id:"+id);
+      //ws.send("game:loadboard");
       broadcast("game:clientsconnected-"+wss.clients.length);
     }
     else if(data==="game:client"){
-      gameClients.push(new Connection(ws, false));
-      ws.send("game:loadboard");
+      var id = conCounter++;
+      gameClients.push(new Connection(ws, false, id));
+      ws.send("game:id:"+id);
+      //ws.send("game:loadboard");
       broadcast("game:clientsconnected-"+wss.clients.length);
     }
     else if(data==="game:checkhost"){
@@ -112,14 +122,24 @@ wss.on("connection", function(ws) {
       ws.send("game:showbuzzer-"+gameBoard[coordx][coordy].getQuestion());
     }
     else if(data.substring(0, 9) ==="game:buzz"){
+      //console.log(ws);
+      //console.log(gameClients);
+      var index = -1;
       broadcast("game:disable");
-      answer = data.substring(9);
+      answer = data.substring(10);
+      id = parseInt(answer.substring(0, answer.indexOf("-")));
+      //console.log(id);
+      answer = answer.substring(answer.indexOf("-")+1);
       if(answer.toLowerCase() === gameBoard[activex][activey].getAnswer().toLowerCase()){
         ws.send("game:correct");
-        for(var x = 0; x < gameClients; x++)
-          if(gameClients[x].getClient() === ws)
+        for(var x = 0; x < gameClients.length; x++)
+          if(gameClients[x].getId() === id){
+            //console.log("FOUND");
+            index = x;
             gameClients[x].addScore(gameBoard[activex][activey].getValue());
-        ws.send("game:score-"+gameClients[x].getScore());
+          }
+       //console.log(index);
+        ws.send("game:score-"+gameClients[index].getScore());
       }
       else{
         ws.send("game:incorrect");
