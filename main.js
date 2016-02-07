@@ -67,8 +67,9 @@
                     var button = document.createElement("button");
                     var button2 = document.createElement("button");
                     button.textContent = "THIS IS A BUTTON";
-                    button.onclick = "send(game:host);";
-                    button2.onclick = "send(game:client)";
+                    button.setAttribute( "onClick", "javascript: send(game:host);" );
+
+                    button2.setAttribute( "onClick", "javascript: send(game:client);" );
                     button2.textContent = "THIS IS A BUTTON TOO";
                     button.className += " joinButton btn btn-success";
                     button2.className += " joinButton btn btn-success";
