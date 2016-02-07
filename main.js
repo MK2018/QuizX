@@ -55,16 +55,20 @@
                 messages.innerHTML += "<br/>" + text;
             }
             function checkText(text){
-                if (text.compareTo("game:confirm"))
+                if (text === "game:confirm"))
                 {
 
                 }
-                else if (text.compareTo("game:askrole"))
+                else if (text === "game:askrole"))
                 {
                     while (buttons.firstChild) {
-                        buttons.removeChild(myNode.firstChild);
-                        }                    
+                        buttons.removeChild(buttons.firstChild);
+                    }                    
                     var button = document.createElement("button");
+                    var button2 = document.createElement("button");
+
                     buttons.appendChild(button);
+                    buttons.appendChild(button2);
+
                 }
             }
