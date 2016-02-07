@@ -135,3 +135,9 @@
                 webSocket.send("game:buzz");
                 webSocket.send(arg1+"");
                  }
+             function check(arg1, arg2)
+                 {
+                    console.log("x:"+arg1);
+                    console.log("y:"+arg2);
+                    webSocket.send("game:("+arg1 +"),("+arg2+")");
+                 }
