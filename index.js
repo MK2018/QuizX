@@ -18,6 +18,12 @@ function Connection(conn, hostOrNah) {
   this.info = function(){
     return "Client = " + client + ", Host = " + host;
   }
+  this.getScore = function(){
+    return this.score;
+  }
+  this.addScore = function(toAdd){
+    this.score += toAdd;
+  }
 }
 
 function Clue(question, value, answer){
@@ -71,6 +77,9 @@ var gameClients = [];
 
 gameBoard = fillBoard();
 
+activex = -1;
+activey = -1;
+
 wss.on("connection", function(ws) {
   ws.send("Connected");
   console.log("websocket connection open")
@@ -98,10 +107,23 @@ wss.on("connection", function(ws) {
       coords = data.substring(10);
       coordx = coords.substring(1, 2);
       coordy = coords.substring(3, 4);
+      activex = coordx;
+      activey = coordy;
       ws.send("game:showclue-"+gameBoard[coordx][coordy].getQuestion());
     }
-    else if(data==="game:buzz"){
+    else if(data.substring(0, 9) ==="game:buzz"){
       broadcast("game:disable");
+      answer = data.substring(9);
+      if(answer.toLowerCase() === gameBoard[activex][activey].getAnswer().toLowerCase()){
+        ws.send("game:correct");
+        for(var x = 0; x < gameClients; x++)
+          if(gameClients[x].getClient() === ws)
+            gameClients[x].addScore(gameBoard[activex][activey].getValue());
+        ws.send("game:score-"+gameClients[x].getScore());
+      }
+      else{
+        ws.send("game:incorrect");
+      }
     }
     //broadcast(data);
   });
