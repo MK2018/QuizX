@@ -26,6 +26,14 @@
 	display: none;
 }
 
+.correct{
+size:50px;
+}
+
+.incorrect{
+
+}
+
 .invisibleTextBox{
 	display:none;
 }

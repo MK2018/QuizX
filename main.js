@@ -114,7 +114,6 @@
                     }
                     pg.className += " par";  
                     buttons.appendChild(pg);  
-                    check(0, 4);
                 }
 
                 else if(text === "game:hashost")
@@ -129,7 +128,11 @@
                     
                    var button = document.createElement("button");
                    button.textContent = "BUZZER";
+<<<<<<< HEAD
                    button.setAttribute( "onClick", "buzz(document.getElementById(answerBox))"); ///////////////////////////////////////////////////////////////FIXFIXFIXFIXFIXFIX
+=======
+                   button.setAttribute( "onClick", "buzzer(document.getElementById(answerBox);"); ///////////////////////////////////////////////////////////////FIXFIXFIXFIXFIXFIX
+>>>>>>> 01e605186e3d2fc3bab556a0b6346a4d3c21a045
 
                    document.getElementById("answerSubmit").className = "invisableanswer";
                    document.getElementById("answerBox").className = "invisabletext";
