@@ -46,9 +46,9 @@ function Clue(question, value, answer){
 }
 
 function fillBoard(){
-  var gameBoard = [new Clue("Who is the best member of the group?", 100, "Michael"),new Clue("Who is the best member of the group?", 200, "Michael"),new Clue("Who is the best member of the group?", 300, "Michael"),new Clue("Who is the best member of the group?", 400, "Michael"),new Clue("Who is the best member of the group?", 500, "Michael")];
-  for(var i=1; i<=5; i++) {
-    gameBoard[i] = [new Clue("Who is the best member of the group?", i*100, "Michael"),new Clue("Who is the best member of the group?", i*100, "Michael"),new Clue("Who is the best member of the group?", i*100, "Michael"),new Clue("Who is the best member of the group?", i*100, "Michael"),new Clue("Who is the best member of the group?", i*100, "Michael"),new Clue("Who is the best member of the group?", i*100, "Michael")];//new Array(6);
+  var gameBoard = [];
+  for(var i=0; i<5; i++) {
+    gameBoard[i] = [new Clue("Who is the best member of the group?", (i+1)*100, "Michael"),new Clue("Who is the best member of the group?", (i+1)*100, "Michael"),new Clue("Who is the best member of the group?", (i+1)*100, "Michael"),new Clue("Who is the best member of the group?", (i+1)*100, "Michael"),new Clue("Who is the best member of the group?", (i+1)*100, "Michael"),new Clue("Who is the best member of the group?", (i+1)*100, "Michael")];//new Array(6);
   }
   return gameBoard;
 }
@@ -83,11 +83,9 @@ var conCounter = 0;
 
 gameBoard = fillBoard();
 
-for(var x=0; x < gameBoard.length; x++){
-  for(var y = 0; y < gameBoard[0].length;y++){
-    console.log(gameBoard[x][y].getValue());
-  }
-}
+//console.log(gameBoard.length);
+//console.log(gameBoard[0].length);
+//console.log(gameBoard);
 
 activex = -1;
 activey = -1;
@@ -128,7 +126,7 @@ wss.on("connection", function(ws) {
       activey = coordy;
       console.log(coordx+","+coordy);
       broadcast("game:showbuzzer-"+gameBoard[coordx][coordy].getQuestion());
-      gameHost.getClient().send("game:showquest-"+gameBoard[coordx][coordy].getQuestion());
+      gameHost[0].getClient().send("game:showquest-"+gameBoard[coordx][coordy].getQuestion());
     }
     else if(data.substring(0, 9) ==="game:buzz"){
       var index = -1;
