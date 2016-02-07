@@ -1,4 +1,7 @@
 
+
+
+
 function broadcast(data) {
 	wss.clients.forEach(function each(client) {
 		client.send(data);
@@ -21,19 +24,26 @@ console.log("http server listening on %d", port)
 var wss = new WebSocketServer({server: server})
 console.log("websocket server created")
 
-wss.on("connection", function(ws) {
+var gameHost = [];
 
+var gameClients = [];
+
+wss.on("connection", function(ws) {
   ws.send("Connected");
 
   console.log("websocket connection open")
 
-  ws.on("message", function(data, id) {
-    console.log(data);
+  ws.on("message", function(data) {
     if(data==="game:connected"){
       ws.send("game:confirm");
       ws.send("game:askrole");
     }
-    else if(data==="game:whatever"){
+    else if(data==="game:host"){
+      
+    }
+    else if(data==="game:client"){
+      gameClients.push(ws);
+      console.log(gameClients);
       ws.send("game:");
     }
     //broadcast(data);
