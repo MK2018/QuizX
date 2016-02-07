@@ -25,6 +25,9 @@ body{
 .invisble{
 	display: :none;
 }
-.tableCellButtons{
-
+.tableCells{
+width:200px;
+height:75px;
+font-family: 'Montserrat', sans-serif;
+border: 2px, solid, #FFFFFF;
 }
