@@ -62,7 +62,6 @@ wss.on("connection", function(ws) {
     }
     else if(data==="game:client"){
       gameClients.push(new Connection(ws, false));
-      //console.log(gameClients);
       ws.send("game:loadboard");
     }
     //broadcast(data);
