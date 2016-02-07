@@ -148,8 +148,8 @@
                     question = document.getElementById("question");
                     question.className = "";
                     question.innerHTML = text.substring(15);
-                   document.getElementById("answerSubmit").className = "";
-                   document.getElementById("answerBox").className = "";
+                   //document.getElementById("answerSubmit").className = "";
+                   //document.getElementById("answerBox").className = "";
 
                  }
                  else if (text === "game:disable")
@@ -162,7 +162,6 @@
                  }
                  else if (text === "game:correct")
                  {
-                    {
                    var thumbCont = document.getElementById("thumbsContainer");
                     while (thumbCont.firstChild) {
                         thumbCont.removeChild(thumbCont.firstChild);

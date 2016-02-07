@@ -126,6 +126,7 @@ wss.on("connection", function(ws) {
       coordy = coords.substring(3, 4);
       activex = coordx;
       activey = coordy;
+      console.log(coordx+","+coordy);
       broadcast("game:showbuzzer-"+gameBoard[coordx][coordy].getQuestion());
       gameHost.getClient().send("game:showquest-"+gameBoard[coordx][coordy].getQuestion());
     }
