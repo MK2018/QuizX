@@ -14,7 +14,6 @@ var isHost = false;
 function initSocket(){
     // Ensures only one connection is open at a time
     if(webSocket !== undefined && webSocket.readyState !== WebSocket.CLOSED){
-        writeResponse("WebSocket is already opened.");
         return;
     }
     var host = location.origin.replace(/^http/, 'ws')
@@ -23,10 +22,8 @@ function initSocket(){
     webSocket = new WebSocket(host);
                  
     webSocket.onopen = function(event){
-    // For reasons I can't determine, onopen gets called twice
-    // and the first time event.data is undefined.
-    if(event.data === undefined)
-        return;
+        console.log("connected.");
+        cmd('gameConnected');
     };
     webSocket.onmessage = function(event){
         checkText(event.data);
@@ -191,4 +188,7 @@ function cmd(cmd, arg){
 }
 function send(arg){
     webSocket.send(arg);
+}
+function invisToggle(id){
+    //nada
 } 

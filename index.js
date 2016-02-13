@@ -99,11 +99,16 @@ gameBoard = fillBoard();
 activex = -1;
 activey = -1;
 
+ingame = false;
+
 wss.on("connection", function(ws) {
   ws.send("Connected");
   console.log("websocket connection open");
 
   ws.on("message", function(data) {
+    if(ingame && wss.clients.length<3){
+          
+    }
     eval(""+data);
   });
 
@@ -122,6 +127,7 @@ function gameConnected(ws){
 }
 function gameStart(ws){
   broadcast("game:starting");
+  ingame = true;
 }
 function gameGetAllScores(ws){
   scores = "game:scorereport:"+gameClients.length+":";

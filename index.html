@@ -10,6 +10,7 @@
         <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="style.css">
+         
     </head>
     <body class="body-wrapper">
         <div class="questionStyle" id="question">
@@ -21,7 +22,7 @@
           <div class="col-md-6 col-md-offset-3" id="topRow">            
             <center>
             <div id="buttons"> 
-              <button class="joinButton btn btn-success"type="submit" onclick="cmd('gameConnected');" >Join</button>
+              <button class="joinButton btn btn-success"type="submit" onclick="initSocket();" >Join</button>
             </div>
             </center>
 
@@ -184,15 +185,14 @@
         </div>
     </div>
     
-        <script src="main.js"></script> 
-        <script>
-            initSocket();
-        </script> 
+        
+        
         <footer> 
             <div class="footer">
                 Made with <span class="red-heart">❤</span> by <a href="http://github.com/mk2018">Michael Krause</a>, <a href="http://github.com/seanle24245">Sean Le</a>, and <a href="http://github.com/veryroomy">Neel Shah</a>.
             </div>
         </footer>
+        <script src="main.js"></script>
     </body>
 
     </html>
