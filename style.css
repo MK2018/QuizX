@@ -28,8 +28,8 @@
 .invisbleTable{
 	display: none;
 }
-.invisble{
-	display: none;
+.invisible{
+	display: none !important;
 }
 
 .invisibleTextBox{
@@ -70,5 +70,20 @@ background-color: #819FF7;
 	padding-top: 40pt;
 	text-align: center;
 	font-size: 75pt;
+	color: white;
+}
+.red-heart{
+	color: red;
+	text-align: center;
+}
+.footer{
+	font-size: 12pt;
+	color: white;
+	text-align: center;
+	position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+a{
 	color: white;
 }
