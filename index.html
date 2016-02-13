@@ -13,7 +13,6 @@
 
     </head>
     <body class="body-wrapper">
-
         <div class="questionStyle" id="question">
         </div>
         <center><h1 class="mainPageTitle" id="title">QuizX</h1></center>
@@ -24,7 +23,7 @@
           <div class="col-md-6 col-md-offset-3" id="topRow">            
             <center>
             <div id="buttons"> 
-              <button class="joinButton btn btn-success"type="submit" onclick="send('game:connected');" >Join</button>
+              <button class="joinButton btn btn-success"type="submit" onclick="cmd('gameConnected');" >Join</button>
             </div>
             </center>
 
@@ -197,7 +196,7 @@
     
         <script src="main.js"></script> 
         <script>
-            openSocket();
+            initSocket();
         </script>  
     </body>
 

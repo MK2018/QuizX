@@ -68,21 +68,21 @@ function broadcast(data) {
 	});
 };
 
-var WebSocketServer = require("ws").Server
-var http = require("http")
-var express = require("express")
-var app = express()
-var port = process.env.PORT || 5000
+var WebSocketServer = require("ws").Server;
+var http = require("http");
+var express = require("express");
+var app = express();
+var port = process.env.PORT || 5000;
 
-app.use(express.static(__dirname + "/"))
+app.use(express.static(__dirname + "/"));
 
-var server = http.createServer(app)
-server.listen(port)
+var server = http.createServer(app);
+server.listen(port);
 
-console.log("http server listening on %d", port)
+console.log("http server listening on %d", port);
 
-var wss = new WebSocketServer({server: server})
-console.log("websocket server created")
+var wss = new WebSocketServer({server: server});
+console.log("websocket server created");
 
 var gameHost = [];
 
@@ -101,9 +101,84 @@ activey = -1;
 
 wss.on("connection", function(ws) {
   ws.send("Connected");
-  console.log("websocket connection open")
+  console.log("websocket connection open");
 
   ws.on("message", function(data) {
+    eval(""+data);
+  });
+
+  ws.on("close", function() {
+    if(gameHost[0]===ws)
+      gameHost.pop();
+    console.log("websocket connection close");
+    broadcast("game:clientsconnected-"+wss.clients.length);
+  });
+
+});
+
+function gameConnected(ws){
+  ws.send("game:confirm");
+  ws.send("game:askrole");
+}
+function gameStart(ws){
+  broadcast("game:starting");
+}
+function gameGetAllScores(ws){
+  scores = "game:scorereport:"+gameClients.length+":";
+  for(var x = 0; x < gameClients.length; x++){
+    scores+=(gameClients[x].getScore)+",";
+  }
+  ws.send();
+}
+function gameVerifyHost(ws){
+  var id = conCounter++;
+  gameHost.push(new Connection(ws, true, id));
+  ws.send("game:id:"+id);
+  broadcast("game:clientsconnected-"+wss.clients.length);
+}
+function gameVerifyClient(ws){
+  var id = conCounter++;
+  gameClients.push(new Connection(ws, false, id));
+  ws.send("game:id:"+id);
+  broadcast("game:clientsconnected-"+wss.clients.length);
+}
+function gameCheckHost(ws){
+  if(gameHost.length === 1)
+    ws.send("game:hashost");
+}
+function gameCheck(ws, args){
+  coordx = parseInt(args['x']);
+  coordy = parseInt(args['y']);
+  activex = coordx;
+  activey = coordy;
+  console.log(coordx+","+coordy);
+  broadcast("game:showbuzzer-"+gameBoard[coordx][coordy].getQuestion());
+}
+function gameBuzz(ws, args){
+  var index = -1;
+  answer = args['ans'];
+  console.log(answer);
+  id = parseInt(args['id']);
+  if(answer.toLowerCase() === gameBoard[activex][activey].getAnswer().toLowerCase()){
+    ws.send("game:correct");
+      for(var x = 0; x < gameClients.length; x++)
+        if(gameClients[x].getId() === id){
+          index = x;
+          gameClients[x].addScore(gameBoard[activex][activey].getValue());
+        }
+    ws.send("game:score-"+gameClients[index].getScore());
+    sleep(2000);
+    broadcast("game:=qcom");
+  }
+}
+function gameIncorrect(ws){
+  ws.send("game:incorrect");
+}
+
+
+///////OLD IF-ELSE TREE BELOW. KEEPING IT HERE FOR REFERENCE UNTIL TRANSITION TO NEW SYSTEM IS COMPLETE.
+
+/*
     if(data==="game:connected"){
       ws.send("game:confirm");
       ws.send("game:askrole");
@@ -167,15 +242,4 @@ wss.on("connection", function(ws) {
         //broadcast("game:enable");
         ws.send("game:incorrect");
       }
-    }
-  });
-
-  ws.on("close", function() {
-    if(gameHost[0]===ws)
-      gameHost.pop();
-    console.log("websocket connection close");
-    broadcast("game:clientsconnected-"+wss.clients.length);
-  })
-
-})
-
+    }*/
