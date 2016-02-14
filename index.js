@@ -62,11 +62,18 @@ function fillBoard(){
   return gameBoard;
 }
 
-function broadcast(data) {
+function broadcast(data, args) {
 	wss.clients.forEach(function each(client) {
-		client.send(data);
+		cmd(data, client, args);
 	});
 };
+
+function cmd(cmd, ws, arg){
+    if(typeof arg === "undefined")
+        ws.send(cmd + "();");
+    else
+        ws.send(cmd + "(" + arg + ");");
+}
 
 var WebSocketServer = require("ws").Server;
 var http = require("http");
@@ -92,65 +99,60 @@ var conCounter = 0;
 
 gameBoard = fillBoard();
 
-//console.log(gameBoard.length);
-//console.log(gameBoard[0].length);
-//console.log(gameBoard);
-
 activex = -1;
 activey = -1;
 
 ingame = false;
 
 wss.on("connection", function(ws) {
-  ws.send("Connected");
+  cmd('connected', ws);
   console.log("websocket connection open");
 
   ws.on("message", function(data) {
-    if(ingame && wss.clients.length<3){
-          
-    }
-    eval(""+data);
+    eval(data);
   });
 
   ws.on("close", function() {
     if(gameHost[0]===ws)
       gameHost.pop();
     console.log("websocket connection close");
-    broadcast("game:clientsconnected-"+wss.clients.length);
+    broadcast("gameClientsConnected", wss.clients.length);
   });
 
 });
 
 function gameConnected(ws){
-  ws.send("game:confirm");
-  ws.send("game:askrole");
+  //ws.send("game:confirm");
+  //ws.send("game:askrole");
+  cmd('gameConfirm', ws);
+  cmd('gameAskRole', ws);
 }
 function gameStart(ws){
-  broadcast("game:starting");
+  broadcast("gameStarting");
   ingame = true;
 }
 function gameGetAllScores(ws){
-  scores = "game:scorereport:"+gameClients.length+":";
-  for(var x = 0; x < gameClients.length; x++){
-    scores+=(gameClients[x].getScore)+",";
+  scores = "gameScoreReport:"+gameClients.length+":";
+  for(var x = 0; x < gameClients.length; x++){            //UPDATE ALL OF THIS TO NEW SYSTEM
+    scores+=(gameClients[x].getScore)+",";                //ACTUALLY JUST COMPLETELY REWRITE THIS
   }
   ws.send();
 }
 function gameVerifyHost(ws){
   var id = conCounter++;
   gameHost.push(new Connection(ws, true, id));
-  ws.send("game:id:"+id);
-  broadcast("game:clientsconnected-"+wss.clients.length);
+  cmd('gameId', ws, id);
+  broadcast('gameClientsConnected', wss.clients.length)
 }
 function gameVerifyClient(ws){
   var id = conCounter++;
   gameClients.push(new Connection(ws, false, id));
-  ws.send("game:id:"+id);
-  broadcast("game:clientsconnected-"+wss.clients.length);
+  cmd('gameId', ws, id);
+  broadcast('gameClientsConnected', wss.clients.length)
 }
 function gameCheckHost(ws){
   if(gameHost.length === 1)
-    ws.send("game:hashost");
+    cmd('gameHasHost', ws);
 }
 function gameCheck(ws, args){
   coordx = parseInt(args['x']);
@@ -158,7 +160,7 @@ function gameCheck(ws, args){
   activex = coordx;
   activey = coordy;
   console.log(coordx+","+coordy);
-  broadcast("game:showbuzzer-"+gameBoard[coordx][coordy].getQuestion());
+  broadcast('gameShowBuzzer', JSON.stringify(gameBoard[coordx][coordy].getQuestion()));
 }
 function gameBuzz(ws, args){
   var index = -1;
@@ -166,19 +168,19 @@ function gameBuzz(ws, args){
   console.log(answer);
   id = parseInt(args['id']);
   if(answer.toLowerCase() === gameBoard[activex][activey].getAnswer().toLowerCase()){
-    ws.send("game:correct");
+    cmd('gameCorrect', ws);
       for(var x = 0; x < gameClients.length; x++)
         if(gameClients[x].getId() === id){
           index = x;
           gameClients[x].addScore(gameBoard[activex][activey].getValue());
         }
-    ws.send("game:score-"+gameClients[index].getScore());
+    cmd("gameScore", ws, gameClients[index].getScore());
     sleep(2000);
-    broadcast("game:=qcom");
+    broadcast("gameQuestionComplete");
   }
 }
 function gameIncorrect(ws){
-  ws.send("game:incorrect");
+  cmd("gameIncorrect", ws);
 }
 
 

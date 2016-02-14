@@ -26,17 +26,181 @@ function initSocket(){
         cmd('gameConnected');
     };
     webSocket.onmessage = function(event){
-        checkText(event.data);
+        eval(event.data);
     };
     webSocket.onclose = function(event){
-        //nada
+        //nothing right now
     };
 }
 
 function closeSocket(){
     webSocket.close();
 }
-function checkText(text){
+function startGame(){
+    console.log("game starting...");
+    invisible.className = "";
+    while (buttons.firstChild)
+        buttons.removeChild(buttons.firstChild);
+    document.getElementById('title').className = "invisible";  
+}                   
+function buzz(){
+    var ans = document.getElementById("answerBox").value;
+    console.log("answer:"+ ans);
+    var id = myID;
+    argString = JSON.stringify({"id":myID, "ans":ans});
+    cmd('gameBuzz', argString);
+}
+function check(x, y){
+    console.log("x:"+(x));
+    console.log("y:"+(y));
+    argString = JSON.stringify({x, y});
+    cmd('gameCheck', argString);
+}
+function checkIfHost(){
+    isHost = true;
+}
+function cmd(cmd, arg){
+    if(typeof arg === "undefined")
+        send(cmd + "(ws);");
+    else
+        send(cmd + "(ws," + arg + ");");
+}
+function send(arg){
+    webSocket.send(arg);
+}
+function invisToggle(id){
+    //nothing yet
+} 
+
+///
+///
+//NEW FUNCTION BASED CALL TREE 
+///
+///
+
+function connected(){
+    //nothing yet
+}
+
+function gameConfirm(){
+    //nothing
+}
+function gameStarting(){
+    startGame();
+}
+function gameAskRole(){
+    while (buttons.firstChild)
+        buttons.removeChild(buttons.firstChild);                   
+    var button = document.createElement("button");
+    var button2 = document.createElement("button");
+    button.textContent = "Join as a host";
+    button.setAttribute( "onClick", "javascript: checkIfHost(); cmd('gameVerifyHost');" );
+    button2.setAttribute( "onClick", "javascript: cmd('gameVerifyClient');" );
+    button2.textContent = "Join as a client";
+    button.className += " joinButton btn btn-success";
+    button2.className += " joinButton btn btn-success";
+    buttons.appendChild(button);
+    buttons.appendChild(button2);
+}
+function gameId(id){
+    myID = parseInt(id); 
+}
+function gameClientsConnected(arg){
+    while (buttons.firstChild) 
+        buttons.removeChild(buttons.firstChild); 
+    var pg = document.createElement("p");
+    if(parseInt(arg)===1)
+        pg.textContent = "Currently, there is " + arg + " client connected.";
+    else
+        pg.textContent = "Currently, there are " + arg + " clients connected.";
+    if(parseInt(arg)>2)
+        cmd("gameCheckHost");
+    pg.className += " par";  
+    buttons.appendChild(pg); 
+}
+function gameHasHost(){
+    var button = document.createElement("button");  
+    button.textContent = "Start Game"; 
+    button.setAttribute( "onClick", "javascript: cmd('gameStart');" );
+    buttons.appendChild(button);
+}    
+function gameShowBuzzer(question){
+    if(!isHost){
+        console.log(question);
+        invisible.className = "invisible";
+        document.getElementById("answerSubmit").className = "";
+        document.getElementById("answerBox").className = "";
+    }
+    else{
+        console.log(question);
+        invisible.className = "invisible";
+        qDiv = document.getElementById("question");
+        qDiv.className = "questionStyle";
+        qDiv.textContent = question;
+    }
+}
+function gameShowQuestion(){
+    //not used right now but kept here just in case
+}
+function gameDisable(){
+    document.getElementById("answerSubmit").disabled = true;
+}
+function gameEnable(){
+    document.getElementById("answerSubmit").disabled = false;
+}    
+function gameCorrect(){
+    var thumbCont = document.getElementById("thumbsContainer");
+    while (thumbCont.firstChild) 
+        thumbCont.removeChild(thumbCont.firstChild);
+    var thumbsUp = document.createElement("i");
+    thumbsUp.className = "fa fa-thumbs-up correctSize";
+    thumbCont.appendChild(thumbsUp);
+    document.getElementById("answerSubmit").className = "invisible"; //sets answer box o invisible
+    document.getElementById("answerBox").className = "invisible";
+    document.getElementById("scoreTable").className = "invisible row"; 
+    setTimeout(function(){}, 2000);
+}   
+function gameQuestionComplete(){
+    question = document.getElementById("question");
+    question.textContent = "";
+    var thumbCont = document.getElementById("thumbsContainer");
+    while (thumbCont.firstChild) 
+        thumbCont.removeChild(thumbCont.firstChild);
+    document.getElementById("answerSubmit").className = "invisible"; //sets answer box o invisible
+    document.getElementById("answerBox").className = "invisible";
+    document.getElementById("invis-container").className = "";
+    document.getElementById("scoreTable").className = "row"; 
+}    
+function gameIncorrect(){
+    var thumbCont = document.getElementById("thumbsContainer");
+    var thumbsDown = document.createElement("i");
+    thumbsDown.className = "fa fa-thumbs-down correctSize";
+    thumbCont.appendChild(thumbsDown);
+    document.getElementById("answerSubmit").className = "invisible"; //sets answer box o invisible
+    document.getElementById("answerBox").className = "invisible";
+    document.getElementById("scoreTable").className = "invisible row"; 
+    setTimeout(function(){}, 2000);
+}   
+function gameScore(arg){
+    console.log(parseInt(arg));
+    myScore += parseInt(arg);
+}     
+function gameScoreReport(arg){
+    var scores = text.subtring(18).splitText(",");
+    for (var i =0; i < (Integer.parseInt(text.substring(17,18))); i++){
+        var newDiv = document.createElement("div");  //sets answer box o invisible
+        newDiv.id='c'+i;
+        newDiv.className='col-md-3';
+        var pg = scores[i];
+        myDiv.setContent(pg);
+        toAdd.appendChild(newDiv);
+    }
+    document.getElementById("scoreTable").className = "row";
+}  
+
+///////OLD IF-ELSE TREE BELOW. KEEPING IT HERE FOR REFERENCE UNTIL TRANSITION TO NEW SYSTEM IS COMPLETE.
+
+/*function checkText(text){
     if (text === "game:confirm"){
         //nada
     }
@@ -156,39 +320,4 @@ function checkText(text){
         }
         document.getElementById("scoreTable").className = "row"; 
     }
-}
-function startGame(){
-    console.log("game starting...");
-    invisible.className = "";
-    while (buttons.firstChild)
-        buttons.removeChild(buttons.firstChild);
-    document.getElementById('title').className = "invisible";  
-}                   
-function buzz(){
-    var ans = document.getElementById("answerBox").value;
-    console.log("answer:"+ ans);
-    var id = myID;
-    argString = JSON.stringify({"id":myID, "ans":ans});
-    cmd('gameBuzz', argString);
-}
-function check(x, y){
-    console.log("x:"+(x));
-    console.log("y:"+(y));
-    argString = JSON.stringify({x, y});
-    cmd('gameCheck', argString);
-}
-function checkIfHost(){
-    isHost = true;
-}
-function cmd(cmd, arg){
-    if(typeof arg === "undefined")
-        send(cmd + "(ws);");
-    else
-        send(cmd + "(ws," + arg + ");");
-}
-function send(arg){
-    webSocket.send(arg);
-}
-function invisToggle(id){
-    //nada
-} 
+}*/
