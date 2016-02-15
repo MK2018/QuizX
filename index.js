@@ -1,4 +1,4 @@
-function Connection(conn, hostOrNah, id) {
+/*function Connection(conn, hostOrNah, id) {
   this.score = 0;
   this.conn = conn;
   this.id = id;
@@ -28,7 +28,34 @@ function Connection(conn, hostOrNah, id) {
   this.getId = function(){
     return this.id;
   }
+}*/
+
+function addConnection(conn){
+  conCount++;
+  connections.push(conn); 
 }
+function removeConnection(conn){
+  conCount--;
+  var index = connections.indexOf(conn);
+  connections.splice(index, 1);
+}
+function addHost(conn){
+  if(gameHosts.length === 1)
+    alreadyHasHost();
+  else
+    gameHosts.push(conn);
+}
+function addClient(conn){
+  gameClients.push(conn);
+}
+function removeHost(){
+  gameHosts.pop();
+}
+function removeClient(conn){
+  var index = connections.indexOf(conn);
+  gameClients.splice(index, 1);
+}
+
 
 function sleep(milliseconds) {
   var start = new Date().getTime();
@@ -75,6 +102,7 @@ function cmd(cmd, ws, arg){
         ws.send(cmd + "(" + arg + ");");
 }
 
+/////START CODE EXECUTION HERE
 var WebSocketServer = require("ws").Server;
 var http = require("http");
 var express = require("express");
@@ -91,30 +119,30 @@ console.log("http server listening on %d", port);
 var wss = new WebSocketServer({server: server});
 console.log("websocket server created");
 
-var gameHost = [];
-
+var gameHosts = [];
 var gameClients = [];
+var connections = [];
+var conCount = 0;
 
-var conCounter = 0;
 
 gameBoard = fillBoard();
 
 activex = -1;
 activey = -1;
 
-ingame = false;
-
 wss.on("connection", function(ws) {
   cmd('connected', ws);
   console.log("websocket connection open");
+  addConnection(ws);
 
   ws.on("message", function(data) {
     eval(data);
   });
 
   ws.on("close", function() {
-    if(gameHost[0]===ws)
-      gameHost.pop();
+    removeConnection(ws);
+    //if(gameHost[0]===ws)
+    //  gameHost.pop();
     console.log("websocket connection close");
     broadcast("gameClientsConnected", wss.clients.length);
   });
@@ -132,21 +160,23 @@ function gameStart(ws){
   ingame = true;
 }
 function gameGetAllScores(ws){
-  scores = "gameScoreReport:"+gameClients.length+":";
+  scores = [];
   for(var x = 0; x < gameClients.length; x++){            //UPDATE ALL OF THIS TO NEW SYSTEM
-    scores+=(gameClients[x].getScore)+",";                //ACTUALLY JUST COMPLETELY REWRITE THIS
+    scores.push(gameClients[x].getScore);                //ACTUALLY JUST COMPLETELY REWRITE THIS
   }
-  ws.send();
+  cmd('gameScoreReport', ws, scores);
 }
 function gameVerifyHost(ws){
-  var id = conCounter++;
-  gameHost.push(new Connection(ws, true, id));
+  //var id = conCount++;
+  //gameHost.push(new Connection(ws, true, id));
+  addHost(ws);
   cmd('gameId', ws, id);
   broadcast('gameClientsConnected', wss.clients.length)
 }
 function gameVerifyClient(ws){
-  var id = conCounter++;
-  gameClients.push(new Connection(ws, false, id));
+  //var id = conCounter++;
+  //gameClients.push(new Connection(ws, false, id));
+  addClient(ws);
   cmd('gameId', ws, id);
   broadcast('gameClientsConnected', wss.clients.length)
 }
@@ -182,7 +212,9 @@ function gameBuzz(ws, args){
 function gameIncorrect(ws){
   cmd("gameIncorrect", ws);
 }
-
+function alreadyHasHost(){
+  //do some stuff
+}
 
 ///////OLD IF-ELSE TREE BELOW. KEEPING IT HERE FOR REFERENCE UNTIL TRANSITION TO NEW SYSTEM IS COMPLETE.
 
