@@ -35,9 +35,9 @@ module.exports = {
 		for(var x = 0; x < rooms.length; x++)
 			if (rooms[x].id === roomId) 
 				index = x;
-		if(index !== -1){
-			
-		}
+		if(index !== -1)
+			rooms[index].addClient(conn);
+		rooms[index].broadcastToRoom('gameClientsConnected', rooms[index].users.length)
 		console.log('Person joined room: ' + roomId);
 	},
 	getRooms: function(){
@@ -54,13 +54,14 @@ var rooms = [];
 var roomIds = [];
 
 function Room(host, id){
-	this.users = [];
+	this.users = [host];
 	this.host = host;
 	this.clients = [];
 	this.id = id;
 
 	this.addClient = function(ws){
 		this.clients.push(ws);
+		this.users.push(ws);
 	}
 	//this.removeHost = function(){
 	//	this.host = null;
@@ -72,6 +73,17 @@ function Room(host, id){
 	this.toString = function(){
 		return ""+id;
 	}
+	this.broadcastToRoom = function(message, args){
+		for(var x = 0; x < this.users.length; x++)
+			cmd(message, this.users[x], args);
+	}
+}
+
+function cmd(cmd, ws, arg){
+    if(typeof arg === "undefined")
+        ws.send(cmd + "();");
+    else
+        ws.send(cmd + "(" + arg + ");");
 }
 
 /*function Connection(conn, hostOrNah, id) {
