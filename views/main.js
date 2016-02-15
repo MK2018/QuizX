@@ -32,6 +32,10 @@ function initSocket(){
         //nothing right now
     };
 }
+function openRoom(){
+
+}
+
 
 function closeSocket(){
     webSocket.close();
@@ -93,14 +97,50 @@ function gameAskRole(){
         buttons.removeChild(buttons.firstChild);                   
     var button = document.createElement("button");
     var button2 = document.createElement("button");
-    button.textContent = "Join as a host";
-    button.setAttribute( "onClick", "javascript: checkIfHost(); cmd('gameVerifyHost');" );
-    button2.setAttribute( "onClick", "javascript: cmd('gameVerifyClient');" );
-    button2.textContent = "Join as a client";
+    button.textContent = "Create a new room";
+    button.setAttribute( "onClick", "javascript: checkIfHost(); initRoom(); cmd('gameInitRoom');" );
+    button2.setAttribute( "onClick", "javascript: askRoom();" );
+    button2.textContent = "Join a room";
     button.className += " joinButton btn btn-success";
     button2.className += " joinButton btn btn-success";
     buttons.appendChild(button);
     buttons.appendChild(button2);
+}
+function initRoom(){
+    while (buttons.firstChild)
+        buttons.removeChild(buttons.firstChild);
+    var loading = document.createElement('p');
+    loading.textContent = 'Loading....';
+    loading.className += 'par';
+    messages.appendChild(loading);
+}
+function displayRoomId(id){
+    while (buttons.firstChild)
+        buttons.removeChild(buttons.firstChild);
+    while (messages.firstChild)
+        messages.removeChild(messages.firstChild);
+    var loading = document.createElement('p');
+    loading.textContent = 'Your room ID is ' + id;
+    loading.className += 'par';
+    messages.appendChild(loading);
+}
+function askRoom(){
+    while (buttons.firstChild)
+        buttons.removeChild(buttons.firstChild);
+    var roomInput = document.createElement('input');
+    roomInput.setAttribute('type', 'text');
+    roomInput.setAttribute('id', 'roomInput');
+    roomInput.className += ' form-control';
+    messages.appendChild(roomInput);
+    var button = document.createElement("button");
+    button.textContent = "Join room";
+    button.setAttribute( "onClick", "javascript: sendRoom();" );
+    button.className += " joinButton btn btn-success";
+    buttons.appendChild(button);
+}
+function sendRoom(){
+    var roomId = parseInt(document.getElementById('roomInput').value);
+    cmd('gameJoinRoom', roomId);
 }
 function gameId(id){
     myID = parseInt(id); 

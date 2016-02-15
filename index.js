@@ -110,7 +110,26 @@ var express = require("express");
 var app = express();
 var port = process.env.PORT || 5000;
 
-app.use(express.static(__dirname + "/"));
+var tmpRmId = null;
+
+/*app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+
+app.get('/', function(req, res) {
+  console.log("we here");
+  tmpRmId = req.query.room;
+  console.log(tmpRmId);
+  res.render('index');
+});
+
+app.get('/join/:room(([0-9])+)', function(req, res) {
+  console.log("we here in 5");
+  tmpRmId = req.params.room;
+  console.log(tmpRmId);
+  res.render('index');
+});
+*/
+app.use(express.static(__dirname + "/views"));
 
 var server = http.createServer(app);
 server.listen(port);
@@ -162,13 +181,13 @@ function gameGetAllScores(ws){
   }
   cmd('gameScoreReport', ws, scores);
 }
-function gameVerifyHost(ws){
+/*function gameVerifyHost(ws){
   //var id = conCount++;
   //gameHost.push(new Connection(ws, true, id));
   id = conn.addHost(ws);
   cmd('gameId', ws, id);
   broadcast('gameClientsConnected', wss.clients.length)
-}
+}*/
 function gameVerifyClient(ws){
   //var id = conCounter++;
   //gameClients.push(new Connection(ws, false, id));
@@ -208,10 +227,17 @@ function gameBuzz(ws, args){
 function gameIncorrect(ws){
   cmd("gameIncorrect", ws);
 }
-function alreadyHasHost(){
-  //do some stuff
+function gameInitRoom(ws){
+  var id = conn.initRoom(ws);
+  cmd('displayRoomId', ws, id);
+  //rooms = conn.getRooms();
+  //rooms.forEach(function(room){
+  //  console.log(room.toString());
+  //});
 }
-
+function gameJoinRoom(ws, id){
+  conn.addToRoom(ws, id);
+}
 ///////OLD IF-ELSE TREE BELOW. KEEPING IT HERE FOR REFERENCE UNTIL TRANSITION TO NEW SYSTEM IS COMPLETE.
 
 /*
