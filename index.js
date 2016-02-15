@@ -30,7 +30,7 @@
   }
 }*/
 
-function addConnection(conn){
+/*function addConnection(conn){
   conCount++;
   connections.push(conn); 
 }
@@ -55,7 +55,7 @@ function removeClient(conn){
   var index = connections.indexOf(conn);
   gameClients.splice(index, 1);
 }
-
+*/
 
 function sleep(milliseconds) {
   var start = new Date().getTime();
@@ -103,6 +103,7 @@ function cmd(cmd, ws, arg){
 }
 
 /////START CODE EXECUTION HERE
+var conn = require('./connection')
 var WebSocketServer = require("ws").Server;
 var http = require("http");
 var express = require("express");
@@ -119,11 +120,6 @@ console.log("http server listening on %d", port);
 var wss = new WebSocketServer({server: server});
 console.log("websocket server created");
 
-var gameHosts = [];
-var gameClients = [];
-var connections = [];
-var conCount = 0;
-
 
 gameBoard = fillBoard();
 
@@ -133,14 +129,14 @@ activey = -1;
 wss.on("connection", function(ws) {
   cmd('connected', ws);
   console.log("websocket connection open");
-  addConnection(ws);
+  conn.addConnection(ws);
 
   ws.on("message", function(data) {
     eval(data);
   });
 
   ws.on("close", function() {
-    removeConnection(ws);
+    conn.removeConnection(ws);
     //if(gameHost[0]===ws)
     //  gameHost.pop();
     console.log("websocket connection close");
@@ -169,15 +165,15 @@ function gameGetAllScores(ws){
 function gameVerifyHost(ws){
   //var id = conCount++;
   //gameHost.push(new Connection(ws, true, id));
-  addHost(ws);
+  id = conn.addHost(ws);
   cmd('gameId', ws, id);
   broadcast('gameClientsConnected', wss.clients.length)
 }
 function gameVerifyClient(ws){
   //var id = conCounter++;
   //gameClients.push(new Connection(ws, false, id));
-  addClient(ws);
-  cmd('gameId', ws, id);
+  id = conn.addClient(ws);
+  cmd('gameId', ws, id);                                      //CHANGE TO NEW ID SYSTEM.
   broadcast('gameClientsConnected', wss.clients.length)
 }
 function gameCheckHost(ws){
