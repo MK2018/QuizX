@@ -191,9 +191,9 @@ function gameGetAllScores(ws){
 function gameVerifyClient(ws){
   //var id = conCounter++;
   //gameClients.push(new Connection(ws, false, id));
-  id = conn.addClient(ws);
-  cmd('gameId', ws, id);                                      //CHANGE TO NEW ID SYSTEM.
-  broadcast('gameClientsConnected', wss.clients.length)
+  //id = conn.addClient(ws);
+  //cmd('gameId', ws, id);                                      //CHANGE TO NEW ID SYSTEM.
+  //broadcast('gameClientsConnected', wss.clients.length)
 }
 function gameCheckHost(ws){
   if(gameHost.length === 1)
