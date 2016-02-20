@@ -35,10 +35,14 @@ module.exports = {
 		for(var x = 0; x < rooms.length; x++)
 			if (rooms[x].id === roomId) 
 				index = x;
-		if(index !== -1)
+		if(index !== -1){
 			rooms[index].addClient(conn);
-		rooms[index].broadcastToRoom('gameClientsConnected', rooms[index].users.length)
-		console.log('Person joined room: ' + roomId);
+			rooms[index].broadcastToRoom('gameClientsConnected', rooms[index].users.length)
+			console.log('Person joined room: ' + roomId);
+		}
+		else{
+			cmd('roomNotFound', conn, roomId);
+		}
 	},
 	getRooms: function(){
 		return rooms;

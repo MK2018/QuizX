@@ -175,11 +175,11 @@ function gameStart(ws){
   ingame = true;
 }
 function gameGetAllScores(ws){
-  scores = [];
-  for(var x = 0; x < gameClients.length; x++){            //UPDATE ALL OF THIS TO NEW SYSTEM
-    scores.push(gameClients[x].getScore);                //ACTUALLY JUST COMPLETELY REWRITE THIS
-  }
-  cmd('gameScoreReport', ws, scores);
+  //scores = [];
+  //for(var x = 0; x < gameClients.length; x++){           
+  //  scores.push(gameClients[x].getScore);                
+  //}
+  cmd('gameScoreReport', ws, 'tmp');
 }
 /*function gameVerifyHost(ws){
   //var id = conCount++;
@@ -188,13 +188,13 @@ function gameGetAllScores(ws){
   cmd('gameId', ws, id);
   broadcast('gameClientsConnected', wss.clients.length)
 }*/
-function gameVerifyClient(ws){
+//function gameVerifyClient(ws){
   //var id = conCounter++;
   //gameClients.push(new Connection(ws, false, id));
   //id = conn.addClient(ws);
   //cmd('gameId', ws, id);                                      //CHANGE TO NEW ID SYSTEM.
   //broadcast('gameClientsConnected', wss.clients.length)
-}
+//}
 function gameCheckHost(ws){
   if(gameHost.length === 1)
     cmd('gameHasHost', ws);

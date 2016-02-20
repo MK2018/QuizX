@@ -226,18 +226,27 @@ function gameScore(arg){
     myScore += parseInt(arg);
 }     
 function gameScoreReport(arg){
-    var scores = text.subtring(18).splitText(",");
+    var scores = arg;
     for (var i =0; i < (Integer.parseInt(text.substring(17,18))); i++){
         var newDiv = document.createElement("div");  //sets answer box o invisible
         newDiv.id='c'+i;
-        newDiv.className='col-md-3';
+        //newDiv.className='col-md-3';
         var pg = scores[i];
         myDiv.setContent(pg);
         toAdd.appendChild(newDiv);
     }
     document.getElementById("scoreTable").className = "row";
 }  
-
+function roomNotFound(id){
+    while (buttons.firstChild)
+        buttons.removeChild(buttons.firstChild);
+    while (messages.firstChild)
+        messages.removeChild(messages.firstChild);
+    var loading = document.createElement('p');
+    loading.textContent = 'No room found for id ' + id;
+    loading.className += 'par';
+    messages.appendChild(loading);
+}
 ///////OLD IF-ELSE TREE BELOW. KEEPING IT HERE FOR REFERENCE UNTIL TRANSITION TO NEW SYSTEM IS COMPLETE.
 
 /*function checkText(text){
