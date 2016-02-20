@@ -44,7 +44,7 @@ module.exports = {
 	},
 	getRooms: function(){
 		return rooms;
-	}
+	},
 	roomReady: function(roomId){
 		room = getRoomById(roomId);
 		if(room.users.length > 3)
