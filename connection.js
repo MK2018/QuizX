@@ -6,6 +6,7 @@ module.exports = {
 	removeConnection: function(conn){
   		conCount--;
   		var index = connections.indexOf(conn);
+  		//checkToKill(conn);			//use this once implemented
   		connections.splice(index, 1);
 	},
 	addHost: function(conn){
@@ -31,13 +32,10 @@ module.exports = {
 		return id;
 	},
 	addToRoom: function(conn, roomId){
-		index = -1;
-		for(var x = 0; x < rooms.length; x++)
-			if (rooms[x].id === roomId) 
-				index = x;
-		if(index !== -1){
-			rooms[index].addClient(conn);
-			rooms[index].broadcastToRoom('gameClientsConnected', rooms[index].users.length)
+		room = getRoomById(roomId);
+		if(room !== null){
+			room.addClient(conn);
+			room.broadcastToRoom('gameClientsConnected', room.users.length)
 			console.log('Person joined room: ' + roomId);
 		}
 		else{
@@ -46,6 +44,12 @@ module.exports = {
 	},
 	getRooms: function(){
 		return rooms;
+	}
+	roomReady: function(roomId){
+		room = getRoomById(roomId);
+		if(room.users.length > 3)
+			return true;
+		return false;
 	}
 }
 
@@ -81,6 +85,11 @@ function Room(host, id){
 		for(var x = 0; x < this.users.length; x++)
 			cmd(message, this.users[x], args);
 	}
+	this.ready = function(){
+		if(room.users.length > 3 && (host !== null && host !== "undefined"))
+			return true;
+		return false;
+	}
 }
 
 function cmd(cmd, ws, arg){
@@ -88,6 +97,20 @@ function cmd(cmd, ws, arg){
         ws.send(cmd + "();");
     else
         ws.send(cmd + "(" + arg + ");");
+}
+
+function getRoomById(id){
+	index = -1;
+	for(var x = 0; x < rooms.length; x++)
+		if (rooms[x].id === roomId) 
+			index = x;
+	if(index !== -1)
+		return rooms[index];
+	return null;
+}
+
+function checkToKill(){
+	//if ws that closed was a host, kill the room.
 }
 
 /*function Connection(conn, hostOrNah, id) {
