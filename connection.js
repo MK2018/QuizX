@@ -6,10 +6,10 @@ module.exports = {
 	removeConnection: function(conn){
   		conCount--;
   		var index = connections.indexOf(conn);
-  		//checkToKill(conn);			//use this once implemented
+  		checkToKill(conn);			//use this once implemented
   		connections.splice(index, 1);
 	},
-	addHost: function(conn){
+	/*addHost: function(conn){
 	   	gameHosts.push(conn);
 	},
 	addClient: function(conn){
@@ -23,7 +23,7 @@ module.exports = {
 	removeClient: function(conn){
 	  	var index = connections.indexOf(conn);
 	  	gameClients.splice(index, 1);
-	},
+	},*/
 	initRoom: function(ws){
 		var id = parseInt(Math.random()*100000+1);
 		while(roomIds.indexOf(id) > -1)
@@ -50,11 +50,14 @@ module.exports = {
 		if(room.users.length > 3)
 			return true;
 		return false;
+	},
+	killRoom: function(roomId){
+
 	}
 }
 
 var gameHosts = [];
-var gameClients = [];
+//var gameClients = [];
 var connections = [];
 var conCount = 0;
 
@@ -66,6 +69,8 @@ function Room(host, id){
 	this.host = host;
 	this.clients = [];
 	this.id = id;
+
+	gameHosts.push(host);
 
 	this.addClient = function(ws){
 		this.clients.push(ws);
@@ -102,14 +107,31 @@ function cmd(cmd, ws, arg){
 function getRoomById(id){
 	index = -1;
 	for(var x = 0; x < rooms.length; x++)
-		if (rooms[x].id === roomId) 
+		if (rooms[x].id === id) 
 			index = x;
 	if(index !== -1)
 		return rooms[index];
 	return null;
 }
 
-function checkToKill(){
+function getRoomByHost(host){
+	index = -1;
+	for(var x = 0; x < rooms.length; x++)
+		if (rooms[x].host === host) 
+			index = x;
+	if(index !== -1)
+		return rooms[index];
+	return null;
+}
+
+function checkToKill(ws){
+	index = -1;
+	for(var x = 0; x < gameHosts.length; x++)
+		if (gameHosts[x] === ws) 
+			index = x;
+	if(index !== -1){
+		room = getRoomByHost(ws);
+	}
 	//if ws that closed was a host, kill the room.
 }
 

@@ -238,9 +238,6 @@ function gameInitRoom(ws){
 function gameJoinRoom(ws, id){
   conn.addToRoom(ws, id);
 }
-function hostLeft(id){
-  
-}
 ///////OLD IF-ELSE TREE BELOW. KEEPING IT HERE FOR REFERENCE UNTIL TRANSITION TO NEW SYSTEM IS COMPLETE.
 
 /*
