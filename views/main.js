@@ -28,6 +28,7 @@ function initSocket(){
         cmd('gameConnected');
     };
     webSocket.onmessage = function(event){
+        console.log(event.data);
         eval(event.data);
     };
     webSocket.onclose = function(event){
@@ -37,8 +38,6 @@ function initSocket(){
 function openRoom(){
 
 }
-
-
 function closeSocket(){
     webSocket.close();
 }
@@ -124,6 +123,7 @@ function displayRoomId(id){
     loading.textContent = 'Your room ID is ' + id;
     loading.className += 'par';
     messages.appendChild(loading);
+    roomId = id;
 }
 function askRoom(){
     while (buttons.firstChild)
@@ -162,10 +162,11 @@ function gameClientsConnected(arg){
 function gamePromptStart(){
     var button = document.createElement("button");  
     button.textContent = "Start Game"; 
-    button.setAttribute( "onClick", "javascript: cmd('gameStart');" );
+    button.setAttribute( "onClick", "javascript: var tmpId = getRoomId(); cmd('gameStart', tmpId);" );
     buttons.appendChild(button);
 }    
 function gameShowBuzzer(question){
+    console.log("Hello from the other side");
     if(!isHost){
         console.log(question);
         invisible.className = "invisible";
@@ -249,7 +250,11 @@ function roomNotFound(id){
     messages.appendChild(loading);
 }
 function roomConnected(id){
+    console.log(id);
     roomId = id;
+}
+function getRoomId(){
+    return roomId;
 }
 ///////OLD IF-ELSE TREE BELOW. KEEPING IT HERE FOR REFERENCE UNTIL TRANSITION TO NEW SYSTEM IS COMPLETE.
 

@@ -66,6 +66,7 @@ function sleep(milliseconds) {
   }
 }
 
+/*
 function Clue(question, value, answer){
   this.question = question;
   this.value = value;
@@ -80,14 +81,14 @@ function Clue(question, value, answer){
     return this.answer;
   }
 }
-
-function fillBoard(){
+*/
+/*function fillBoard(){
   var gameBoard = [];
   for(var i=0; i<5; i++) {
     gameBoard[i] = [new Clue("Who is the best member of the group?", (i+1)*100, "Michael"),new Clue("Who is the best member of the group?", (i+1)*100, "Michael"),new Clue("Who is the best member of the group?", (i+1)*100, "Michael"),new Clue("Who is the best member of the group?", (i+1)*100, "Michael"),new Clue("Who is the best member of the group?", (i+1)*100, "Michael"),new Clue("Who is the best member of the group?", (i+1)*100, "Michael")];//new Array(6);
   }
   return gameBoard;
-}
+}*/
 
 function broadcast(data, args) {
 	wss.clients.forEach(function each(client) {
@@ -140,7 +141,7 @@ var wss = new WebSocketServer({server: server});
 console.log("websocket server created");
 
 
-gameBoard = fillBoard();
+//gameBoard = fillBoard();
 
 activex = -1;
 activey = -1;
@@ -170,9 +171,10 @@ function gameConnected(ws){
   cmd('gameConfirm', ws);
   cmd('gameAskRole', ws);
 }
-function gameStart(ws){
-  broadcast("gameStarting");
-  ingame = true;
+function gameStart(ws, roomId){
+  conn.startGame(parseInt(roomId));
+  //broadcast("gameStarting");
+  //ingame = true;
 }
 function gameGetAllScores(ws){
   //scores = [];
@@ -203,18 +205,25 @@ function gameCheck(ws, args){
   coordx = parseInt(args['x']);
   coordy = parseInt(args['y']);
   roomId = parseInt(args['roomId']);
-  console.log(roomId);
-  activex = coordx;
-  activey = coordy;
-  console.log(coordx+","+coordy);
-  conn.showBuzzer(coordx, coordy, roomId)
+  //console.log(roomId);
+  //activex = coordx;
+  //activey = coordy;
+  //console.log(coordx+","+coordy);
+  conn.showBuzzer(coordx, coordy, roomId);
   //broadcast('gameShowBuzzer', JSON.stringify(gameBoard[coordx][coordy].getQuestion()));
 }
 function gameBuzz(ws, args){
   //var index = -1;
   var answer = args['ans'];
   var roomId = args['roomId'];
-  conn.checkAnswer(answer, roomId, ws);
+  var points = conn.checkAnswer(answer, roomId, ws);
+  if(points === -1)
+    //Send incorrect status
+  //else
+    //send correct status
+//------------------------------------------------------------------
+
+
   //console.log(answer);
   //id = parseInt(args['id']);
   /*if(answer.toLowerCase() === gameBoard[activex][activey].getAnswer().toLowerCase()){

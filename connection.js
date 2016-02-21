@@ -6,24 +6,9 @@ module.exports = {
 	removeConnection: function(conn){
   		conCount--;
   		var index = connections.indexOf(conn);
-  		checkToKill(conn);			//use this once implemented
+  		checkToKill(conn);			
   		connections.splice(index, 1);
 	},
-	/*addHost: function(conn){
-	   	gameHosts.push(conn);
-	},
-	addClient: function(conn){
-	  	gameClients.push(conn);
-	  	return conCount;
-	},
-	removeHost: function(){
-	  	gameHosts.pop();
-	  	return conCount;
-	},
-	removeClient: function(conn){
-	  	var index = connections.indexOf(conn);
-	  	gameClients.splice(index, 1);
-	},*/
 	initRoom: function(ws){
 		var id = parseInt(Math.random()*100000+1);
 		while(roomIds.indexOf(id) > -1)
@@ -53,19 +38,29 @@ module.exports = {
 	showBuzzer: function(x, y, roomId){
 		//show the question on the host
 		//show box to answer on all other clients
+		var room = getRoomById(roomId);
+		room.ax = x;
+		room.ay = y;
+		room.broadcastToRoom('gameShowBuzzer', JSON.stringify(room.board[x][y].getQuestion()));
+		console.log("showBuzzer signal sent");
 	},
 	checkAnswer: function(answer, roomId, ws){
-		//check answer against question
-		//return point value
-		//replace gameBuzz on main page
+		var room = getRoomById(roomId);
+		var board = room.board;
+		if(board[room.ax][room.ay].getAnswer().toLowerCase()===answer.toLowerCase())
+			return board[room.ax][room.ay].getValue();
+		return -1;
+	},
+	startGame: function(roomId){
+		var room = getRoomById(roomId);
+		room.broadcastToRoom('gameStarting');
 	}
 }
 
 
-var board = require('./board');
+var boardLoader = require('./board');
 
 var gameHosts = [];
-//var gameClients = [];
 var connections = [];
 var conCount = 0;
 
@@ -77,6 +72,9 @@ function Room(host, id){
 	this.host = host;
 	this.clients = [];
 	this.id = id;
+	this.board = boardLoader.getNewBoard();
+	this.ax = -1;
+	this.ay = -1;
 
 	gameHosts.push(host);
 
@@ -84,9 +82,6 @@ function Room(host, id){
 		this.clients.push(ws);
 		this.users.push(ws);
 	}
-	//this.removeHost = function(){
-	//	this.host = null;
-	//}
 	this.removeClient = function(ws){
 		var index = this.clients.indexOf(ws);
 	  	this.clients.splice(index, 1);
@@ -145,34 +140,3 @@ function checkToKill(ws){
 	}
 	//if ws that closed was a host, kill the room.
 }
-
-/*function Connection(conn, hostOrNah, id) {
-  this.score = 0;
-  this.conn = conn;
-  this.id = id;
-  if(hostOrNah){
-    this.host = true;
-    this.client = false;
-  }
-  else{
-    this.host = false;
-    this.client = true;
-  }
-  this.getHost = function(){
-    return this.host;
-  }
-  this.getClient = function(){
-    return this.client;
-  }
-  this.info = function(){
-    return "Client = " + client + ", Host = " + host;
-  }
-  this.getScore = function(){
-    return this.score;
-  }
-  this.addScore = function(toAdd){
-    this.score += toAdd;
-  }
-  this.getId = function(){
-    return this.id;
-  }*/
