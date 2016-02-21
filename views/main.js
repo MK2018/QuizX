@@ -153,12 +153,12 @@ function gameClientsConnected(arg){
         pg.textContent = "Currently, there is " + arg + " client connected.";
     else
         pg.textContent = "Currently, there are " + arg + " clients connected.";
-    if(parseInt(arg)>2)
-        cmd("gameCheckHost");
+    //if(parseInt(arg)>2)
+    //    cmd("gameCheckHost");
     pg.className += " par";  
     buttons.appendChild(pg); 
 }
-function gameHasHost(){
+function gamePromptStart(){
     var button = document.createElement("button");  
     button.textContent = "Start Game"; 
     button.setAttribute( "onClick", "javascript: cmd('gameStart');" );

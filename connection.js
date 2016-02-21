@@ -37,6 +37,10 @@ module.exports = {
 			room.addClient(conn);
 			room.broadcastToRoom('gameClientsConnected', room.users.length)
 			console.log('Person joined room: ' + roomId);
+			if(room.ready()){
+				console.log("ROOM READY");
+				room.broadcastToRoom('gamePromptStart');
+			}
 		}
 		else{
 			cmd('roomNotFound', conn, roomId);
@@ -44,15 +48,6 @@ module.exports = {
 	},
 	getRooms: function(){
 		return rooms;
-	},
-	roomReady: function(roomId){
-		room = getRoomById(roomId);
-		if(room.users.length > 3)
-			return true;
-		return false;
-	},
-	killRoom: function(roomId){
-
 	}
 }
 
@@ -91,7 +86,9 @@ function Room(host, id){
 			cmd(message, this.users[x], args);
 	}
 	this.ready = function(){
-		if(room.users.length > 3 && (host !== null && host !== "undefined"))
+		console.log(room.users.length);
+		//console.log(host);
+		if(room.users.length >= 3 && (host !== null && host !== "undefined"))
 			return true;
 		return false;
 	}
@@ -131,6 +128,7 @@ function checkToKill(ws){
 			index = x;
 	if(index !== -1){
 		room = getRoomByHost(ws);
+		rooms.splice(index, 1);
 	}
 	//if ws that closed was a host, kill the room.
 }

@@ -195,10 +195,10 @@ function gameGetAllScores(ws){
   //cmd('gameId', ws, id);                                      //CHANGE TO NEW ID SYSTEM.
   //broadcast('gameClientsConnected', wss.clients.length)
 //}
-function gameCheckHost(ws){
-  if(gameHost.length === 1)
-    cmd('gameHasHost', ws);
-}
+//function gameCheckHost(ws){
+  //if(gameHost.length === 1)
+  //  cmd('gameHasHost', ws);
+//}
 function gameCheck(ws, args){
   coordx = parseInt(args['x']);
   coordy = parseInt(args['y']);
