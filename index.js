@@ -202,27 +202,32 @@ function gameGetAllScores(ws){
 function gameCheck(ws, args){
   coordx = parseInt(args['x']);
   coordy = parseInt(args['y']);
+  roomId = parseInt(args['roomId']);
+  console.log(roomId);
   activex = coordx;
   activey = coordy;
   console.log(coordx+","+coordy);
-  broadcast('gameShowBuzzer', JSON.stringify(gameBoard[coordx][coordy].getQuestion()));
+  conn.showBuzzer(coordx, coordy, roomId)
+  //broadcast('gameShowBuzzer', JSON.stringify(gameBoard[coordx][coordy].getQuestion()));
 }
 function gameBuzz(ws, args){
-  var index = -1;
-  answer = args['ans'];
-  console.log(answer);
-  id = parseInt(args['id']);
-  if(answer.toLowerCase() === gameBoard[activex][activey].getAnswer().toLowerCase()){
-    cmd('gameCorrect', ws);
-      for(var x = 0; x < gameClients.length; x++)
-        if(gameClients[x].getId() === id){
-          index = x;
-          gameClients[x].addScore(gameBoard[activex][activey].getValue());
-        }
+  //var index = -1;
+  var answer = args['ans'];
+  var roomId = args['roomId'];
+  conn.checkAnswer(answer, roomId, ws);
+  //console.log(answer);
+  //id = parseInt(args['id']);
+  /*if(answer.toLowerCase() === gameBoard[activex][activey].getAnswer().toLowerCase()){
+    cmd('gameCorrect', ws, gameBoard[activex][activey].getValue());
+      //for(var x = 0; x < gameClients.length; x++)
+      //  if(gameClients[x].getId() === id){
+      //    index = x;
+      //    gameClients[x].addScore(gameBoard[activex][activey].getValue());
+      //  }
     cmd("gameScore", ws, gameClients[index].getScore());
     sleep(2000);
     broadcast("gameQuestionComplete");
-  }
+  }*/
 }
 function gameIncorrect(ws){
   cmd("gameIncorrect", ws);

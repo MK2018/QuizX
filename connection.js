@@ -41,6 +41,7 @@ module.exports = {
 				console.log("ROOM READY");
 				room.broadcastToRoom('gamePromptStart');
 			}
+			cmd('roomConnected', conn, roomId);
 		}
 		else{
 			cmd('roomNotFound', conn, roomId);
@@ -48,8 +49,20 @@ module.exports = {
 	},
 	getRooms: function(){
 		return rooms;
+	},
+	showBuzzer: function(x, y, roomId){
+		//show the question on the host
+		//show box to answer on all other clients
+	},
+	checkAnswer: function(answer, roomId, ws){
+		//check answer against question
+		//return point value
+		//replace gameBuzz on main page
 	}
 }
+
+
+var board = require('./board');
 
 var gameHosts = [];
 //var gameClients = [];

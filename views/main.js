@@ -9,6 +9,8 @@ var thumbsdown = document.getElementById("incorrectThumb");
 var myID = -1;
 var myScore = 0;
 
+var roomId = -1;
+
 var isHost = false;
  
 function initSocket(){
@@ -49,15 +51,14 @@ function startGame(){
 }                   
 function buzz(){
     var ans = document.getElementById("answerBox").value;
-    console.log("answer:"+ ans);
-    var id = myID;
-    argString = JSON.stringify({"id":myID, "ans":ans});
+    //console.log("answer:"+ ans);
+    argString = JSON.stringify({roomId, ans});
     cmd('gameBuzz', argString);
 }
 function check(x, y){
     console.log("x:"+(x));
     console.log("y:"+(y));
-    argString = JSON.stringify({x, y});
+    argString = JSON.stringify({x, y, roomId});
     cmd('gameCheck', argString);
 }
 function checkIfHost(){
@@ -246,6 +247,9 @@ function roomNotFound(id){
     loading.textContent = 'No room found for id ' + id;
     loading.className += 'par';
     messages.appendChild(loading);
+}
+function roomConnected(id){
+    roomId = id;
 }
 ///////OLD IF-ELSE TREE BELOW. KEEPING IT HERE FOR REFERENCE UNTIL TRANSITION TO NEW SYSTEM IS COMPLETE.
 
