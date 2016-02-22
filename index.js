@@ -217,7 +217,7 @@ function gameBuzz(ws, args){
   var answer = args['ans'];
   var roomId = args['roomId'];
   var points = conn.checkAnswer(answer, roomId, ws);
-  if(points === -1)
+  //if(points === -1)
     //Send incorrect status
   //else
     //send correct status
