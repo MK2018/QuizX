@@ -222,8 +222,6 @@ function gameBuzz(ws, args){
   //else
     //send correct status
 //------------------------------------------------------------------
-
-
   //console.log(answer);
   //id = parseInt(args['id']);
   /*if(answer.toLowerCase() === gameBoard[activex][activey].getAnswer().toLowerCase()){

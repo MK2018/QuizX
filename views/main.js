@@ -42,11 +42,7 @@ function closeSocket(){
     webSocket.close();
 }
 function startGame(){
-    console.log("game starting...");
-    invisible.className = "";
-    while (buttons.firstChild)
-        buttons.removeChild(buttons.firstChild);
-    document.getElementById('title').className = "invisible";  
+    
 }                   
 function buzz(){
     var ans = document.getElementById("answerBox").value;
@@ -90,7 +86,11 @@ function gameConfirm(){
     //nothing
 }
 function gameStarting(){
-    startGame();
+    console.log("game starting...");
+    invisible.className = "";
+    while (buttons.firstChild)
+        buttons.removeChild(buttons.firstChild);
+    document.getElementById('title').className = "invisible";  
 }
 function gameAskRole(){
     while (buttons.firstChild)
