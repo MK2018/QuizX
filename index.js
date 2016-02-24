@@ -217,10 +217,10 @@ function gameBuzz(ws, args){
   var answer = args['ans'];
   var roomId = args['roomId'];
   var points = conn.checkAnswer(answer, roomId, ws);
-  //if(points === -1)
-    //Send incorrect status
-  //else
-    //send correct status
+  if(points === -1)
+    cmd('questionIncorrect', ws);
+  else
+    cmd('questionCorrect', ws, points);
 //------------------------------------------------------------------
   //console.log(answer);
   //id = parseInt(args['id']);

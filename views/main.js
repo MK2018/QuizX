@@ -256,6 +256,13 @@ function roomConnected(id){
 function getRoomId(){
     return roomId;
 }
+function questionCorrect(points){
+    console.log("QUESTION CORRECT");
+    console.log(points + " points awarded.");
+}
+function questionIncorrect(){
+    console.log("answer is incorrect");
+}
 ///////OLD IF-ELSE TREE BELOW. KEEPING IT HERE FOR REFERENCE UNTIL TRANSITION TO NEW SYSTEM IS COMPLETE.
 
 /*function checkText(text){
