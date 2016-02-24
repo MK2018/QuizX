@@ -258,7 +258,8 @@ function getRoomId(){
 }
 function questionCorrect(points){
     console.log("QUESTION CORRECT");
-    console.log(points + " points awarded.");
+    myScore += points;
+    console.log("Current score:" + myScore);
 }
 function questionIncorrect(){
     console.log("answer is incorrect");
