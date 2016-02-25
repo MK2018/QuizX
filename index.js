@@ -143,8 +143,8 @@ console.log("websocket server created");
 
 //gameBoard = fillBoard();
 
-activex = -1;
-activey = -1;
+var activex = -1;
+var activey = -1;
 
 wss.on("connection", function(ws) {
   cmd('connected', ws);
