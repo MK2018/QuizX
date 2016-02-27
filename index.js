@@ -130,7 +130,7 @@ app.get('/join/:room(([0-9])+)', function(req, res) {
   res.render('index');
 });
 */
-app.use(express.static(__dirname + "/views"));
+app.use(express.static(__dirname + "/static"));
 
 var server = http.createServer(app);
 server.listen(port);
