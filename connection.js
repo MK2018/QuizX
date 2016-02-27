@@ -1,4 +1,5 @@
 module.exports = {
+	//implement a timer at some point
 	addConnection: function(conn){
   		conCount++;
   		connections.push(conn); 
