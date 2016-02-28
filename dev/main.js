@@ -266,6 +266,37 @@ function questionIncorrect(){
     console.log("answer is incorrect");
     //prompt for more time
 }
+
+
+
+function set_screen(name) {
+    if (! name) name = "#launch";
+    //console.log(name);
+    screens = document.getElementsByTagName("section");
+    for (var i=0; i<screens.length; ++i) {
+        console.log(screens[i].id);
+        if (name == "#"+screens[i].id) {
+            screens[i].style.display = "block";
+        } else {
+            screens[i].style.display = "none";
+        }
+    }
+}
+check_hash = (function() {
+    var hash;
+    return function() {
+        if (window.location.hash != hash) {
+            hash = window.location.hash;
+            set_screen(hash);
+        }
+    }
+})();
+function init() {
+    setInterval(check_hash, 100);
+}
+
+
+
 ///////OLD IF-ELSE TREE BELOW. KEEPING IT HERE FOR REFERENCE UNTIL TRANSITION TO NEW SYSTEM IS COMPLETE.
 
 /*function checkText(text){

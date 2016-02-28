@@ -24,19 +24,20 @@
     <body class="body-wrapper">
         <div class="questionStyle" id="question">
         </div>
-        <center><h1 class="mainPageTitle" id="title">QuizX</h1></center>
-
-         <div class="container">
-        <div class="row" >
-          <div class="col-md-6 col-md-offset-3" id="topRow">            
-            <center>
-                <div id="messages">
-                </div>
-                <div id="buttons"> 
-                  <button class="joinButton btn btn-success"type="submit" onclick="initSocket();" >Join</button>
-                </div>
-            </center>
-
+        <section id="launch">
+            <center><h1 class="mainPageTitle" id="title">QuizX</h1></center>
+            <div class="container">
+            <div class="row" >
+              <div class="col-md-6 col-md-offset-3" id="topRow">            
+                <center>
+                    <div id="messages">
+                        <a href="#gameBoard">DO NOT CLICK ME</a>
+                    </div>
+                    <div id="buttons"> 
+                      <button class="joinButton btn btn-success"type="submit" onclick="initSocket();" >Join</button>
+                    </div>
+                </center>
+        </section>
             <input type="text" id="answerBox" placeholder="Answer" class="form-control invisibleTextBox"/>
             <button id="answerSubmit"class="btn btn-success invisibleSubmitAnswer" type="submit" onclick="buzz();">Submit Answer</button>
             <div id="thumbsContainer" style="font-size: 300px; color:#449D44;">
@@ -55,6 +56,7 @@
 
           </div>
         </div>
+    <section id='gameBoard'>
         <div id="invis-container" class="invisible">
            <div class="row">
                 <div class="col-md-2 category">
@@ -194,7 +196,7 @@
             </div>
            </div>
         </div>
-    </div>
+    </section>
     
         
         
@@ -204,6 +206,7 @@
             </div>
         </footer>
         <script src="main.js"></script>
+        <script>init();</script>
     </body>
 
     </html>
