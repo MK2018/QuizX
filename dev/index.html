@@ -22,25 +22,26 @@
         </script>         
     </head>
     <body class="body-wrapper">
-        <div class="questionStyle" id="question">
-        </div>
-        <section id="launch">
+        <page id="home">
             <center><h1 class="mainPageTitle" id="title">QuizX</h1></center>
             <div class="container">
-            <div class="row" >
-              <div class="col-md-6 col-md-offset-3" id="topRow">            
-                <center>
-                    <div id="messages">
-                        <a href="#gameBoard">DO NOT CLICK ME</a>
+                <div class="row" >
+                    <div class="col-md-6 col-md-offset-3" id="topRow">            
+                        <div id="buttons"> 
+                            <button class="joinButton btn btn-success"type="submit" onclick="initSocket();" >Join</button>
+                        </div>
                     </div>
-                    <div id="buttons"> 
-                      <button class="joinButton btn btn-success"type="submit" onclick="initSocket();" >Join</button>
-                    </div>
-                </center>
-        </section>
+                </div>
+            </div>
+        </page>
+        <page id="question">
+            <div class="questionStyle" id="question">
+            </div>
+        </page>
+        <page id="answer">
             <input type="text" id="answerBox" placeholder="Answer" class="form-control invisibleTextBox"/>
             <button id="answerSubmit"class="btn btn-success invisibleSubmitAnswer" type="submit" onclick="buzz();">Submit Answer</button>
-            <div id="thumbsContainer" style="font-size: 300px; color:#449D44;">
+            <div id="thumbsContainer" style="font-size: 300px; color:#449D44;"></div>
             <!--
 
             <div style="font-size: 300px; color:#449D44;" class="invisible"  id="correctThumb">
@@ -52,154 +53,143 @@
             <i class="fa fa-thumbs-down incorrectSize" ></i>
             </div>
 -->
-            </div>
+        </page>
+        <page id='gameBoard'>
+            <div id="invis-container" class="invisible">
+                <div class="row">
+                    <div class="col-md-2 category">
+                        Category 1
+                    </div>
+                    <div class="col-md-2 category">
+                        Category 2
+                    </div>
+                    <div class="col-md-2 category">
+                        Category 3
+                    </div>
+                    <div class="col-md-2 category">
+                        Category 4
+                    </div>
+                    <div class="col-md-2 category">
+                        Category 5
+                    </div>
+                    <div class="col-md-2 category">
+                        Category 6
+                    </div>
+                </div>
 
-          </div>
-        </div>
-    <section id='gameBoard'>
-        <div id="invis-container" class="invisible">
-           <div class="row">
-                <div class="col-md-2 category">
-                    Category1
+                <div class="row">
+                    <div class="col-md-2">
+                         <button class="tableCells btn btn-default"type="submit" onclick="check(0,0); this.disabled=true;" >100</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="tableCells btn btn-default"type="submit" onclick="check(0,1); this.disabled=true;" >100</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="tableCells btn btn-default"type="submit" onclick="check(0,2); this.disabled=true;" >100</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="tableCells btn btn-default"type="submit" onclick="check(0,3); this.disabled=true;" >100</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="tableCells btn btn-default"type="submit" onclick="check(0,4); this.disabled=true;" >100</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="tableCells btn btn-default"type="submit" onclick="check(0,5); this.disabled=true;" >100</button>
+                    </div>
                 </div>
-                <div class="col-md-2 category">
-                    Category2
-                </div>
-                <div class="col-md-2 category">
-                    Category3
-                </div>
-                <div class="col-md-2 category">
-                    Category4
-                </div>
-                <div class="col-md-2 category">
-                    Category5
-                </div>
-                <div class="col-md-2 category">
-                    Category6
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-2">
-                     <button class="tableCells btn btn-default"type="submit" onclick="check(0,0); this.disabled=true;" >100</button>
-                </div>
-                <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(0,1); this.disabled=true;" >100</button>
-                </div>
-                <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(0,2); this.disabled=true;" >100</button>
-                </div>
-                <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(0,3); this.disabled=true;" >100</button>
-                </div>
-                <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(0,4); this.disabled=true;" >100</button>
-                </div>
-                <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(0,5); this.disabled=true;" >100</button>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(1,0); this.disabled=true;" >200</button>
+                <div class="row">
+                    <div class="col-md-2">
+                        <button class="tableCells btn btn-default"type="submit" onclick="check(1,0); this.disabled=true;" >200</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="tableCells btn btn-default"type="submit" onclick="check(1,1); this.disabled=true;" >200</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="tableCells btn btn-default"type="submit" onclick="check(1,2); this.disabled=true;" >200</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="tableCells btn btn-default"type="submit" onclick="check(1,3); this.disabled=true;" >200</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="tableCells btn btn-default"type="submit" onclick="check(1,4); this.disabled=true;" >200</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="tableCells btn btn-default"type="submit" onclick="check(1,5); this.disabled=true;" >200</button>
+                    </div>
                 </div>
-                <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(1,1); this.disabled=true;" >200</button>
-                </div>
-                <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(1,2); this.disabled=true;" >200</button>
-                </div>
-                <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(1,3); this.disabled=true;" >200</button>
-                </div>
-                <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(1,4); this.disabled=true;" >200</button>
-                </div>
-                <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(1,5); this.disabled=true;" >200</button>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-md-2">
-                     <button class="tableCells btn btn-default"type="submit" onclick="check(2,0); this.disabled=true;" >300</button>
+                <div class="row">
+                    <div class="col-md-2">
+                         <button class="tableCells btn btn-default"type="submit" onclick="check(2,0); this.disabled=true;" >300</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="tableCells btn btn-default"type="submit" onclick="check(2,1); this.disabled=true;" >300</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="tableCells btn btn-default"type="submit" onclick="check(2,2); this.disabled=true;" >300</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="tableCells btn btn-default"type="submit" onclick="check(2,3); this.disabled=true;" >300</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="tableCells btn btn-default"type="submit" onclick="check(2,4); this.disabled=true;" >300</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="tableCells btn btn-default"type="submit" onclick="check(2,5); this.disabled=true;" >300</button>
+                    </div>
                 </div>
-                <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(2,1); this.disabled=true;" >300</button>
-                </div>
-                <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(2,2); this.disabled=true;" >300</button>
-                </div>
-                <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(2,3); this.disabled=true;" >300</button>
-                </div>
-                <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(2,4); this.disabled=true;" >300</button>
-                </div>
-                <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(2,5); this.disabled=true;" >300</button>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(3,0); this.disabled=true;" >400</button>
+                <div class="row">
+                    <div class="col-md-2">
+                        <button class="tableCells btn btn-default"type="submit" onclick="check(3,0); this.disabled=true;" >400</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="tableCells btn btn-default"type="submit" onclick="check(3,1); this.disabled=true;" >400</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="tableCells btn btn-default"type="submit" onclick="check(3,2); this.disabled=true;" >400</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="tableCells btn btn-default"type="submit" onclick="check(3,3); this.disabled=true;" >400</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="tableCells btn btn-default"type="submit" onclick="check(3,4); this.disabled=true;" >400</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="tableCells btn btn-default"type="submit" onclick="check(3,5); this.disabled=true;" >400</button>
+                    </div>
                 </div>
-                <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(3,1); this.disabled=true;" >400</button>
-                </div>
-                <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(3,2); this.disabled=true;" >400</button>
-                </div>
-                <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(3,3); this.disabled=true;" >400</button>
-                </div>
-                <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(3,4); this.disabled=true;" >400</button>
-                </div>
-                <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(3,5); this.disabled=true;" >400</button>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(4,0); this.disabled=true;" >500</button>
+                <div class="row">
+                    <div class="col-md-2">
+                        <button class="tableCells btn btn-default"type="submit" onclick="check(4,0); this.disabled=true;" >500</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="tableCells btn btn-default"type="submit" onclick="check(4,1); this.disabled=true;" >500</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="tableCells btn btn-default"type="submit" onclick="check(4,2); this.disabled=true;" >500</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="tableCells btn btn-default"type="submit" onclick="check(4,3); this.disabled=true;" >500</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="tableCells btn btn-default"type="submit" onclick="check(4,4); this.disabled=true;" >500</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="tableCells btn btn-default"type="submit" onclick="check(4,5); this.disabled=true;" >500</button>     
+                    </div>
                 </div>
-                <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(4,1); this.disabled=true;" >500</button>
-                </div>
-                <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(4,2); this.disabled=true;" >500</button>
-                </div>
-                <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(4,3); this.disabled=true;" >500</button>
-                </div>
-                <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(4,4); this.disabled=true;" >500</button>
-                </div>
-                <div class="col-md-2">
-                    <button class="tableCells btn btn-default"type="submit" onclick="check(4,5); this.disabled=true;" >500</button>     
+           
+                <div class="row invisibleScoreTable" id="scoreTable">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3"></div>
                 </div>
             </div>
-       
-
-
-           <div class="row invisibleScoreTable" id="scoreTable">
-            <div class="col-md-3">
-            </div>
-            <div class="col-md-3">
-            </div>
-            <div class="col-md-3">
-            </div>
-            <div class="col-md-3">
-            </div>
-           </div>
-        </div>
-    </section>
-    
-        
-        
+        </page>
         <footer> 
             <div class="footer">
                 Made with <span class="red-heart">❤</span> by <a href="http://github.com/mk2018">Michael Krause</a>, <a href="http://github.com/seanle24245">Sean Le</a>, and <a href="http://github.com/veryroomy">Neel Shah</a>.
@@ -210,8 +200,3 @@
     </body>
 
     </html>
-
-
-
-
-    

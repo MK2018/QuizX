@@ -270,9 +270,9 @@ function questionIncorrect(){
 
 
 function set_screen(name) {
-    if (! name) name = "#launch";
+    if (! name) name = "#home";
     //console.log(name);
-    screens = document.getElementsByTagName("section");
+    screens = document.getElementsByTagName("page");
     for (var i=0; i<screens.length; ++i) {
         console.log(screens[i].id);
         if (name == "#"+screens[i].id) {
