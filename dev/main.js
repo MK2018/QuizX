@@ -68,9 +68,9 @@ function cmd(cmd, arg){
 function send(arg){
     webSocket.send(arg);
 }
-function invisToggle(id){
+//function invisToggle(id){
     //nothing yet
-} 
+//} 
 
 ///
 ///
@@ -87,10 +87,11 @@ function gameConfirm(){
 }
 function gameStarting(){
     console.log("game starting...");
-    invisible.className = "";
-    while (buttons.firstChild)
-        buttons.removeChild(buttons.firstChild);
-    document.getElementById('title').className = "invisible";  
+    window.location.replace (window.location + "#gameBoard");
+    //invisible.className = "";
+    //while (buttons.firstChild)
+    //    buttons.removeChild(buttons.firstChild);
+    //document.getElementById('title').className = "invisible";  
 }
 function gameAskRole(){
     while (buttons.firstChild)
@@ -184,12 +185,12 @@ function gameShowBuzzer(question){
 function gameShowQuestion(){
     //not used right now but kept here just in case
 }
-function gameDisable(){
+/*function gameDisable(){
     document.getElementById("answerSubmit").disabled = true;
 }
 function gameEnable(){
     document.getElementById("answerSubmit").disabled = false;
-}    
+}    */
 function gameCorrect(){
     var thumbCont = document.getElementById("thumbsContainer");
     while (thumbCont.firstChild) 
@@ -197,7 +198,7 @@ function gameCorrect(){
     var thumbsUp = document.createElement("i");
     thumbsUp.className = "fa fa-thumbs-up correctSize";
     thumbCont.appendChild(thumbsUp);
-    document.getElementById("answerSubmit").className = "invisible"; //sets answer box o invisible
+    document.getElementById("answerSubmit").className = "invisible"; 
     document.getElementById("answerBox").className = "invisible";
     document.getElementById("scoreTable").className = "invisible row"; 
     setTimeout(function(){}, 2000);
@@ -208,7 +209,7 @@ function gameQuestionComplete(){
     var thumbCont = document.getElementById("thumbsContainer");
     while (thumbCont.firstChild) 
         thumbCont.removeChild(thumbCont.firstChild);
-    document.getElementById("answerSubmit").className = "invisible"; //sets answer box o invisible
+    document.getElementById("answerSubmit").className = "invisible"; 
     document.getElementById("answerBox").className = "invisible";
     document.getElementById("invis-container").className = "";
     document.getElementById("scoreTable").className = "row"; 
@@ -218,7 +219,7 @@ function gameIncorrect(){
     var thumbsDown = document.createElement("i");
     thumbsDown.className = "fa fa-thumbs-down correctSize";
     thumbCont.appendChild(thumbsDown);
-    document.getElementById("answerSubmit").className = "invisible"; //sets answer box o invisible
+    document.getElementById("answerSubmit").className = "invisible"; 
     document.getElementById("answerBox").className = "invisible";
     document.getElementById("scoreTable").className = "invisible row"; 
     setTimeout(function(){}, 2000);
@@ -270,16 +271,15 @@ function questionIncorrect(){
 
 
 function set_screen(name) {
-    if (! name) name = "#home";
+    if (!name) name = "#home";
     //console.log(name);
     screens = document.getElementsByTagName("page");
-    for (var i=0; i<screens.length; ++i) {
+    for (var i=0; i<screens.length; i++) {
         console.log(screens[i].id);
-        if (name == "#"+screens[i].id) {
+        if (name === "#"+screens[i].id)
             screens[i].style.display = "block";
-        } else {
+        else
             screens[i].style.display = "none";
-        }
     }
 }
 check_hash = (function() {

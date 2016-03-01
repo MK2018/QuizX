@@ -18,7 +18,6 @@
 
           ga('create', 'UA-59493204-3', 'auto');
           ga('send', 'pageview');
-
         </script>         
     </head>
     <body class="body-wrapper">
@@ -27,8 +26,11 @@
             <div class="container">
                 <div class="row" >
                     <div class="col-md-6 col-md-offset-3" id="topRow">            
+                        <div id="messages">       
+                        </div>
                         <div id="buttons"> 
                             <button class="joinButton btn btn-success"type="submit" onclick="initSocket();" >Join</button>
+                            <!--<a href="#gameBoard">DO NOT CLICK ME</a>-->
                         </div>
                     </div>
                 </div>
@@ -55,7 +57,7 @@
 -->
         </page>
         <page id='gameBoard'>
-            <div id="invis-container" class="invisible">
+            <!--<div id="invis-container" class="invisible">-->
                 <div class="row">
                     <div class="col-md-2 category">
                         Category 1
@@ -188,7 +190,7 @@
                     <div class="col-md-3"></div>
                     <div class="col-md-3"></div>
                 </div>
-            </div>
+            <!--</div>-->
         </page>
         <footer> 
             <div class="footer">
