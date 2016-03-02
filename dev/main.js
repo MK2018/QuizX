@@ -1,5 +1,5 @@
 var webSocket;
-var messages = document.getElementById("messages");
+//var messages = document.getElementById("messages");
 var buttons = document.getElementById("buttons");
 var invisible = document.getElementById("invis-container");
 var invisibletext = document.getElementById("answerBox");
@@ -25,7 +25,8 @@ function initSocket(){
                  
     webSocket.onopen = function(event){
         console.log("connected.");
-        cmd('gameConnected');
+        //cmd('gameConnected');
+        window.location.replace(window.location + "#rolePrompt");
     };
     webSocket.onmessage = function(event){
         console.log(event.data);
@@ -94,8 +95,8 @@ function gameStarting(){
     //document.getElementById('title').className = "invisible";  
 }
 function gameAskRole(){
-    while (buttons.firstChild)
-        buttons.removeChild(buttons.firstChild);                   
+    /*while (buttons.firstChild)
+        buttons.removeChild(buttons.firstChild);             
     var button = document.createElement("button");
     var button2 = document.createElement("button");
     button.textContent = "Create a new room";
@@ -105,7 +106,7 @@ function gameAskRole(){
     button.className += " joinButton btn btn-success";
     button2.className += " joinButton btn btn-success";
     buttons.appendChild(button);
-    buttons.appendChild(button2);
+    buttons.appendChild(button2);*/
 }
 function initRoom(){
     while (buttons.firstChild)
@@ -275,7 +276,7 @@ function set_screen(name) {
     //console.log(name);
     screens = document.getElementsByTagName("page");
     for (var i=0; i<screens.length; i++) {
-        console.log(screens[i].id);
+        //console.log(screens[i].id);
         if (name === "#"+screens[i].id)
             screens[i].style.display = "block";
         else
@@ -292,6 +293,10 @@ check_hash = (function() {
     }
 })();
 function init() {
+	console.log(window.location.substring(0, window.location.length-2) === window.location.origin);
+	console.log(window.location.substring(0, window.location.length-2) +", "+ window.location.origin);
+	//if(webSocket === undefined && window.location !== window.location.origin)
+	//	window.location.replace(window.location.origin);
     setInterval(check_hash, 100);
 }
 

@@ -21,16 +21,37 @@
         </script>         
     </head>
     <body class="body-wrapper">
-        <page id="home">
+        <const id="logo">
             <center><h1 class="mainPageTitle" id="title">QuizX</h1></center>
+        </const>
+        <page id="home">
             <div class="container">
                 <div class="row" >
                     <div class="col-md-6 col-md-offset-3" id="topRow">            
-                        <div id="messages">       
-                        </div>
                         <div id="buttons"> 
-                            <button class="joinButton btn btn-success"type="submit" onclick="initSocket();" >Join</button>
-                            <!--<a href="#gameBoard">DO NOT CLICK ME</a>-->
+                            <button class="joinButton btn btn-success" type="submit" onclick="initSocket();" >Join</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </page>
+        <page id="rolePrompt">
+            <div class="container">
+                <div class="row" >
+                    <div class="col-md-6 col-md-offset-3">            
+                        <div id="buttons">
+                            <button class="joinButton btn btn-success" onclick="checkIfHost(); initRoom(); cmd('gameInitRoom');">Create Room</button>
+                            <button class="joinButton btn btn-success" onclick="askRoom();">Join a room</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </page>
+        <page id="loadingRoom">
+            <div class="container">
+                <div class="row" >
+                    <div class="col-md-6 col-md-offset-3">            
+                        <div id="messages">
                         </div>
                     </div>
                 </div>
