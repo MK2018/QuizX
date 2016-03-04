@@ -87,3 +87,19 @@ background-color: #819FF7;
 a{
 	color: white;
 }
+.loading{
+	color: black;
+	background-color: white;
+	position:fixed !important;
+	position:absolute;
+	top:0px;
+	right:0px;
+	bottom:0px;
+	left:0px;
+	width: 100%;
+	height: 100%;
+	z-index: 10;
+	padding-top: 20%;
+	font-size: 40pt;
+	text-align: center;
+}

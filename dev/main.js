@@ -293,13 +293,24 @@ check_hash = (function() {
     }
 })();
 function init() {
-	console.log(window.location.substring(0, window.location.length-2) === window.location.origin);
-	console.log(window.location.substring(0, window.location.length-2) +", "+ window.location.origin);
-	//if(webSocket === undefined && window.location !== window.location.origin)
-	//	window.location.replace(window.location.origin);
+	if(webSocket === undefined && String(window.location) !== String(window.location.origin+"/"))
+		window.location.replace(window.location.origin);
     setInterval(check_hash, 100);
+    setTimeout(fade, 1000);
 }
-
+function fade() {
+    element = document.getElementById('loading');
+    var op = 1;  // initial opacity
+    var timer = setInterval(function () {
+        if (op <= 0.1){
+            clearInterval(timer);
+            element.style.display = 'none';
+        }
+        element.style.opacity = op;
+        element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+        op -= op * 0.05;
+    }, 10);
+}
 
 
 ///////OLD IF-ELSE TREE BELOW. KEEPING IT HERE FOR REFERENCE UNTIL TRANSITION TO NEW SYSTEM IS COMPLETE.
