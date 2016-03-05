@@ -12,6 +12,9 @@ var myScore = 0;
 var roomId = -1;
 
 var isHost = false;
+
+window.onhashchange = hashChanged;
+
  
 function initSocket(){
     // Ensures only one connection is open at a time
@@ -312,6 +315,15 @@ function fade() {
     }, 10);
 }
 
+function toRolePrompt(){
+	//do nothing
+}
+
+
+function hashChanged() {
+   	//if(/*is in hash list*/)				//MAKE THIS SO THAT HASH MUST BE A VALID HASH IN THE HASH LIST
+    /*eval()*/console.log("to" + (String(location.hash).substring(1, 2).toUpperCase())+(String(location.hash).substring(2)));
+}
 
 ///////OLD IF-ELSE TREE BELOW. KEEPING IT HERE FOR REFERENCE UNTIL TRANSITION TO NEW SYSTEM IS COMPLETE.
 
