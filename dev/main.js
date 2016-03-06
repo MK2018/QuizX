@@ -318,7 +318,21 @@ function fade() {
 function toRolePrompt(){
 	//do nothing
 }
+function toHome(){
 
+}
+function toLoadingRoom(){
+
+}
+function toQuestion(){
+
+}
+function toAnswer(){
+
+}
+function toGameBoard(){
+	
+}
 
 function hashChanged() {
    	//if(/*is in hash list*/)				//MAKE THIS SO THAT HASH MUST BE A VALID HASH IN THE HASH LIST
