@@ -14,6 +14,7 @@ var roomId = -1;
 var isHost = false;
 
 window.onhashchange = hashChanged;
+hashes = {'rolePrompt', 'home', 'loadingRoom', 'question', 'answer', 'gameBoard'};
 
  
 function initSocket(){
@@ -316,27 +317,27 @@ function fade() {
 }
 
 function toRolePrompt(){
-	//do nothing
+	//todo
 }
 function toHome(){
-
+	//todo
 }
 function toLoadingRoom(){
-
+	//todo
 }
 function toQuestion(){
-
+	//todo
 }
 function toAnswer(){
-
+	//todo
 }
 function toGameBoard(){
-	
+	//todo
 }
 
 function hashChanged() {
-   	//if(/*is in hash list*/)				//MAKE THIS SO THAT HASH MUST BE A VALID HASH IN THE HASH LIST
-    /*eval()*/console.log("to" + (String(location.hash).substring(1, 2).toUpperCase())+(String(location.hash).substring(2)));
+   	if(hashes.indexOf(location.hash)>-1)
+    	eval("to" + (String(location.hash).substring(1, 2).toUpperCase())+(String(location.hash).substring(2)));
 }
 
 ///////OLD IF-ELSE TREE BELOW. KEEPING IT HERE FOR REFERENCE UNTIL TRANSITION TO NEW SYSTEM IS COMPLETE.
