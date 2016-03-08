@@ -318,21 +318,51 @@ function fade() {
 
 function toRolePrompt(){
 	//todo
+
+
+	//general algorithm:
+	//set method ident's page to visible, set all others to invisible
+	//take care of any additional business the pertains to the switch of the screen. 
 }
 function toHome(){
 	//todo
+
+
+	//general algorithm:
+	//set method ident's page to visible, set all others to invisible
+	//take care of any additional business the pertains to the switch of the screen. 
 }
 function toLoadingRoom(){
 	//todo
+
+
+	//general algorithm:
+	//set method ident's page to visible, set all others to invisible
+	//take care of any additional business the pertains to the switch of the screen. 
 }
 function toQuestion(){
 	//todo
+
+
+	//general algorithm:
+	//set method ident's page to visible, set all others to invisible
+	//take care of any additional business the pertains to the switch of the screen. 
 }
 function toAnswer(){
 	//todo
+
+
+	//general algorithm:
+	//set method ident's page to visible, set all others to invisible
+	//take care of any additional business the pertains to the switch of the screen. 
 }
 function toGameBoard(){
 	//todo
+
+
+	//general algorithm:
+	//set method ident's page to visible, set all others to invisible
+	//take care of any additional business the pertains to the switch of the screen. 
 }
 
 function hashChanged() {
