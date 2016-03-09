@@ -14,7 +14,7 @@ var roomId = -1;
 var isHost = false;
 
 window.onhashchange = hashChanged;
-hashes = {'rolePrompt', 'home', 'loadingRoom', 'question', 'answer', 'gameBoard'};
+hashes = ['#rolePrompt', '#home', '#loadingRoom', '#question', '#answer', '#gameBoard'];
 
  
 function initSocket(){
@@ -275,7 +275,7 @@ function questionIncorrect(){
 
 
 
-function set_screen(name) {
+/*function set_screen(name) {
     if (!name) name = "#home";
     //console.log(name);
     screens = document.getElementsByTagName("page");
@@ -295,12 +295,14 @@ check_hash = (function() {
             set_screen(hash);
         }
     }
-})();
+})();*/
 function init() {
 	if(webSocket === undefined && String(window.location) !== String(window.location.origin+"/"))
 		window.location.replace(window.location.origin);
-    setInterval(check_hash, 100);
+    //setInterval(check_hash, 100);
     setTimeout(fade, 1000);
+    toHome();
+    //location.hash = "#home";
 }
 function fade() {
     element = document.getElementById('loading');
@@ -320,12 +322,11 @@ function toRolePrompt(){
 	//todo
 	pages = document.getElementsByTagName("page");
     for (var i=0; i<pages.length; i++) {
-        if ('rolePrompt' === "#"+pages[i].id)
+        if ('rolePrompt' === pages[i].id)
             pages[i].style.display = "block";
         else
             pages[i].style.display = "none";
     }
-}
 
 	//general algorithm:
 	//set method ident's page to visible, set all others to invisible
@@ -334,7 +335,13 @@ function toRolePrompt(){
 function toHome(){
 	//todo
 
-
+	pages = document.getElementsByTagName("page");
+    for (var i=0; i<pages.length; i++) {
+        if ('home' === pages[i].id)
+            pages[i].style.display = "block";
+        else
+            pages[i].style.display = "none";
+    }
 	//general algorithm:
 	//set method ident's page to visible, set all others to invisible
 	//take care of any additional business the pertains to the switch of the screen. 
@@ -342,7 +349,13 @@ function toHome(){
 function toLoadingRoom(){
 	//todo
 
-
+	pages = document.getElementsByTagName("page");
+    for (var i=0; i<pages.length; i++) {
+        if ('loadingRoom' === pages[i].id)
+            pages[i].style.display = "block";
+        else
+            pages[i].style.display = "none";
+    }
 	//general algorithm:
 	//set method ident's page to visible, set all others to invisible
 	//take care of any additional business the pertains to the switch of the screen. 
@@ -350,7 +363,13 @@ function toLoadingRoom(){
 function toQuestion(){
 	//todo
 
-
+	pages = document.getElementsByTagName("page");
+    for (var i=0; i<pages.length; i++) {
+        if ('question' === pages[i].id)
+            pages[i].style.display = "block";
+        else
+            pages[i].style.display = "none";
+    }
 	//general algorithm:
 	//set method ident's page to visible, set all others to invisible
 	//take care of any additional business the pertains to the switch of the screen. 
@@ -358,7 +377,13 @@ function toQuestion(){
 function toAnswer(){
 	//todo
 
-
+	pages = document.getElementsByTagName("page");
+    for (var i=0; i<pages.length; i++) {
+        if ('answer' === pages[i].id)
+            pages[i].style.display = "block";
+        else
+            pages[i].style.display = "none";
+    }
 	//general algorithm:
 	//set method ident's page to visible, set all others to invisible
 	//take care of any additional business the pertains to the switch of the screen. 
@@ -366,7 +391,13 @@ function toAnswer(){
 function toGameBoard(){
 	//todo
 
-
+	pages = document.getElementsByTagName("page");
+    for (var i=0; i<pages.length; i++) {
+        if ('gameBoard' === pages[i].id)
+            pages[i].style.display = "block";
+        else
+            pages[i].style.display = "none";
+    }
 	//general algorithm:
 	//set method ident's page to visible, set all others to invisible
 	//take care of any additional business the pertains to the switch of the screen. 
@@ -374,7 +405,7 @@ function toGameBoard(){
 
 function hashChanged() {
    	if(hashes.indexOf(location.hash)>-1)
-    	eval("to" + (String(location.hash).substring(1, 2).toUpperCase())+(String(location.hash).substring(2)));
+    	eval("to" + (String(location.hash).substring(1, 2).toUpperCase())+(String(location.hash).substring(2)) + "();");
 }
 
 ///////OLD IF-ELSE TREE BELOW. KEEPING IT HERE FOR REFERENCE UNTIL TRANSITION TO NEW SYSTEM IS COMPLETE.
