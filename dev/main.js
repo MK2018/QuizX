@@ -318,7 +318,14 @@ function fade() {
 
 function toRolePrompt(){
 	//todo
-
+	pages = document.getElementsByTagName("page");
+    for (var i=0; i<pages.length; i++) {
+        if ('rolePrompt' === "#"+pages[i].id)
+            pages[i].style.display = "block";
+        else
+            pages[i].style.display = "none";
+    }
+}
 
 	//general algorithm:
 	//set method ident's page to visible, set all others to invisible
