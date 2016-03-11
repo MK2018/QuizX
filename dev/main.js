@@ -15,6 +15,7 @@ var isHost = false;
 
 window.onhashchange = hashChanged;
 hashes = ['#rolePrompt', '#home', '#loadingRoom', '#question', '#answer', '#gameBoard'];
+var history = window.history;
 
  
 function initSocket(){
@@ -22,11 +23,8 @@ function initSocket(){
     if(webSocket !== undefined && webSocket.readyState !== WebSocket.CLOSED){
         return;
     }
-    var host = location.origin.replace(/^http/, 'ws')
-
-    // Create a new instance of the websocket
+    var host = location.origin.replace(/^http/, 'ws');
     webSocket = new WebSocket(host);
-                 
     webSocket.onopen = function(event){
         console.log("connected.");
         //cmd('gameConnected');
@@ -121,15 +119,19 @@ function initRoom(){
     messages.appendChild(loading);
 }
 function displayRoomId(id){
-    while (buttons.firstChild)
-        buttons.removeChild(buttons.firstChild);
-    while (messages.firstChild)
-        messages.removeChild(messages.firstChild);
+    to('loadingRoom');
+    clear('messages');
     var loading = document.createElement('p');
     loading.textContent = 'Your room ID is ' + id;
     loading.className += 'par';
     messages.appendChild(loading);
     roomId = id;
+    
+}
+function clear(divname){
+	var toClear = document.getElementById(divname);
+	while(toClear.firstChild)
+		toClear.removeChild(toClear.firstChild);
 }
 function askRoom(){
     while (buttons.firstChild)
@@ -300,11 +302,11 @@ function init() {
 	if(webSocket === undefined && String(window.location) !== String(window.location.origin+"/"))
 		window.location.replace(window.location.origin);
     //setInterval(check_hash, 100);
-    setTimeout(fade, 1000);
-    toHome();
+    //setTimeout(fade, 1000);
+    to('home');
     //location.hash = "#home";
 }
-function fade() {
+/*function fade() {
     element = document.getElementById('loading');
     var op = 1;  // initial opacity
     var timer = setInterval(function () {
@@ -316,10 +318,10 @@ function fade() {
         element.style.filter = 'alpha(opacity=' + op * 100 + ")";
         op -= op * 0.05;
     }, 10);
-}
+}*/
 
-function toRolePrompt(){
-	//todo
+/*function toRolePrompt(){
+	history.pushState("#rolePrompt", document.title, window.location.pathname);
 	pages = document.getElementsByTagName("page");
     for (var i=0; i<pages.length; i++) {
         if ('rolePrompt' === pages[i].id)
@@ -327,14 +329,10 @@ function toRolePrompt(){
         else
             pages[i].style.display = "none";
     }
-
-	//general algorithm:
-	//set method ident's page to visible, set all others to invisible
-	//take care of any additional business the pertains to the switch of the screen. 
 }
 function toHome(){
 	//todo
-
+	history.pushState("#home", document.title, window.location.pathname);
 	pages = document.getElementsByTagName("page");
     for (var i=0; i<pages.length; i++) {
         if ('home' === pages[i].id)
@@ -342,13 +340,10 @@ function toHome(){
         else
             pages[i].style.display = "none";
     }
-	//general algorithm:
-	//set method ident's page to visible, set all others to invisible
-	//take care of any additional business the pertains to the switch of the screen. 
 }
 function toLoadingRoom(){
 	//todo
-
+	history.pushState("#loadingRoom", document.title, window.location.pathname);
 	pages = document.getElementsByTagName("page");
     for (var i=0; i<pages.length; i++) {
         if ('loadingRoom' === pages[i].id)
@@ -356,13 +351,10 @@ function toLoadingRoom(){
         else
             pages[i].style.display = "none";
     }
-	//general algorithm:
-	//set method ident's page to visible, set all others to invisible
-	//take care of any additional business the pertains to the switch of the screen. 
 }
 function toQuestion(){
 	//todo
-
+	history.pushState("#question", document.title, window.location.pathname);
 	pages = document.getElementsByTagName("page");
     for (var i=0; i<pages.length; i++) {
         if ('question' === pages[i].id)
@@ -370,13 +362,10 @@ function toQuestion(){
         else
             pages[i].style.display = "none";
     }
-	//general algorithm:
-	//set method ident's page to visible, set all others to invisible
-	//take care of any additional business the pertains to the switch of the screen. 
 }
 function toAnswer(){
 	//todo
-
+	history.pushState("#answer", document.title, window.location.pathname);
 	pages = document.getElementsByTagName("page");
     for (var i=0; i<pages.length; i++) {
         if ('answer' === pages[i].id)
@@ -384,13 +373,10 @@ function toAnswer(){
         else
             pages[i].style.display = "none";
     }
-	//general algorithm:
-	//set method ident's page to visible, set all others to invisible
-	//take care of any additional business the pertains to the switch of the screen. 
 }
 function toGameBoard(){
 	//todo
-
+	history.pushState("#gameBoard", document.title, window.location.pathname);
 	pages = document.getElementsByTagName("page");
     for (var i=0; i<pages.length; i++) {
         if ('gameBoard' === pages[i].id)
@@ -398,14 +384,23 @@ function toGameBoard(){
         else
             pages[i].style.display = "none";
     }
-	//general algorithm:
-	//set method ident's page to visible, set all others to invisible
-	//take care of any additional business the pertains to the switch of the screen. 
+}*/
+
+function to(hash){
+	history.pushState("#"+hash, document.title, window.location.pathname);
+	pages = document.getElementsByTagName("page");
+	for (var i=0; i<pages.length; i++) {
+        if (hash === pages[i].id)
+            pages[i].style.display = "block";
+        else
+            pages[i].style.display = "none";
+    }
 }
+
 
 function hashChanged() {
    	if(hashes.indexOf(location.hash)>-1)
-    	eval("to" + (String(location.hash).substring(1, 2).toUpperCase())+(String(location.hash).substring(2)) + "();");
+   		to(location.hash.substring(1));
 }
 
 ///////OLD IF-ELSE TREE BELOW. KEEPING IT HERE FOR REFERENCE UNTIL TRANSITION TO NEW SYSTEM IS COMPLETE.
