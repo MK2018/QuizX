@@ -128,7 +128,7 @@ app.get('/join/:room(([0-9])+)', function(req, res) {
   res.render('dev/index');
 });
 */
-app.use(express.static(__dirname + "/dev"));
+app.use(express.static(__dirname + "/static"));
 
 var server = http.createServer(app);
 server.listen(port);
