@@ -134,7 +134,7 @@ function clear(divname){
 		toClear.removeChild(toClear.firstChild);
 }
 function askRoom(){
-    while (buttons.firstChild)
+    /*while (buttons.firstChild)
         buttons.removeChild(buttons.firstChild);
     var roomInput = document.createElement('input');
     roomInput.setAttribute('type', 'text');
@@ -145,7 +145,7 @@ function askRoom(){
     button.textContent = "Join room";
     button.setAttribute( "onClick", "javascript: sendRoom();" );
     button.className += " joinButton btn btn-success";
-    buttons.appendChild(button);
+    buttons.appendChild(button);*/
 }
 function sendRoom(){
     var roomId = parseInt(document.getElementById('roomInput').value);
@@ -306,6 +306,25 @@ function init() {
     to('home');
     //location.hash = "#home";
 }
+
+
+function to(hash){
+	history.pushState("#"+hash, document.title, window.location.pathname);
+	pages = document.getElementsByTagName("page");
+	for (var i=0; i<pages.length; i++) {
+        if (hash === pages[i].id)
+            pages[i].style.display = "block";
+        else
+            pages[i].style.display = "none";
+    }
+}
+
+
+function hashChanged() {
+   	if(hashes.indexOf(location.hash)>-1)
+   		to(location.hash.substring(1));
+}
+
 /*function fade() {
     element = document.getElementById('loading');
     var op = 1;  // initial opacity
@@ -386,22 +405,7 @@ function toGameBoard(){
     }
 }*/
 
-function to(hash){
-	history.pushState("#"+hash, document.title, window.location.pathname);
-	pages = document.getElementsByTagName("page");
-	for (var i=0; i<pages.length; i++) {
-        if (hash === pages[i].id)
-            pages[i].style.display = "block";
-        else
-            pages[i].style.display = "none";
-    }
-}
 
-
-function hashChanged() {
-   	if(hashes.indexOf(location.hash)>-1)
-   		to(location.hash.substring(1));
-}
 
 ///////OLD IF-ELSE TREE BELOW. KEEPING IT HERE FOR REFERENCE UNTIL TRANSITION TO NEW SYSTEM IS COMPLETE.
 

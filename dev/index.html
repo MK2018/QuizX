@@ -39,13 +39,25 @@
                 </div>
             </div>
         </page>
+        <page id="askRoom">
+            <div class="container">
+                <div class="row" >
+                    <div class="col-md-6 col-md-offset-3">  
+                        <input type="text" id="roomInput" class="form-control" placeholder="Room Number...">          
+                        <div id="buttons">
+                            <button class="joinButton btn btn-success" onclick="sendRoom();">Join Room</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </page>
         <page id="rolePrompt">
             <div class="container">
                 <div class="row" >
                     <div class="col-md-6 col-md-offset-3">            
                         <div id="buttons">
                             <button class="joinButton btn btn-success" onclick="checkIfHost(); initRoom(); cmd('gameInitRoom');">Create Room</button>
-                            <button class="joinButton btn btn-success" onclick="askRoom();">Join a room</button>
+                            <button class="joinButton btn btn-success" onclick="to('askRoom');">Join a Room</button>
                         </div>
                     </div>
                 </div>
