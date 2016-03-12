@@ -32,7 +32,9 @@
             <div class="container">
                 <div class="row" >
                     <div class="col-md-6 col-md-offset-3" id="topRow">            
-                        <div id="buttons"> 
+                        <div id="home-messages">
+                        </div>
+                        <div id="home-buttons"> 
                             <button class="joinButton btn btn-success" type="submit" onclick="initSocket();" >Join</button>
                         </div>
                     </div>
@@ -44,7 +46,7 @@
                 <div class="row" >
                     <div class="col-md-6 col-md-offset-3">  
                         <input type="text" id="roomInput" class="form-control" placeholder="Room Number...">          
-                        <div id="buttons">
+                        <div id="askRoom-buttons">
                             <button class="joinButton btn btn-success" onclick="sendRoom();">Join Room</button>
                         </div>
                     </div>
@@ -55,7 +57,7 @@
             <div class="container">
                 <div class="row" >
                     <div class="col-md-6 col-md-offset-3">            
-                        <div id="buttons">
+                        <div id="rolePrompt-buttons">
                             <button class="joinButton btn btn-success" onclick="checkIfHost(); initRoom(); cmd('gameInitRoom');">Create Room</button>
                             <button class="joinButton btn btn-success" onclick="to('askRoom');">Join a Room</button>
                         </div>
@@ -67,7 +69,10 @@
             <div class="container">
                 <div class="row" >
                     <div class="col-md-6 col-md-offset-3">            
-                        <div id="messages">
+                        <div id="loadingRoom-messages">
+                        </div>
+                        <div id="loadingRoom-buttons">
+                            <button onclick="javascript: var tmpId = getRoomId(); cmd('gameStart', tmpId);">Start Game</button>
                         </div>
                     </div>
                 </div>

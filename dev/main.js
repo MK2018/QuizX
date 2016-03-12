@@ -17,6 +17,8 @@ window.onhashchange = hashChanged;
 hashes = ['#rolePrompt', '#home', '#loadingRoom', '#question', '#answer', '#gameBoard'];
 var history = window.history;
 
+var currPage = "#home";
+
  
 function initSocket(){
     // Ensures only one connection is open at a time
@@ -111,6 +113,8 @@ function gameAskRole(){
     buttons.appendChild(button2);*/
 }
 function initRoom(){
+	var buttons = document.getElementById('home-buttons');
+	var messages = document.getElementById('home-messages');
     while (buttons.firstChild)
         buttons.removeChild(buttons.firstChild);
     var loading = document.createElement('p');
@@ -155,6 +159,10 @@ function gameId(id){
     myID = parseInt(id); 
 }
 function gameClientsConnected(arg){
+    if(currPage != "loadingRoom"){
+    	to('loadingRoom');
+    	console.log('switching...');
+    }
     while (buttons.firstChild) 
         buttons.removeChild(buttons.firstChild); 
     var pg = document.createElement("p");
@@ -168,10 +176,13 @@ function gameClientsConnected(arg){
     buttons.appendChild(pg); 
 }
 function gamePromptStart(){
-    var button = document.createElement("button");  
+    /*var button = document.createElement("button");  
     button.textContent = "Start Game"; 
     button.setAttribute( "onClick", "javascript: var tmpId = getRoomId(); cmd('gameStart', tmpId);" );
-    buttons.appendChild(button);
+    buttons.appendChild(button);*/
+    to('loadingRoom');
+    var buttons = document.getElementById('loadingRoom-buttons');
+
 }    
 function gameShowBuzzer(question){
     console.log("Hello from the other side");
@@ -317,6 +328,7 @@ function to(hash){
         else
             pages[i].style.display = "none";
     }
+    currPage = hash;
 }
 
 

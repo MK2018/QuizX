@@ -118,19 +118,17 @@ app.set('view engine', 'html');
 
 app.get('/', function(req, res) {
   console.log("we here");
-  tmpRmId = req.query.room;
-  console.log(tmpRmId);
-  res.render('index');
+  res.render('dev/index');
 });
 
 app.get('/join/:room(([0-9])+)', function(req, res) {
   console.log("we here in 5");
   tmpRmId = req.params.room;
   console.log(tmpRmId);
-  res.render('index');
+  res.render('dev/index');
 });
 */
-app.use(express.static(__dirname + "/static"));
+app.use(express.static(__dirname + "/dev"));
 
 var server = http.createServer(app);
 server.listen(port);
