@@ -124,13 +124,14 @@ function initRoom(){
 }
 function displayRoomId(id){
     to('loadingRoom');
-    clear('messages');
+    clear('loadingRoom-messages');
+    clear('loadingRoom-buttons');
+    var idDiv = document.getElementById('loadingRoom-id');
     var loading = document.createElement('p');
     loading.textContent = 'Your room ID is ' + id;
     loading.className += 'par';
-    messages.appendChild(loading);
+    idDiv.appendChild(loading);
     roomId = id;
-    
 }
 function clear(divname){
 	var toClear = document.getElementById(divname);
@@ -163,8 +164,10 @@ function gameClientsConnected(arg){
     	to('loadingRoom');
     	console.log('switching...');
     }
-    while (buttons.firstChild) 
-        buttons.removeChild(buttons.firstChild); 
+    var messages = document.getElementById('loadingRoom-messages');
+    //while (buttons.firstChild) 
+    //    buttons.removeChild(buttons.firstChild);
+    clear('loadingRoom-messages'); 
     var pg = document.createElement("p");
     if(parseInt(arg)===1)
         pg.textContent = "Currently, there is " + arg + " client connected.";
@@ -173,7 +176,7 @@ function gameClientsConnected(arg){
     //if(parseInt(arg)>2)
     //    cmd("gameCheckHost");
     pg.className += " par";  
-    buttons.appendChild(pg); 
+    messages.appendChild(pg); 
 }
 function gamePromptStart(){
     /*var button = document.createElement("button");  
@@ -182,10 +185,13 @@ function gamePromptStart(){
     buttons.appendChild(button);*/
     to('loadingRoom');
     var buttons = document.getElementById('loadingRoom-buttons');
-
+    var button = document.createElement("button");  
+    button.textContent = "Start Game"; 
+    button.setAttribute( "onClick", "javascript: var tmpId = getRoomId(); cmd('gameStart', tmpId);" );
+    buttons.appendChild(button);
 }    
 function gameShowBuzzer(question){
-    console.log("Hello from the other side");
+    /*console.log("Hello from the other side");
     if(!isHost){
         console.log(question);
         invisible.className = "invisible";
@@ -198,7 +204,7 @@ function gameShowBuzzer(question){
         qDiv = document.getElementById("question");
         qDiv.className = "questionStyle";
         qDiv.textContent = question;
-    }
+    }*/																			//FIX ALL OF THIS 
 }
 function gameShowQuestion(){
     //not used right now but kept here just in case
