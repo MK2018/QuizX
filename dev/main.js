@@ -285,6 +285,7 @@ function questionCorrect(points){
     console.log("QUESTION CORRECT");
     //Close question on all screens
     myScore += points;
+    to('scoreBoard');
     console.log("Current score:" + myScore);
 }
 function questionIncorrect(){
