@@ -215,7 +215,7 @@ function gameShowQuestion(){
 function gameEnable(){
     document.getElementById("answerSubmit").disabled = false;
 }    */
-function gameCorrect(){
+/*function gameCorrect(){
     var thumbCont = document.getElementById("thumbsContainer");
     while (thumbCont.firstChild) 
         thumbCont.removeChild(thumbCont.firstChild);
@@ -228,7 +228,7 @@ function gameCorrect(){
     setTimeout(function(){}, 2000);
 }   
 function gameQuestionComplete(){
-    question = document.getElementById("question");
+    var question = document.getElementById("question");
     question.textContent = "";
     var thumbCont = document.getElementById("thumbsContainer");
     while (thumbCont.firstChild) 
@@ -247,14 +247,14 @@ function gameIncorrect(){
     document.getElementById("answerBox").className = "invisible";
     document.getElementById("scoreTable").className = "invisible row"; 
     setTimeout(function(){}, 2000);
-}   
+} */  
 function gameScore(arg){
     console.log(parseInt(arg));
     myScore += parseInt(arg);
 }     
-function gameScoreReport(arg){
+/*function gameScoreReport(arg){
     var scores = arg;
-    for (var i =0; i < (Integer.parseInt(text.substring(17,18))); i++){
+    for (var i =0; i < (parseInt(text.substring(17,18))); i++){
         var newDiv = document.createElement("div");  //sets answer box o invisible
         newDiv.id='c'+i;
         //newDiv.className='col-md-3';
@@ -263,7 +263,7 @@ function gameScoreReport(arg){
         toAdd.appendChild(newDiv);
     }
     document.getElementById("scoreTable").className = "row";
-}  
+}  */
 function roomNotFound(id){
     while (buttons.firstChild)
         buttons.removeChild(buttons.firstChild);
@@ -285,7 +285,6 @@ function questionCorrect(points){
     console.log("QUESTION CORRECT");
     //Close question on all screens
     myScore += points;
-    to('scoreBoard');
     console.log("Current score:" + myScore);
 }
 function questionIncorrect(){
@@ -328,7 +327,7 @@ function init() {
 
 function to(hash){
 	history.pushState("#"+hash, document.title, window.location.pathname);
-	pages = document.getElementsByTagName("page");
+	var pages = document.getElementsByTagName("page");
 	for (var i=0; i<pages.length; i++) {
         if (hash === pages[i].id)
             pages[i].style.display = "block";
