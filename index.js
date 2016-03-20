@@ -1,3 +1,5 @@
+//keep the streak alive!!!
+
 /*function Connection(conn, hostOrNah, id) {
   this.score = 0;
   this.conn = conn;
