@@ -1,4 +1,5 @@
-//keep the streak alive!!!
+//keep the streak alive 2.0!!!
+//fyi: I've been doing quite a bit of traveling and haven't had time to code much.
 
 /*function Connection(conn, hostOrNah, id) {
   this.score = 0;
