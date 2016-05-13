@@ -1,35 +1,4 @@
-/*function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
-    }
-  }
-}
-*/
-/*
-function Clue(question, value, answer){
-  this.question = question;
-  this.value = value;
-  this.answer = answer;
-  this.getQuestion =  function(){
-    return this.question;
-  }
-  this.getValue = function(){
-    return this.value;
-  }
-  this.getAnswer = function(){
-    return this.answer;
-  }
-}
-*/
-/*function fillBoard(){
-  var gameBoard = [];
-  for(var i=0; i<5; i++) {
-    gameBoard[i] = [new Clue("Who is the best member of the group?", (i+1)*100, "Michael"),new Clue("Who is the best member of the group?", (i+1)*100, "Michael"),new Clue("Who is the best member of the group?", (i+1)*100, "Michael"),new Clue("Who is the best member of the group?", (i+1)*100, "Michael"),new Clue("Who is the best member of the group?", (i+1)*100, "Michael"),new Clue("Who is the best member of the group?", (i+1)*100, "Michael")];//new Array(6);
-  }
-  return gameBoard;
-}*/
+
 
 function broadcast(data, args) {
 	wss.clients.forEach(function each(client) {
