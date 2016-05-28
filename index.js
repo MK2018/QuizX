@@ -1,3 +1,4 @@
+//DEPRECATED CODE. NEW VERSION IS IN THE WORKS.
 
 
 function broadcast(data, args) {
@@ -23,21 +24,6 @@ var port = process.env.PORT || 5000;
 
 var tmpRmId = null;
 
-/*app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html');
-
-app.get('/', function(req, res) {
-  console.log("we here");
-  res.render('dev/index');
-});
-
-app.get('/join/:room(([0-9])+)', function(req, res) {
-  console.log("we here in 5");
-  tmpRmId = req.params.room;
-  console.log(tmpRmId);
-  res.render('dev/index');
-});
-*/
 app.use(express.static(__dirname + "/static"));
 
 var server = http.createServer(app);
@@ -91,24 +77,6 @@ function gameGetAllScores(ws){
   //}
   cmd('gameScoreReport', ws, 'tmp');
 }
-/*function gameVerifyHost(ws){
-  //var id = conCount++;
-  //gameHost.push(new Connection(ws, true, id));
-  id = conn.addHost(ws);
-  cmd('gameId', ws, id);
-  broadcast('gameClientsConnected', wss.clients.length)
-}*/
-//function gameVerifyClient(ws){
-  //var id = conCounter++;
-  //gameClients.push(new Connection(ws, false, id));
-  //id = conn.addClient(ws);
-  //cmd('gameId', ws, id);                                      //CHANGE TO NEW ID SYSTEM.
-  //broadcast('gameClientsConnected', wss.clients.length)
-//}
-//function gameCheckHost(ws){
-  //if(gameHost.length === 1)
-  //  cmd('gameHasHost', ws);
-//}
 function gameCheck(ws, args){
   coordx = parseInt(args['x']);
   coordy = parseInt(args['y']);
@@ -129,20 +97,6 @@ function gameBuzz(ws, args){
     cmd('questionIncorrect', ws);
   else
     cmd('questionCorrect', ws, points);
-//------------------------------------------------------------------
-  //console.log(answer);
-  //id = parseInt(args['id']);
-  /*if(answer.toLowerCase() === gameBoard[activex][activey].getAnswer().toLowerCase()){
-    cmd('gameCorrect', ws, gameBoard[activex][activey].getValue());
-      //for(var x = 0; x < gameClients.length; x++)
-      //  if(gameClients[x].getId() === id){
-      //    index = x;
-      //    gameClients[x].addScore(gameBoard[activex][activey].getValue());
-      //  }
-    cmd("gameScore", ws, gameClients[index].getScore());
-    sleep(2000);
-    broadcast("gameQuestionComplete");
-  }*/
 }
 function gameIncorrect(ws){
   cmd("gameIncorrect", ws);
@@ -158,70 +112,3 @@ function gameInitRoom(ws){
 function gameJoinRoom(ws, id){
   conn.addToRoom(ws, id);
 }
-///////OLD IF-ELSE TREE BELOW. KEEPING IT HERE FOR REFERENCE UNTIL TRANSITION TO NEW SYSTEM IS COMPLETE.
-
-/*
-    if(data==="game:connected"){
-      ws.send("game:confirm");
-      ws.send("game:askrole");
-    }
-    else if(data === "game:start"){
-      broadcast("game:starting");
-    }
-    else if(data === "game:getallscores"){
-      scores = "game:scorereport:"+gameClients.length+":";
-      for(var x = 0; x < gameClients.length; x++){
-        scores+=(gameClients[x].getScore)+",";
-      }
-      ws.send();
-    }
-    else if(data==="game:host"){
-      var id = conCounter++;
-      gameHost.push(new Connection(ws, true, id));
-      ws.send("game:id:"+id);
-      broadcast("game:clientsconnected-"+wss.clients.length);
-    }
-    else if(data==="game:client"){
-      var id = conCounter++;
-      gameClients.push(new Connection(ws, false, id));
-      ws.send("game:id:"+id);
-      broadcast("game:clientsconnected-"+wss.clients.length);
-    }
-    else if(data==="game:checkhost"){
-      if(gameHost.length === 1)
-        ws.send("game:hashost");
-    }
-    else if(data.substring(0,10) ==="game:check"){
-      coords = data.substring(10);
-      coordx = coords.substring(1, 2);
-      coordy = coords.substring(3, 4);
-      activex = coordx;
-      activey = coordy;
-      console.log(coordx+","+coordy);
-      broadcast("game:showbuzzer-"+gameBoard[coordx][coordy].getQuestion());
-      //host = gameHost[0];
-      //host.send("game:showquest-"+gameBoard[coordx][coordy].getQuestion());
-    }
-    else if(data.substring(0, 9) ==="game:buzz"){
-      var index = -1;
-      //broadcast("game:disable");
-      answer = data.substring(10);
-      console.log(answer);
-      id = parseInt(answer.substring(0, answer.indexOf("-")));
-      answer = answer.substring(answer.indexOf("-")+1);
-      if(answer.toLowerCase() === gameBoard[activex][activey].getAnswer().toLowerCase()){
-        ws.send("game:correct");
-        for(var x = 0; x < gameClients.length; x++)
-          if(gameClients[x].getId() === id){
-            index = x;
-            gameClients[x].addScore(gameBoard[activex][activey].getValue());
-          }
-        ws.send("game:score-"+gameClients[index].getScore());
-        sleep(2000);
-        broadcast("game:=qcom");
-      }
-      else{
-        //broadcast("game:enable");
-        ws.send("game:incorrect");
-      }
-    }*/
